@@ -10,6 +10,9 @@
 
 ### GET Request:
 
+	// in header
+	#import <TiHTTPClient/TiHTTPClient.h>
+
     -(void)sendRequest
     {
         TiHTTPRequest *request = [[[TiHTTPRequest alloc] init] autorelease];
@@ -30,6 +33,9 @@
     }
 
 ### POST Request:
+
+	// in header
+	#import <TiHTTPClient/TiHTTPClient.h>
 
     -(void)sendRequest
     {
