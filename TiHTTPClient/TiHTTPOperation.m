@@ -16,7 +16,7 @@
 
 - (id)initWithConnection:(TiHTTPRequest *)request
 {
-    self = [super init];
+    self = [self init];
     if (self) {
         // Assign it! it will be released with the request itself
         _request = request;
