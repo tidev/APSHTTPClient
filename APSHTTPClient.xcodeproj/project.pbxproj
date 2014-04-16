@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		B635ED4B18FDB3320038B130 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B635ED4A18FDB3320038B130 /* CoreFoundation.framework */; };
 		B635ED6318FDB4B00038B130 /* APSHTTPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B635ED5918FDB4B00038B130 /* APSHTTPHelper.m */; };
 		B635ED6418FDB4B00038B130 /* APSHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B635ED5B18FDB4B00038B130 /* APSHTTPOperation.m */; };
 		B635ED6518FDB4B00038B130 /* APSHTTPPostForm.m in Sources */ = {isa = PBXBuildFile; fileRef = B635ED5D18FDB4B00038B130 /* APSHTTPPostForm.m */; };
@@ -33,12 +32,10 @@
 		B635EDA218FDB8AB0038B130 /* APSHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED5E18FDB4B00038B130 /* APSHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B635EDA318FDB8AF0038B130 /* APSHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED6018FDB4B00038B130 /* APSHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B635EDA418FDB8B20038B130 /* APSHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED6218FDB4B00038B130 /* APSHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B635EDAF18FDC1320038B130 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B635EDAE18FDC1320038B130 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B635ED4718FDB3320038B130 /* APSHTTPClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APSHTTPClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B635ED4A18FDB3320038B130 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		B635ED4E18FDB3320038B130 /* APSHTTPClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "APSHTTPClient-Info.plist"; sourceTree = "<group>"; };
 		B635ED5018FDB3320038B130 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B635ED5218FDB3320038B130 /* APSHTTPClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "APSHTTPClient-Prefix.pch"; sourceTree = "<group>"; };
@@ -53,7 +50,6 @@
 		B635ED6018FDB4B00038B130 /* APSHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPResponse.h; sourceTree = "<group>"; };
 		B635ED6118FDB4B00038B130 /* APSHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPResponse.m; sourceTree = "<group>"; };
 		B635ED6218FDB4B00038B130 /* APSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPClient.h; sourceTree = "<group>"; };
-		B635EDAE18FDC1320038B130 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B635EDAF18FDC1320038B130 /* MobileCoreServices.framework in Frameworks */,
-				B635ED4B18FDB3320038B130 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,8 +83,6 @@
 		B635ED4918FDB3320038B130 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B635EDAE18FDC1320038B130 /* MobileCoreServices.framework */,
-				B635ED4A18FDB3320038B130 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -282,6 +274,7 @@
 				PRODUCT_NAME = APSHTTPClient;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -321,6 +314,7 @@
 				PRODUCT_NAME = APSHTTPClient;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -328,12 +322,18 @@
 		B635ED5618FDB3320038B130 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					i386,
+				);
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				INFOPLIST_FILE = "APSHTTPClient/APSHTTPClient-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -342,12 +342,17 @@
 		B635ED5718FDB3320038B130 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					i386,
+				);
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				INFOPLIST_FILE = "APSHTTPClient/APSHTTPClient-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
