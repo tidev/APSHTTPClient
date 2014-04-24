@@ -9,19 +9,11 @@
 #define RELEASE_TO_NIL(x) { if (x!=nil) { [x release]; x = nil; } }
 #endif
 
-#ifndef DeveloperLog
-#if DEBUG
-#define DeveloperLog(...) { NSLog(__VA_ARGS__); }
-#else
-#define DeveloperLog(...) { }
-#endif
-#endif
-
 #ifndef DebugLog
-#if DEBUG
+#if defined(DEBUG) || defined(DEVELOPER)
 #define DebugLog(...) { NSLog(__VA_ARGS__); }
 #else
-#define DebugLog(...) { }
+#define DebugLog(...) {}
 #endif
 #endif
 

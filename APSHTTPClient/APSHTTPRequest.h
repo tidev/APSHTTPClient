@@ -8,15 +8,15 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-	TiRequestAuthNone = 0,
-	TiRequestAuthBasic = 1,
-	TiRequestAuthDigest = 2,
-    TiRequestAuthChallange = 3
-} TiRequestAuth;
+	APSRequestAuthNone = 0,
+	APSRequestAuthBasic = 1,
+	APSRequestAuthDigest = 2,
+    APSRequestAuthChallange = 3
+} APSRequestAuth;
 
 typedef enum {
-	TiRequestErrorCancel = 0
-} TiRequestError;
+	APSRequestErrorCancel = 0
+} APSRequestError;
 
 
 @class APSHTTPResponse;
@@ -26,12 +26,12 @@ typedef enum {
 
 @protocol APSHTTPRequestDelegate <NSObject>
 @optional
--(void)tiRequest:(APSHTTPRequest*)request onLoad:(APSHTTPResponse*)tiResponse;
--(void)tiRequest:(APSHTTPRequest*)request onError:(APSHTTPResponse*)tiResponse;
--(void)tiRequest:(APSHTTPRequest*)request onDataStream:(APSHTTPResponse*)tiResponse;
--(void)tiRequest:(APSHTTPRequest*)request onSendStream:(APSHTTPResponse*)tiResponse;
--(void)tiRequest:(APSHTTPRequest*)request onReadyStateChage:(APSHTTPResponse*)tiResponse;
--(void)tiRequest:(APSHTTPRequest*)request onRedirect:(APSHTTPResponse*)tiResponse;
+-(void)request:(APSHTTPRequest*)request onLoad:(APSHTTPResponse*)response;
+-(void)request:(APSHTTPRequest*)request onError:(APSHTTPResponse*)response;
+-(void)request:(APSHTTPRequest*)request onDataStream:(APSHTTPResponse*)response;
+-(void)request:(APSHTTPRequest*)request onSendStream:(APSHTTPResponse*)response;
+-(void)request:(APSHTTPRequest*)request onReadyStateChage:(APSHTTPResponse*)response;
+-(void)request:(APSHTTPRequest*)request onRedirect:(APSHTTPResponse*)response;
 
 @end
 
@@ -52,13 +52,14 @@ typedef enum {
 @property(nonatomic, retain) APSHTTPPostForm *postForm;
 @property(nonatomic, readonly) APSHTTPResponse* response;
 @property(nonatomic, assign) NSObject<APSHTTPRequestDelegate>* delegate;
+@property(nonatomic, assign) NSObject<NSURLConnectionDelegate>* connectionDelegate;
 @property(nonatomic) NSTimeInterval timeout;
 @property(nonatomic) BOOL sendDefaultCookies;
 @property(nonatomic) BOOL redirects;
 @property(nonatomic) BOOL synchronous;
 @property(nonatomic) BOOL validatesSecureCertificate;
 @property(nonatomic) BOOL cancelled;
-@property(nonatomic) TiRequestAuth authType;
+@property(nonatomic) APSRequestAuth authType;
 @property(nonatomic, retain) NSOperationQueue *theQueue;
 @property(nonatomic, retain) NSDictionary *userInfo;
 -(void)send;
