@@ -61,7 +61,7 @@
         [_connection cancel];
         [self connection:_connection didFailWithError:
          [NSError errorWithDomain:@"APSHTTPErrorDomain"
-                             code:TiRequestErrorCancel
+                             code:APSRequestErrorCancel
                          userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"The request was cancelled",NSLocalizedDescriptionKey,nil]]
          ];
     }
@@ -82,22 +82,30 @@
         if([data length] > 0) {
             [_request setHTTPBody:data];
         }
-        DeveloperLog(@"Data: %@", [NSString stringWithUTF8String: [data bytes]]);
+#ifdef DEBUG
+        NSLog(@"Data: %@", [NSString stringWithUTF8String: [data bytes]]);
+#endif
         NSDictionary *headers = [[self postForm] requestHeaders];
         for (NSString* key in headers)
         {
             [_request setValue:[headers valueForKey:key] forHTTPHeaderField:key];
-            DeveloperLog(@"Header: %@: %@", key, [headers valueForKey:key]);
+#ifdef DEBUG
+            NSLog(@"Header: %@: %@", key, [headers valueForKey:key]);
+#endif
         }
     }
     if(_headers != nil) {
         for (NSString* key in _headers)
         {
             [_request setValue:[_headers valueForKey:key] forHTTPHeaderField:key];
-            DeveloperLog(@"Header: %@: %@", key, [_headers valueForKey:key]);
+#ifdef DEBUG
+            NSLog(@"Header: %@: %@", key, [_headers valueForKey:key]);
+#endif
         }
     }
-    DeveloperLog(@"URL: %@", [self url]);
+#ifdef DEBUG
+    NSLog(@"URL: %@", [self url]);
+#endif
     [_request setURL: [self url]];
     
     if([self timeout] > 0) {
@@ -105,7 +113,9 @@
     }
     if([self method] != nil) {
         [_request setHTTPMethod: [self method]];
-        DeveloperLog(@"Method: %@", [self method]);
+#ifdef DEBUG
+        NSLog(@"Method: %@", [self method]);
+#endif
     }
     [_request setHTTPShouldHandleCookies:[self sendDefaultCookies]];
     
@@ -126,8 +136,8 @@
     } else {
         [_response setRequest:_request];
         [_response setReadyState:APSHTTPResponseStateOpened];
-        if([_delegate respondsToSelector:@selector(tiRequest:onReadyStateChage:)]) {
-            [_delegate tiRequest:self onReadyStateChage:_response];
+        if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
+            [_delegate request:self onReadyStateChage:_response];
         }
         
         _connection = [[NSURLConnection alloc] initWithRequest: _request
@@ -161,9 +171,25 @@
     [_headers setValue:value forKey:key];
 }
 
+-(BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection
+{
+	if([self connectionDelegate] != nil && [[self connectionDelegate] respondsToSelector:@selector(connectionShouldUseCredentialStorage:)]) {
+		return [[self connectionDelegate] connectionShouldUseCredentialStorage:connection];
+	}
+	return YES;
+}
+
 -(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    DeveloperLog(@"%s", __PRETTY_FUNCTION__);
+#ifdef DEBUG
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
+	if([self connectionDelegate] != nil && [[self connectionDelegate] respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)])
+	{
+		[[self connectionDelegate] connection:connection willSendRequestForAuthenticationChallenge:challenge];
+		return;
+	}
+
     if ([challenge previousFailureCount]) {
         [[challenge sender] cancelAuthenticationChallenge:challenge];
     }
@@ -191,14 +217,16 @@
 
 -(NSURLRequest*)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response
 {
-    DeveloperLog(@"Code %li Redirecting from: %@ to: %@",(long)[(NSHTTPURLResponse*)response statusCode], [_request URL] ,[request URL]);
+#ifdef DEBUG
+    NSLog(@"Code %li Redirecting from: %@ to: %@",(long)[(NSHTTPURLResponse*)response statusCode], [_request URL] ,[request URL]);
+#endif
     [_response setConnected:YES];
     [_response setResponse: response];
     [_response setRequest:request];
 
-    if([[self delegate] respondsToSelector:@selector(tiRequest:onRedirect:)])
+    if([[self delegate] respondsToSelector:@selector(request:onRedirect:)])
     {
-        [[self delegate] tiRequest:self onRedirect:_response];
+        [[self delegate] request:self onRedirect:_response];
     }
     if(![self redirects] && [_response status] != 0)
     {
@@ -219,7 +247,9 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    DeveloperLog(@"%s", __PRETTY_FUNCTION__);
+#ifdef DEBUG
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     [_response setReadyState:APSHTTPResponseStateHeaders];
     [_response setConnected:YES];
     [_response setResponse: response];
@@ -233,26 +263,27 @@
     }
     _expectedDownloadResponseLength = [response expectedContentLength];
     
-    if([_delegate respondsToSelector:@selector(tiRequest:onReadyStateChage:)]) {
-        [_delegate tiRequest:self onReadyStateChage:_response];
+    if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
+        [_delegate request:self onReadyStateChage:_response];
     }
 
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    DeveloperLog(@"%s", __PRETTY_FUNCTION__);
-
+#ifdef DEBUG
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     if([_response readyState] != APSHTTPResponseStateLoading) {
         [_response setReadyState:APSHTTPResponseStateLoading];
-        if([_delegate respondsToSelector:@selector(tiRequest:onReadyStateChage:)]) {
-            [_delegate tiRequest:self onReadyStateChage:_response];
+        if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
+            [_delegate request:self onReadyStateChage:_response];
         }
     }
     [_response appendData:data];
     [_response setDownloadProgress: (float)[_response responseLength] / (float)_expectedDownloadResponseLength];
-    if([_delegate respondsToSelector:@selector(tiRequest:onDataStream:)]) {
-        [_delegate tiRequest:self onDataStream:_response];
+    if([_delegate respondsToSelector:@selector(request:onDataStream:)]) {
+        [_delegate request:self onDataStream:_response];
     }
     
 }
@@ -261,13 +292,13 @@
 {
     if([_response readyState] != APSHTTPResponseStateLoading) {
         [_response setReadyState:APSHTTPResponseStateLoading];
-        if([_delegate respondsToSelector:@selector(tiRequest:onReadyStateChage:)]) {
-            [_delegate tiRequest:self onReadyStateChage:_response];
+        if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
+            [_delegate request:self onReadyStateChage:_response];
         }
     }
     [_response setUploadProgress: (float)totalBytesWritten / (float)totalBytesExpectedToWrite];
-    if([_delegate respondsToSelector:@selector(tiRequest:onSendStream:)]) {
-        [_delegate tiRequest:self onSendStream:_response];
+    if([_delegate respondsToSelector:@selector(request:onSendStream:)]) {
+        [_delegate request:self onSendStream:_response];
     }
 }
 
@@ -276,40 +307,47 @@
     if(_operation != nil) {
         [_operation setFinished:YES];
     }
-    DeveloperLog(@"%s", __PRETTY_FUNCTION__);
+#ifdef DEBUG
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     [_response setDownloadProgress:1.f];
     [_response setUploadProgress:1.f];
     [_response setReadyState:APSHTTPResponseStateDone];
     [_response setConnected:NO];
      
-    if([_delegate respondsToSelector:@selector(tiRequest:onReadyStateChage:)]) {
-        [_delegate tiRequest:self onReadyStateChage:_response];
+    if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
+        [_delegate request:self onReadyStateChage:_response];
     }
-    if([_delegate respondsToSelector:@selector(tiRequest:onSendStream:)]) {
-        [_delegate tiRequest:self onSendStream:_response];
+    if([_delegate respondsToSelector:@selector(request:onSendStream:)]) {
+        [_delegate request:self onSendStream:_response];
     }
-    if([_delegate respondsToSelector:@selector(tiRequest:onDataStream:)]) {
-        [_delegate tiRequest:self onDataStream:_response];
+    if([_delegate respondsToSelector:@selector(request:onDataStream:)]) {
+        [_delegate request:self onDataStream:_response];
     }
-    if([_delegate respondsToSelector:@selector(tiRequest:onLoad:)]) {
-        [_delegate tiRequest:self onLoad:_response];
+    if([_delegate respondsToSelector:@selector(request:onLoad:)]) {
+        [_delegate request:self onLoad:_response];
     }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+	if([self connectionDelegate] != nil && [[self connectionDelegate] respondsToSelector:@selector(connection:didFailWithError:)]) {
+		[[self connectionDelegate] connection:connection didFailWithError:error];
+	}
     if(_operation != nil) {
         [_operation setFinished:YES];
     }
-    DeveloperLog(@"%s", __PRETTY_FUNCTION__);
+#ifdef DEBUG
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
     [_response setReadyState:APSHTTPResponseStateDone];
-    if([_delegate respondsToSelector:@selector(tiRequest:onReadyStateChage:)]) {
-        [_delegate tiRequest:self onReadyStateChage:_response];
+    if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
+        [_delegate request:self onReadyStateChage:_response];
     }
     [_response setConnected:NO];
     [_response setError:error];
-    if([_delegate respondsToSelector:@selector(tiRequest:onError:)]) {
-        [_delegate tiRequest:self onError:_response];
+    if([_delegate respondsToSelector:@selector(request:onError:)]) {
+        [_delegate request:self onError:_response];
     }
 }
 

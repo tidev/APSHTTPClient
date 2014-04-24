@@ -212,7 +212,9 @@
 {
     NSData *fileData = [NSData dataWithContentsOfFile:path];
     if(fileData == nil) {
-        DeveloperLog(@"%s Cannot find file %@", __PRETTY_FUNCTION__, path);
+#ifdef DEBUG
+		NSLog(@"%s Cannot find file %@", __PRETTY_FUNCTION__, path);
+#endif
         return;
     }
     NSString *fileName = [[path componentsSeparatedByString:@"/"] lastObject];

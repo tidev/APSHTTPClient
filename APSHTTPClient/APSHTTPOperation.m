@@ -58,7 +58,7 @@
         [[[self request] connection] cancel];
         [[self request] connection:[[self request] connection] didFailWithError:
          [NSError errorWithDomain:@"APSHTTPErrorDomain"
-                             code:TiRequestErrorCancel
+                             code:APSRequestErrorCancel
                          userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"The request was cancelled",NSLocalizedDescriptionKey,nil]]
          ];
     } else {

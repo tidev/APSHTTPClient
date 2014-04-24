@@ -117,7 +117,9 @@
                                               options: NSJSONReadingAllowFragments
                                                 error: &error];
     if(error != nil) {
-        DeveloperLog(@"%s - %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+#ifdef DEBUG
+        NSLog(@"%s - %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+#endif
         return nil;
     }
     return json;
@@ -125,7 +127,9 @@
 -(NSString*)responseString
 {
     if([self error] != nil) {
-        DeveloperLog(@"%s", __PRETTY_FUNCTION__);
+#ifdef DEBUG
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
         return [[self error] localizedDescription];
     }
     if([self responseData] == nil || [self responseLength] == 0) return nil;
@@ -150,10 +154,14 @@
 {
     id json = [self jsonResponse];
     if([json isKindOfClass:[NSDictionary class]]) {
-        DeveloperLog(@"%s", __PRETTY_FUNCTION__);
+#ifdef DEBUG
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+#endif
         return (NSDictionary*)json;
     }
-    DeveloperLog(@"%s - JSON is %@", __PRETTY_FUNCTION__, [[json superclass] description]);
+#ifdef DEBUG
+    NSLog(@"%s - JSON is %@", __PRETTY_FUNCTION__, [[json superclass] description]);
+#endif
     return nil;
 }
 -(NSArray*)responseArray
@@ -162,7 +170,9 @@
     if([json isKindOfClass:[NSArray class]]) {
         return (NSArray*)json;
     }
-    DeveloperLog(@"%s - JSON is %@", __PRETTY_FUNCTION__, [[json superclass] description]);
+#ifdef DEBUG
+    NSLog(@"%s - JSON is %@", __PRETTY_FUNCTION__, [[json superclass] description]);
+#endif
     return nil;
 }
 
