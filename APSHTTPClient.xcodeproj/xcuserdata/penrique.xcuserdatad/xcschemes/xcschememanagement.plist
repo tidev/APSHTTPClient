@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>APSCHTTPClient.xcscheme</key>
+		<key>APSHTTPClient-Debug.framework.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
-		<key>APSHTTPClient-Debug.framework.xcscheme</key>
+		<key>APSHTTPClient-Debug.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
@@ -17,7 +17,12 @@
 		<key>APSHTTPClient-Release.framework.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
+		</dict>
+		<key>APSHTTPClient-Release.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>APSHTTPClient.framework.xcscheme</key>
 		<dict>
@@ -48,6 +53,16 @@
 			<true/>
 		</dict>
 		<key>B635EDA518FDB90A0038B130</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B6C4B87E190AE0FB00482D2E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B6C4B88C190AE0FC00482D2E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
