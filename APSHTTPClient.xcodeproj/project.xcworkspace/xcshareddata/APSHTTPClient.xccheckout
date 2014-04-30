@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>CAC34147-0936-428D-A329-4DE2D1BD53A3</string>
+	<string>34CDC654-2E94-4837-BA68-31853396B1EC</string>
 	<key>IDESourceControlProjectName</key>
 	<string>APSHTTPClient</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B5F74A4A-93E7-4D60-82F2-EBD72621CCC5</key>
-		<string>https://github.com/pec1985/TiHTTPClient-1.git</string>
+		<key>B9A9726A-0C90-4CCB-A489-7A07189D8E7D</key>
+		<string>ssh://github.com/srahim/APSHTTPClient.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>APSHTTPClient.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B5F74A4A-93E7-4D60-82F2-EBD72621CCC5</key>
+		<key>B9A9726A-0C90-4CCB-A489-7A07189D8E7D</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/pec1985/TiHTTPClient-1.git</string>
+	<string>ssh://github.com/srahim/APSHTTPClient.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B5F74A4A-93E7-4D60-82F2-EBD72621CCC5</string>
+	<string>B9A9726A-0C90-4CCB-A489-7A07189D8E7D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B5F74A4A-93E7-4D60-82F2-EBD72621CCC5</string>
+			<string>B9A9726A-0C90-4CCB-A489-7A07189D8E7D</string>
 			<key>IDESourceControlWCCName</key>
-			<string>TiHTTPClient</string>
+			<string>APSHTTPClient</string>
 		</dict>
 	</array>
 </dict>
