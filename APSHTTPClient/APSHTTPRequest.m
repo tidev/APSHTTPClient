@@ -208,7 +208,8 @@
              [NSURLCredential credentialForTrust: [[challenge protectionSpace] serverTrust]]
                    forAuthenticationChallenge: challenge];
         }
-    } else if ( [authMethod isEqualToString:NSURLAuthenticationMethodDefault] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic] || [authMethod isEqualToString:NSURLAuthenticationMethodNTLM]) {
+    } else if ( [authMethod isEqualToString:NSURLAuthenticationMethodDefault] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic]
+               || [authMethod isEqualToString:NSURLAuthenticationMethodNTLM] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest]) {
         if([self requestPassword] != nil && [self requestUsername] != nil) {
             handled = YES;
             [[challenge sender] useCredential:
