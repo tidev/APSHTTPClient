@@ -184,35 +184,44 @@
 #ifdef DEBUG
     NSLog(@"%s", __PRETTY_FUNCTION__);
 #endif
-	if([self connectionDelegate] != nil && [[self connectionDelegate] respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)])
-	{
-		[[self connectionDelegate] connection:connection willSendRequestForAuthenticationChallenge:challenge];
-		return;
-	}
+    BOOL useSubDelegate = ([self connectionDelegate] != nil && [[self connectionDelegate] respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
+    
+    if(useSubDelegate && [[self connectionDelegate] respondsToSelector:@selector(willHandleChallenge:forConnection:)]) {
+        useSubDelegate = [[self connectionDelegate] willHandleChallenge:challenge forConnection:connection];
+    }
+    
+    if(useSubDelegate) {
+        [[self connectionDelegate] connection:connection willSendRequestForAuthenticationChallenge:challenge];
+        return;
+    }
 
     if ([challenge previousFailureCount]) {
         [[challenge sender] cancelAuthenticationChallenge:challenge];
     }
-    if(![self validatesSecureCertificate]) {
-        if (
-            [[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust] &&
-            [challenge.protectionSpace.host isEqualToString:[[self url] host]]
-            ) {
+    
+    NSString* authMethod = [[[[challenge protectionSpace] authenticationMethod] retain] autorelease];
+    BOOL handled = NO;
+    if ([authMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+        if ( ([challenge.protectionSpace.host isEqualToString:[[self url] host]]) && (![self validatesSecureCertificate]) ){
+            handled = YES;
             [[challenge sender] useCredential:
              [NSURLCredential credentialForTrust: [[challenge protectionSpace] serverTrust]]
                    forAuthenticationChallenge: challenge];
         }
+    } else if ( [authMethod isEqualToString:NSURLAuthenticationMethodDefault] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic] || [authMethod isEqualToString:NSURLAuthenticationMethodNTLM]) {
+        if([self requestPassword] != nil && [self requestUsername] != nil) {
+            handled = YES;
+            [[challenge sender] useCredential:
+             [NSURLCredential credentialWithUser:[self requestUsername]
+                                        password:[self requestPassword]
+                                     persistence:NSURLCredentialPersistenceForSession]
+                   forAuthenticationChallenge:challenge];
+        }
     }
     
-    if([self requestPassword] != nil && [self requestUsername] != nil) {
-        [[challenge sender] useCredential:
-         [NSURLCredential credentialWithUser:[self requestUsername]
-                                    password:[self requestPassword]
-                                 persistence:NSURLCredentialPersistenceForSession]
-               forAuthenticationChallenge:challenge];
-        
+    if (!handled) {
+        [[challenge sender] performDefaultHandlingForAuthenticationChallenge:challenge];
     }
-    [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 
 -(NSURLRequest*)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response

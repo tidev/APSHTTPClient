@@ -1,3 +1,5 @@
 /Build/
-
+/Builds/
 .DS_Store
+xcuserdata
+
