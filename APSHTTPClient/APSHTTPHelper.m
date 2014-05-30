@@ -158,7 +158,7 @@ if((remainingSize > nameSize)&&([self caselessCompareFirstString:data secondStri
 	if (!MIMEType) {
 		return @"application/octet-stream";
 	}
-    return [(NSString *)MIMEType autorelease];
+    return CFBridgingRelease(MIMEType);
 }
 
 // Taken from http://stackoverflow.com/questions/8088473/url-encode-an-nsstring

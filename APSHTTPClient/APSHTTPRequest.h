@@ -7,16 +7,16 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
+typedef NS_ENUM(NSInteger, APSRequestAuth) {
 	APSRequestAuthNone = 0,
 	APSRequestAuthBasic = 1,
 	APSRequestAuthDigest = 2,
     APSRequestAuthChallange = 3
-} APSRequestAuth;
+};
 
-typedef enum {
+typedef NS_ENUM(NSInteger, APSRequestError) {
 	APSRequestErrorCancel = 0
-} APSRequestError;
+};
 
 
 @class APSHTTPResponse;
@@ -40,24 +40,18 @@ typedef enum {
 
 @end
 
-@interface APSHTTPRequest : NSObject<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
-{
-    long long _expectedDownloadResponseLength;
-    NSURLConnection *_connection;
-    NSMutableDictionary *_headers;
-    APSHTTPOperation* _operation;
-}
+@interface APSHTTPRequest : NSObject
 
 @property(nonatomic, readonly) NSMutableURLRequest *request;
-@property(nonatomic, retain) NSURL *url;
-@property(nonatomic, retain) NSString *method;
-@property(nonatomic, retain) NSString *filePath;
-@property(nonatomic, retain) NSString *requestUsername;
-@property(nonatomic, retain) NSString *requestPassword;
-@property(nonatomic, retain) APSHTTPPostForm *postForm;
+@property(nonatomic) NSURL *url;
+@property(nonatomic) NSString *method;
+@property(nonatomic) NSString *filePath;
+@property(nonatomic) NSString *requestUsername;
+@property(nonatomic) NSString *requestPassword;
+@property(nonatomic) APSHTTPPostForm *postForm;
 @property(nonatomic, readonly) APSHTTPResponse* response;
-@property(nonatomic, assign) NSObject<APSHTTPRequestDelegate>* delegate;
-@property(nonatomic, assign) NSObject<APSConnectionDelegate>* connectionDelegate;
+@property(nonatomic, weak) NSObject<APSHTTPRequestDelegate>* delegate;
+@property(nonatomic, weak) NSObject<APSConnectionDelegate>* connectionDelegate;
 @property(nonatomic) NSTimeInterval timeout;
 @property(nonatomic) BOOL sendDefaultCookies;
 @property(nonatomic) BOOL redirects;
@@ -65,8 +59,8 @@ typedef enum {
 @property(nonatomic) BOOL validatesSecureCertificate;
 @property(nonatomic) BOOL cancelled;
 @property(nonatomic) APSRequestAuth authType;
-@property(nonatomic, retain) NSOperationQueue *theQueue;
-@property(nonatomic, retain) NSDictionary *userInfo;
+@property(nonatomic) NSOperationQueue *theQueue;
+@property(nonatomic) NSDictionary *userInfo;
 -(void)send;
 -(void)abort;
 -(void)addRequestHeader:(NSString*)key value:(NSString*)value;

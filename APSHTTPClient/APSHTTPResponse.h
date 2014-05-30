@@ -7,26 +7,24 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
+typedef NS_ENUM(NSInteger, APSHTTPResponseState) {
     APSHTTPResponseStateUnsent = 0,
     APSHTTPResponseStateOpened = 1,
     APSHTTPResponseStateHeaders = 2,
     APSHTTPResponseStateLoading = 3,
     APSHTTPResponseStateDone = 4
-} APSHTTPResponseState;
+};
 
 @interface APSHTTPResponse : NSObject
-{
-    NSMutableData *_data;
-}
+
 @property(nonatomic, readonly) NSURL *url;
 @property(nonatomic, readonly) NSInteger status;
 @property(nonatomic, readonly) NSDictionary *headers;
 @property(nonatomic, readonly) NSString *connectionType;
 @property(nonatomic, readonly) NSString *location;
 @property(nonatomic) NSStringEncoding encoding;
-@property(nonatomic, retain) NSError *error;
-@property(nonatomic, retain) NSString *filePath;
+@property(nonatomic) NSError *error;
+@property(nonatomic) NSString *filePath;
 @property(nonatomic) float downloadProgress;
 @property(nonatomic) float uploadProgress;
 

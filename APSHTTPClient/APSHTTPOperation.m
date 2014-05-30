@@ -9,11 +9,6 @@
 
 @implementation APSHTTPOperation
 
-- (void)dealloc
-{
-    [super dealloc];
-}
-
 - (id)initWithConnection:(APSHTTPRequest *)request
 {
     self = [self init];

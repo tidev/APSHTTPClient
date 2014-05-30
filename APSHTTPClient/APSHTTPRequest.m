@@ -7,30 +7,18 @@
 
 #import "APSHTTPClient.h"
 
-@implementation APSHTTPRequest
-@synthesize url = _url;
-@synthesize method = _method;
-@synthesize response = _response;
-@synthesize filePath = _filePath;
-@synthesize requestPassword = _requestPassword;
-@synthesize requestUsername = _requestUsername;
+@interface APSHTTPRequest () <NSURLConnectionDataDelegate>
+@end
 
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_connection);
-    RELEASE_TO_NIL(_request);
-    RELEASE_TO_NIL(_response);
-    RELEASE_TO_NIL(_url);
-    RELEASE_TO_NIL(_method);
-    RELEASE_TO_NIL(_filePath);
-    RELEASE_TO_NIL(_requestUsername);
-    RELEASE_TO_NIL(_requestPassword);
-    RELEASE_TO_NIL(_postForm);
-    RELEASE_TO_NIL(_operation);
-    RELEASE_TO_NIL(_userInfo);
-    RELEASE_TO_NIL(_headers);
-    [super dealloc];
+
+@implementation APSHTTPRequest {
+    long long _expectedDownloadResponseLength;
+    NSURLConnection *_connection;
+    NSMutableDictionary *_headers;
+    APSHTTPOperation* _operation;
 }
+
+
 - (id)init
 {
     self = [super init];
@@ -146,7 +134,6 @@
                                ];
         
         if([self theQueue]) {
-            RELEASE_TO_NIL(_operation);
             _operation = [[APSHTTPOperation alloc] initWithConnection: self];
             [_operation setIndex:[[self theQueue] operationCount]];
             [[self theQueue] addOperation: _operation];
@@ -199,7 +186,7 @@
         [[challenge sender] cancelAuthenticationChallenge:challenge];
     }
     
-    NSString* authMethod = [[[[challenge protectionSpace] authenticationMethod] retain] autorelease];
+    NSString* authMethod = [[challenge protectionSpace] authenticationMethod];
     BOOL handled = NO;
     if ([authMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
         if ( ([challenge.protectionSpace.host isEqualToString:[[self url] host]]) && (![self validatesSecureCertificate]) ){
@@ -245,11 +232,8 @@
     
     //http://tewha.net/2012/05/handling-302303-redirects/
     if (response) {
-        NSMutableURLRequest *r = [[_request mutableCopy] autorelease];
-        [r setURL: [request URL]];
-        RELEASE_TO_NIL(_request);
-        _request = [r retain];
-        return r;
+        _request.URL = request.URL;
+        return _request;
     } else {
         return request;
     }

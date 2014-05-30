@@ -8,19 +8,13 @@
 #import "APSHTTPClient.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@implementation APSHTTPPostForm
-
-
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_headers);
-    RELEASE_TO_NIL(_postFormData);
-    RELEASE_TO_NIL(_requestFormDictionay);
-    RELEASE_TO_NIL(_requestFilesArray);
-    RELEASE_TO_NIL(_jsonData);
-    RELEASE_TO_NIL(_stringData);
-    RELEASE_TO_NIL(_contentType);
-    [super dealloc];
+@implementation APSHTTPPostForm {
+    NSMutableDictionary *_requestFormDictionay;
+    NSMutableArray *_requestFilesArray;
+    NSMutableDictionary *_headers;
+    NSMutableData *_postFormData;
+    NSData *_jsonData;
+    NSData *_stringData;
 }
 
 
@@ -35,8 +29,7 @@
 }
 -(void)appendData:(NSData *)data withContentType:(NSString *)contentType
 {
-    RELEASE_TO_NIL(_contentType);
-    _contentType = [contentType retain];
+    _contentType = [contentType copy];
     [[self postFormData] appendData: data];
 }
 
@@ -146,7 +139,7 @@
 }
 -(NSDictionary*)requestHeaders
 {
-    return [[_headers copy] autorelease];
+    return [_headers copy];
 }
 
 -(NSMutableDictionary*)requestFormDictionay
@@ -175,8 +168,7 @@
 -(void)setJSONData:(id)json
 {
     NSError *error = nil;
-    RELEASE_TO_NIL(_jsonData);
-    _jsonData = [[NSJSONSerialization dataWithJSONObject:json options:kNilOptions error:&error] retain];
+    _jsonData = [NSJSONSerialization dataWithJSONObject:json options:kNilOptions error:&error];
     if(error != nil) {
         NSLog(@"Error reading JSON: %@", [error localizedDescription]);
     }
@@ -184,8 +176,7 @@
 
 -(void)setStringData:(NSString *)str
 {
-    RELEASE_TO_NIL(_stringData);
-    _stringData = [[str dataUsingEncoding: NSUTF8StringEncoding] retain];
+    _stringData = [str dataUsingEncoding: NSUTF8StringEncoding];
 }
 
 -(void)addDictionay:(NSDictionary*)dict
