@@ -5,7 +5,8 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "APSHTTPClient.h"
+//#import "APSHTTPClient.h"
+#import "APSHTTPOperation.h"
 
 @implementation APSHTTPOperation
 

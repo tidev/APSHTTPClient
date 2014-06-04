@@ -19,6 +19,12 @@
 		C9143BCE19390EAD0039AAEA /* APSHTTPPostForm.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BC719390EAD0039AAEA /* APSHTTPPostForm.m */; };
 		C9143BCF19390EAD0039AAEA /* APSHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BC919390EAD0039AAEA /* APSHTTPRequest.m */; };
 		C9143BD019390EAD0039AAEA /* APSHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BCB19390EAD0039AAEA /* APSHTTPResponse.m */; };
+		C9143BE3193916E90039AAEA /* APSHTTPClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC119390EAD0039AAEA /* APSHTTPClient.h */; };
+		C9143BE4193916E90039AAEA /* APSHTTPHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC219390EAD0039AAEA /* APSHTTPHelper.h */; };
+		C9143BE5193916E90039AAEA /* APSHTTPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC419390EAD0039AAEA /* APSHTTPOperation.h */; };
+		C9143BE6193916E90039AAEA /* APSHTTPPostForm.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC619390EAD0039AAEA /* APSHTTPPostForm.h */; };
+		C9143BE7193916E90039AAEA /* APSHTTPRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC819390EAD0039AAEA /* APSHTTPRequest.h */; };
+		C9143BE8193916E90039AAEA /* APSHTTPResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BCA19390EAD0039AAEA /* APSHTTPResponse.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,12 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				C9143BE3193916E90039AAEA /* APSHTTPClient.h in CopyFiles */,
+				C9143BE4193916E90039AAEA /* APSHTTPHelper.h in CopyFiles */,
+				C9143BE5193916E90039AAEA /* APSHTTPOperation.h in CopyFiles */,
+				C9143BE6193916E90039AAEA /* APSHTTPPostForm.h in CopyFiles */,
+				C9143BE7193916E90039AAEA /* APSHTTPRequest.h in CopyFiles */,
+				C9143BE8193916E90039AAEA /* APSHTTPResponse.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +298,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
+				"ARCHS[sdk=iphoneos*]" = armv7;
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -323,6 +338,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
+				"ARCHS[sdk=iphoneos*]" = armv7;
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -345,6 +363,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

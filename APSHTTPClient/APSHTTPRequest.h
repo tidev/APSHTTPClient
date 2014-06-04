@@ -22,7 +22,6 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 @class APSHTTPResponse;
 @class APSHTTPRequest;
 @class APSHTTPPostForm;
-@class APSHTTPOperation;
 
 @protocol APSConnectionDelegate <NSURLConnectionDelegate>
 @optional
@@ -42,14 +41,14 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 
 @interface APSHTTPRequest : NSObject
 
-@property(nonatomic, readonly) NSMutableURLRequest *request;
-@property(nonatomic) NSURL *url;
-@property(nonatomic) NSString *method;
-@property(nonatomic) NSString *filePath;
-@property(nonatomic) NSString *requestUsername;
-@property(nonatomic) NSString *requestPassword;
-@property(nonatomic) APSHTTPPostForm *postForm;
-@property(nonatomic, readonly) APSHTTPResponse* response;
+@property(nonatomic, strong, readonly) NSMutableURLRequest *request;
+@property(nonatomic, strong) NSURL *url;
+@property(nonatomic, strong) NSString *method;
+@property(nonatomic, strong) NSString *filePath;
+@property(nonatomic, strong) NSString *requestUsername;
+@property(nonatomic, strong) NSString *requestPassword;
+@property(nonatomic, strong) APSHTTPPostForm *postForm;
+@property(nonatomic, strong, readonly) APSHTTPResponse* response;
 @property(nonatomic, weak) NSObject<APSHTTPRequestDelegate>* delegate;
 @property(nonatomic, weak) NSObject<APSConnectionDelegate>* connectionDelegate;
 @property(nonatomic) NSTimeInterval timeout;
@@ -59,8 +58,8 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 @property(nonatomic) BOOL validatesSecureCertificate;
 @property(nonatomic) BOOL cancelled;
 @property(nonatomic) APSRequestAuth authType;
-@property(nonatomic) NSOperationQueue *theQueue;
-@property(nonatomic) NSDictionary *userInfo;
+@property(nonatomic, strong) NSOperationQueue *theQueue;
+@property(nonatomic, strong) NSDictionary *userInfo;
 -(void)send;
 -(void)abort;
 -(void)addRequestHeader:(NSString*)key value:(NSString*)value;

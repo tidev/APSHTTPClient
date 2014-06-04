@@ -6,6 +6,7 @@
  */
 
 #import "APSHTTPClient.h"
+#import "APSHTTPOperation.h"
 
 @interface APSHTTPRequest () <NSURLConnectionDataDelegate>
 @end

@@ -17,28 +17,28 @@ typedef NS_ENUM(NSInteger, APSHTTPResponseState) {
 
 @interface APSHTTPResponse : NSObject
 
-@property(nonatomic, readonly) NSURL *url;
-@property(nonatomic, readonly) NSInteger status;
-@property(nonatomic, readonly) NSDictionary *headers;
-@property(nonatomic, readonly) NSString *connectionType;
-@property(nonatomic, readonly) NSString *location;
-@property(nonatomic) NSStringEncoding encoding;
-@property(nonatomic) NSError *error;
-@property(nonatomic) NSString *filePath;
-@property(nonatomic) float downloadProgress;
-@property(nonatomic) float uploadProgress;
+//@property(nonatomic, strong, readonly ) NSURL                *url;
+@property(nonatomic, strong, readonly ) NSDictionary         *headers;            // used by TiNetworkHTTPClientProxy, ImageLoader
+@property(nonatomic, strong, readonly ) NSString             *connectionType;     // used by TiNetworkHTTPClientProxy
+//@property(nonatomic, assign, readonly ) NSStringEncoding     encoding;
 
-@property(nonatomic, readonly) NSData* responseData;
-@property(nonatomic, readonly) NSInteger responseLength;
-@property(nonatomic, readonly) NSString*responseString;
-@property(nonatomic, readonly) NSDictionary*responseDictionary;
-@property(nonatomic, readonly) NSArray* responseArray;
+@property(nonatomic, strong, readonly ) NSData               *responseData;       // used by TiNetworkHTTPClientProxy, ImageLoader
+@property(nonatomic, strong, readonly ) NSString             *responseString;     // used by TiNetworkHTTPClientProxy, YahooModule and GeolocationModule
+@property(nonatomic, strong, readonly ) NSDictionary         *responseDictionary; // used by TiNetworkHTTPClientProxy
+@property(nonatomic, strong, readonly ) NSArray              *responseArray;      // used by TiNetworkHTTPClientProxy
+@property(nonatomic, assign, readonly ) BOOL                 saveToFile;          // used by TiNetworkHTTPClientProxy
 
-@property(nonatomic) BOOL saveToFile;
-@property(nonatomic) BOOL connected;
-@property(nonatomic) APSHTTPResponseState readyState;
+@property(nonatomic, assign, readonly ) NSInteger            status;              // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, strong, readonly ) NSString             *location;           // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, assign, readonly ) NSInteger            responseLength;      // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, strong, readwrite) NSError              *error;              // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, strong, readwrite) NSString             *filePath;           // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, assign, readwrite) float                downloadProgress;    // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, assign, readwrite) float                uploadProgress;      // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, assign, readwrite) BOOL                 connected;           // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, assign, readwrite) APSHTTPResponseState readyState;          // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, strong, readwrite) NSURLResponse        *response;           // should be protocol (used by APSHTTPRequest)
+@property(nonatomic, strong, readwrite) NSURLRequest         *request;            // should be protocol (used by APSHTTPRequest)
 
 -(void)appendData:(NSData*)data;
--(void)setResponse:(NSURLResponse*) response;
--(void)setRequest:(NSURLRequest*) request;
 @end

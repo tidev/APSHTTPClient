@@ -7,6 +7,12 @@
 
 #import "APSHTTPClient.h"
 
+@interface APSHTTPResponse ()
+@property(nonatomic,         readwrite) NSStringEncoding     encoding;
+@property(nonatomic,         readwrite) BOOL                 saveToFile;
+@property(nonatomic, strong, readonly ) NSURL                *url;
+@end
+
 @implementation APSHTTPResponse {
     NSMutableData *_data;
 }
