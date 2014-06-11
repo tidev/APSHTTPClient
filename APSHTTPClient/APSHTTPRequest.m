@@ -206,7 +206,11 @@
     }
     
     if (!handled) {
-        [[challenge sender] performDefaultHandlingForAuthenticationChallenge:challenge];
+        if ([[challenge sender] respondsToSelector:@selector(performDefaultHandlingForAuthenticationChallenge:)]) {
+            [[challenge sender] performDefaultHandlingForAuthenticationChallenge:challenge];
+        } else {
+            [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
+        }
     }
 }
 
