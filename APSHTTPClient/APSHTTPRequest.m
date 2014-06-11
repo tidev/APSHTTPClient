@@ -129,8 +129,16 @@
         } else {
             if (![NSThread isMainThread]) {
                 NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-                NSSet *runLoopModes = [NSSet setWithObject:NSRunLoopCommonModes];
+                NSMutableSet *runLoopModes = [NSMutableSet setWithObjects:NSDefaultRunLoopMode, NSRunLoopCommonModes, nil];
+                if ([runLoop currentMode]) {
+                    if (![runLoopModes containsObject:[runLoop currentMode]]) {
+                        [runLoopModes addObject:[runLoop currentMode]];
+                    }
+                } else {
+                    DebugLog(@"%s [Line %@] [WARN] [[NSRunLoop currentRunLoop] currentMode] is nil", __PRETTY_FUNCTION__, @(__LINE__));
+                }
                 for (NSString *runLoopMode in runLoopModes) {
+                    NSLog(@"MDL: runLoopMode = %@", runLoopMode);
                     [_connection scheduleInRunLoop:runLoop forMode:runLoopMode];
                 }
             }

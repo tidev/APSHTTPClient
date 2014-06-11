@@ -52,6 +52,9 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 @property(nonatomic, strong, readwrite) NSOperationQueue                 *theQueue;
 @property(nonatomic, assign, readwrite) NSURLRequestCachePolicy          cachePolicy;
 
+// Only used in Titanium ImageLoader
+@property(nonatomic, strong, readwrite) NSDictionary                     *userInfo;
+
 -(void)send;
 -(void)abort;
 -(void)addRequestHeader:(NSString*)key value:(NSString*)value;
