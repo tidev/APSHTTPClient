@@ -18,7 +18,7 @@
 }
 
 
--(void)setResponse:(NSURLResponse*) response
+- (void) updateResponseParamaters:(NSURLResponse *)response
 {
     _url = [response URL];
     if([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -30,7 +30,8 @@
 
     }
 }
--(void)setRequest:(NSURLRequest*) request
+
+- (void) updateRequestParamaters:(NSURLRequest *)request
 {
     _connectionType = [request HTTPMethod];
     _location = [[request URL] absoluteString];

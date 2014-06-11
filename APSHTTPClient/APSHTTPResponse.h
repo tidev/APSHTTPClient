@@ -37,8 +37,10 @@ typedef NS_ENUM(NSInteger, APSHTTPResponseState) {
 @property(nonatomic, assign, readwrite) float                uploadProgress;      // should be protocol (used by APSHTTPRequest)
 @property(nonatomic, assign, readwrite) BOOL                 connected;           // should be protocol (used by APSHTTPRequest)
 @property(nonatomic, assign, readwrite) APSHTTPResponseState readyState;          // should be protocol (used by APSHTTPRequest)
-@property(nonatomic, strong, readwrite) NSURLResponse        *response;           // should be protocol (used by APSHTTPRequest)
-@property(nonatomic, strong, readwrite) NSURLRequest         *request;            // should be protocol (used by APSHTTPRequest)
+
+- (void) updateRequestParamaters:(NSURLRequest *)request;
+- (void) updateResponseParamaters:(NSURLResponse *)response;
+
 
 -(void)appendData:(NSData*)data;
 @end

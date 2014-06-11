@@ -7,13 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, APSRequestAuth) {
-	APSRequestAuthNone = 0,
-	APSRequestAuthBasic = 1,
-	APSRequestAuthDigest = 2,
-    APSRequestAuthChallange = 3
-};
-
 typedef NS_ENUM(NSInteger, APSRequestError) {
 	APSRequestErrorCancel = 0
 };
@@ -41,29 +34,25 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 
 @interface APSHTTPRequest : NSObject
 
-@property(nonatomic, strong, readonly) NSMutableURLRequest *request;
-@property(nonatomic, strong) NSURL *url;
-@property(nonatomic, strong) NSString *method;
-@property(nonatomic, strong) NSString *filePath;
-@property(nonatomic, strong) NSString *requestUsername;
-@property(nonatomic, strong) NSString *requestPassword;
-@property(nonatomic, strong) APSHTTPPostForm *postForm;
-@property(nonatomic, strong, readonly) APSHTTPResponse* response;
-@property(nonatomic, weak) NSObject<APSHTTPRequestDelegate>* delegate;
-@property(nonatomic, weak) NSObject<APSConnectionDelegate>* connectionDelegate;
-@property(nonatomic) NSTimeInterval timeout;
-@property(nonatomic) BOOL sendDefaultCookies;
-@property(nonatomic) BOOL redirects;
-@property(nonatomic) BOOL synchronous;
-@property(nonatomic) BOOL validatesSecureCertificate;
-@property(nonatomic) BOOL cancelled;
-@property(nonatomic) APSRequestAuth authType;
-@property(nonatomic, strong) NSOperationQueue *theQueue;
-@property(nonatomic, strong) NSDictionary *userInfo;
+@property(nonatomic, strong, readwrite) NSURL                            *url;
+@property(nonatomic, strong, readwrite) NSString                         *method;
+@property(nonatomic, strong, readwrite) NSString                         *filePath;
+@property(nonatomic, strong, readwrite) NSString                         *requestUsername;
+@property(nonatomic, strong, readwrite) NSString                         *requestPassword;
+@property(nonatomic, strong, readwrite) APSHTTPPostForm                  *postForm;
+@property(nonatomic, strong, readonly ) APSHTTPResponse                  *response;
+@property(nonatomic, weak,   readwrite) NSObject<APSHTTPRequestDelegate> *delegate;
+@property(nonatomic, weak,   readwrite) NSObject<APSConnectionDelegate>  *connectionDelegate;
+@property(nonatomic, assign, readwrite) NSTimeInterval                   timeout;
+@property(nonatomic, assign, readwrite) BOOL                             sendDefaultCookies;
+@property(nonatomic, assign, readwrite) BOOL                             redirects;
+@property(nonatomic, assign, readwrite) BOOL                             synchronous;
+@property(nonatomic, assign, readwrite) BOOL                             validatesSecureCertificate;
+@property(nonatomic, assign, readwrite) BOOL                             cancelled;
+@property(nonatomic, strong, readwrite) NSOperationQueue                 *theQueue;
+@property(nonatomic, assign, readwrite) NSURLRequestCachePolicy          cachePolicy;
+
 -(void)send;
 -(void)abort;
 -(void)addRequestHeader:(NSString*)key value:(NSString*)value;
--(void)setCachePolicy:(NSURLRequestCachePolicy)cache;
--(void)connection:(NSURLConnection*)connection didFailWithError:(NSError*)error;
--(NSURLConnection*)connection;
 @end
