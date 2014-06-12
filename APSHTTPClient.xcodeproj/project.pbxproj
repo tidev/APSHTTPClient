@@ -7,193 +7,265 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		B635EDA518FDB90A0038B130 /* APSHTTPClient.framework */ = {
+		C9D0608A19491B4B007E488A /* Create Release Folder */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = B635EDA618FDB90A0038B130 /* Build configuration list for PBXAggregateTarget "APSHTTPClient.framework" */;
+			buildConfigurationList = C9D0608B19491B4B007E488A /* Build configuration list for PBXAggregateTarget "Create Release Folder" */;
 			buildPhases = (
-				B635EDA918FDB9330038B130 /* ShellScript */,
+				C9D0608E19491D3B007E488A /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = APSHTTPClient.framework;
-			productName = APSHTTPClient.framework;
+			name = "Create Release Folder";
+			productName = "Create Release Zip";
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		B62D6426190AE55200BE4C69 /* APSHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED6218FDB4B00038B130 /* APSHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B62D6427190AE55200BE4C69 /* APSHTTPHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED5818FDB4B00038B130 /* APSHTTPHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B62D6428190AE55200BE4C69 /* APSHTTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED5A18FDB4B00038B130 /* APSHTTPOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B62D6429190AE55200BE4C69 /* APSHTTPPostForm.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED5C18FDB4B00038B130 /* APSHTTPPostForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B62D642A190AE55200BE4C69 /* APSHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED5E18FDB4B00038B130 /* APSHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B62D642B190AE55200BE4C69 /* APSHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B635ED6018FDB4B00038B130 /* APSHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B6C4B8A4190AE13E00482D2E /* APSHTTPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B635ED5918FDB4B00038B130 /* APSHTTPHelper.m */; };
-		B6C4B8A5190AE13E00482D2E /* APSHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B635ED5B18FDB4B00038B130 /* APSHTTPOperation.m */; };
-		B6C4B8A6190AE13E00482D2E /* APSHTTPPostForm.m in Sources */ = {isa = PBXBuildFile; fileRef = B635ED5D18FDB4B00038B130 /* APSHTTPPostForm.m */; };
-		B6C4B8A7190AE13E00482D2E /* APSHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B635ED5F18FDB4B00038B130 /* APSHTTPRequest.m */; };
-		B6C4B8A8190AE13E00482D2E /* APSHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B635ED6118FDB4B00038B130 /* APSHTTPResponse.m */; };
+		C9143B9C19390E1D0039AAEA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143B9B19390E1D0039AAEA /* Foundation.framework */; };
+		C9143BAA19390E1E0039AAEA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143BA919390E1E0039AAEA /* XCTest.framework */; };
+		C9143BAB19390E1E0039AAEA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143B9B19390E1D0039AAEA /* Foundation.framework */; };
+		C9143BAD19390E1E0039AAEA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143BAC19390E1E0039AAEA /* UIKit.framework */; };
+		C9143BB019390E1E0039AAEA /* libAPSHTTPClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143B9819390E1D0039AAEA /* libAPSHTTPClient.a */; };
+		C9143BB619390E1E0039AAEA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9143BB419390E1E0039AAEA /* InfoPlist.strings */; };
+		C9143BB819390E1E0039AAEA /* APSHTTPClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BB719390E1E0039AAEA /* APSHTTPClientTests.m */; };
+		C9143BCC19390EAD0039AAEA /* APSHTTPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BC319390EAD0039AAEA /* APSHTTPHelper.m */; };
+		C9143BCE19390EAD0039AAEA /* APSHTTPPostForm.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BC719390EAD0039AAEA /* APSHTTPPostForm.m */; };
+		C9143BCF19390EAD0039AAEA /* APSHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BC919390EAD0039AAEA /* APSHTTPRequest.m */; };
+		C9143BD019390EAD0039AAEA /* APSHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BCB19390EAD0039AAEA /* APSHTTPResponse.m */; };
+		C9143BE3193916E90039AAEA /* APSHTTPClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC119390EAD0039AAEA /* APSHTTPClient.h */; };
+		C9143BE4193916E90039AAEA /* APSHTTPHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC219390EAD0039AAEA /* APSHTTPHelper.h */; };
+		C9143BE6193916E90039AAEA /* APSHTTPPostForm.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC619390EAD0039AAEA /* APSHTTPPostForm.h */; };
+		C9143BE7193916E90039AAEA /* APSHTTPRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC819390EAD0039AAEA /* APSHTTPRequest.h */; };
+		C9143BE8193916E90039AAEA /* APSHTTPResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BCA19390EAD0039AAEA /* APSHTTPResponse.h */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C9143BAE19390E1E0039AAEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C9143B9019390E1D0039AAEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C9143B9719390E1D0039AAEA;
+			remoteInfo = APSHTTPClient;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		B6C4B87D190AE0FB00482D2E /* CopyFiles */ = {
+		C9143B9619390E1D0039AAEA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				C9143BE3193916E90039AAEA /* APSHTTPClient.h in CopyFiles */,
+				C9143BE4193916E90039AAEA /* APSHTTPHelper.h in CopyFiles */,
+				C9143BE6193916E90039AAEA /* APSHTTPPostForm.h in CopyFiles */,
+				C9143BE7193916E90039AAEA /* APSHTTPRequest.h in CopyFiles */,
+				C9143BE8193916E90039AAEA /* APSHTTPResponse.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B635ED4E18FDB3320038B130 /* APSHTTPClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "APSHTTPClient-Info.plist"; sourceTree = "<group>"; };
-		B635ED5018FDB3320038B130 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B635ED5218FDB3320038B130 /* APSHTTPClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "APSHTTPClient-Prefix.pch"; sourceTree = "<group>"; };
-		B635ED5818FDB4B00038B130 /* APSHTTPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPHelper.h; sourceTree = "<group>"; };
-		B635ED5918FDB4B00038B130 /* APSHTTPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPHelper.m; sourceTree = "<group>"; };
-		B635ED5A18FDB4B00038B130 /* APSHTTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPOperation.h; sourceTree = "<group>"; };
-		B635ED5B18FDB4B00038B130 /* APSHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPOperation.m; sourceTree = "<group>"; };
-		B635ED5C18FDB4B00038B130 /* APSHTTPPostForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPPostForm.h; sourceTree = "<group>"; };
-		B635ED5D18FDB4B00038B130 /* APSHTTPPostForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPPostForm.m; sourceTree = "<group>"; };
-		B635ED5E18FDB4B00038B130 /* APSHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPRequest.h; sourceTree = "<group>"; };
-		B635ED5F18FDB4B00038B130 /* APSHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPRequest.m; sourceTree = "<group>"; };
-		B635ED6018FDB4B00038B130 /* APSHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPResponse.h; sourceTree = "<group>"; };
-		B635ED6118FDB4B00038B130 /* APSHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPResponse.m; sourceTree = "<group>"; };
-		B635ED6218FDB4B00038B130 /* APSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPClient.h; sourceTree = "<group>"; };
-		B6C4B87F190AE0FB00482D2E /* libAPSHTTPClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAPSHTTPClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9143B9819390E1D0039AAEA /* libAPSHTTPClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAPSHTTPClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9143B9B19390E1D0039AAEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C9143B9F19390E1D0039AAEA /* APSHTTPClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "APSHTTPClient-Prefix.pch"; sourceTree = "<group>"; };
+		C9143BA819390E1E0039AAEA /* APSHTTPClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APSHTTPClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9143BA919390E1E0039AAEA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C9143BAC19390E1E0039AAEA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C9143BB319390E1E0039AAEA /* APSHTTPClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "APSHTTPClientTests-Info.plist"; sourceTree = "<group>"; };
+		C9143BB519390E1E0039AAEA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C9143BB719390E1E0039AAEA /* APSHTTPClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APSHTTPClientTests.m; sourceTree = "<group>"; };
+		C9143BC119390EAD0039AAEA /* APSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPClient.h; sourceTree = "<group>"; };
+		C9143BC219390EAD0039AAEA /* APSHTTPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPHelper.h; sourceTree = "<group>"; };
+		C9143BC319390EAD0039AAEA /* APSHTTPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPHelper.m; sourceTree = "<group>"; };
+		C9143BC619390EAD0039AAEA /* APSHTTPPostForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPPostForm.h; sourceTree = "<group>"; };
+		C9143BC719390EAD0039AAEA /* APSHTTPPostForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPPostForm.m; sourceTree = "<group>"; };
+		C9143BC819390EAD0039AAEA /* APSHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPRequest.h; sourceTree = "<group>"; };
+		C9143BC919390EAD0039AAEA /* APSHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPRequest.m; sourceTree = "<group>"; };
+		C9143BCA19390EAD0039AAEA /* APSHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPResponse.h; sourceTree = "<group>"; };
+		C9143BCB19390EAD0039AAEA /* APSHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPResponse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B6C4B87C190AE0FB00482D2E /* Frameworks */ = {
+		C9143B9519390E1D0039AAEA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9143B9C19390E1D0039AAEA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9143BA519390E1E0039AAEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9143BAA19390E1E0039AAEA /* XCTest.framework in Frameworks */,
+				C9143BAD19390E1E0039AAEA /* UIKit.framework in Frameworks */,
+				C9143BAB19390E1E0039AAEA /* Foundation.framework in Frameworks */,
+				C9143BB019390E1E0039AAEA /* libAPSHTTPClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B635ED3E18FDB3310038B130 = {
+		C9143B8F19390E1D0039AAEA = {
 			isa = PBXGroup;
 			children = (
-				B635ED4C18FDB3320038B130 /* APSHTTPClient */,
-				B635ED4918FDB3320038B130 /* Frameworks */,
-				B635ED4818FDB3320038B130 /* Products */,
+				C9143B9D19390E1D0039AAEA /* APSHTTPClient */,
+				C9143BB119390E1E0039AAEA /* APSHTTPClientTests */,
+				C9143B9A19390E1D0039AAEA /* Frameworks */,
+				C9143B9919390E1D0039AAEA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B635ED4818FDB3320038B130 /* Products */ = {
+		C9143B9919390E1D0039AAEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B6C4B87F190AE0FB00482D2E /* libAPSHTTPClient.a */,
+				C9143B9819390E1D0039AAEA /* libAPSHTTPClient.a */,
+				C9143BA819390E1E0039AAEA /* APSHTTPClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B635ED4918FDB3320038B130 /* Frameworks */ = {
+		C9143B9A19390E1D0039AAEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C9143B9B19390E1D0039AAEA /* Foundation.framework */,
+				C9143BA919390E1E0039AAEA /* XCTest.framework */,
+				C9143BAC19390E1E0039AAEA /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B635ED4C18FDB3320038B130 /* APSHTTPClient */ = {
+		C9143B9D19390E1D0039AAEA /* APSHTTPClient */ = {
 			isa = PBXGroup;
 			children = (
-				B635ED6218FDB4B00038B130 /* APSHTTPClient.h */,
-				B635ED5818FDB4B00038B130 /* APSHTTPHelper.h */,
-				B635ED5918FDB4B00038B130 /* APSHTTPHelper.m */,
-				B635ED5A18FDB4B00038B130 /* APSHTTPOperation.h */,
-				B635ED5B18FDB4B00038B130 /* APSHTTPOperation.m */,
-				B635ED5C18FDB4B00038B130 /* APSHTTPPostForm.h */,
-				B635ED5D18FDB4B00038B130 /* APSHTTPPostForm.m */,
-				B635ED5E18FDB4B00038B130 /* APSHTTPRequest.h */,
-				B635ED5F18FDB4B00038B130 /* APSHTTPRequest.m */,
-				B635ED6018FDB4B00038B130 /* APSHTTPResponse.h */,
-				B635ED6118FDB4B00038B130 /* APSHTTPResponse.m */,
-				B635ED4D18FDB3320038B130 /* Supporting Files */,
+				C9143BC119390EAD0039AAEA /* APSHTTPClient.h */,
+				C9143BC219390EAD0039AAEA /* APSHTTPHelper.h */,
+				C9143BC319390EAD0039AAEA /* APSHTTPHelper.m */,
+				C9143BC619390EAD0039AAEA /* APSHTTPPostForm.h */,
+				C9143BC719390EAD0039AAEA /* APSHTTPPostForm.m */,
+				C9143BC819390EAD0039AAEA /* APSHTTPRequest.h */,
+				C9143BC919390EAD0039AAEA /* APSHTTPRequest.m */,
+				C9143BCA19390EAD0039AAEA /* APSHTTPResponse.h */,
+				C9143BCB19390EAD0039AAEA /* APSHTTPResponse.m */,
+				C9143B9E19390E1D0039AAEA /* Supporting Files */,
 			);
 			path = APSHTTPClient;
 			sourceTree = "<group>";
 		};
-		B635ED4D18FDB3320038B130 /* Supporting Files */ = {
+		C9143B9E19390E1D0039AAEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B635ED4E18FDB3320038B130 /* APSHTTPClient-Info.plist */,
-				B635ED4F18FDB3320038B130 /* InfoPlist.strings */,
-				B635ED5218FDB3320038B130 /* APSHTTPClient-Prefix.pch */,
+				C9143B9F19390E1D0039AAEA /* APSHTTPClient-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C9143BB119390E1E0039AAEA /* APSHTTPClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				C9143BB719390E1E0039AAEA /* APSHTTPClientTests.m */,
+				C9143BB219390E1E0039AAEA /* Supporting Files */,
+			);
+			path = APSHTTPClientTests;
+			sourceTree = "<group>";
+		};
+		C9143BB219390E1E0039AAEA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C9143BB319390E1E0039AAEA /* APSHTTPClientTests-Info.plist */,
+				C9143BB419390E1E0039AAEA /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		B62D6425190AE54100BE4C69 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B62D6426190AE55200BE4C69 /* APSHTTPClient.h in Headers */,
-				B62D6427190AE55200BE4C69 /* APSHTTPHelper.h in Headers */,
-				B62D6428190AE55200BE4C69 /* APSHTTPOperation.h in Headers */,
-				B62D6429190AE55200BE4C69 /* APSHTTPPostForm.h in Headers */,
-				B62D642A190AE55200BE4C69 /* APSHTTPRequest.h in Headers */,
-				B62D642B190AE55200BE4C69 /* APSHTTPResponse.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		B6C4B87E190AE0FB00482D2E /* APSHTTPClient */ = {
+		C9143B9719390E1D0039AAEA /* APSHTTPClient */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B6C4B8A2190AE0FC00482D2E /* Build configuration list for PBXNativeTarget "APSHTTPClient" */;
+			buildConfigurationList = C9143BBB19390E1E0039AAEA /* Build configuration list for PBXNativeTarget "APSHTTPClient" */;
 			buildPhases = (
-				B6C4B87B190AE0FB00482D2E /* Sources */,
-				B6C4B87C190AE0FB00482D2E /* Frameworks */,
-				B6C4B87D190AE0FB00482D2E /* CopyFiles */,
-				B62D6425190AE54100BE4C69 /* Headers */,
+				C9143B9419390E1D0039AAEA /* Sources */,
+				C9143B9519390E1D0039AAEA /* Frameworks */,
+				C9143B9619390E1D0039AAEA /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = APSHTTPClient;
-			productName = APSHTTPClient.library;
-			productReference = B6C4B87F190AE0FB00482D2E /* libAPSHTTPClient.a */;
+			productName = APSHTTPClient;
+			productReference = C9143B9819390E1D0039AAEA /* libAPSHTTPClient.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		C9143BA719390E1E0039AAEA /* APSHTTPClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9143BBE19390E1E0039AAEA /* Build configuration list for PBXNativeTarget "APSHTTPClientTests" */;
+			buildPhases = (
+				C9143BA419390E1E0039AAEA /* Sources */,
+				C9143BA519390E1E0039AAEA /* Frameworks */,
+				C9143BA619390E1E0039AAEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C9143BAF19390E1E0039AAEA /* PBXTargetDependency */,
+			);
+			name = APSHTTPClientTests;
+			productName = APSHTTPClientTests;
+			productReference = C9143BA819390E1E0039AAEA /* APSHTTPClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B635ED3F18FDB3310038B130 /* Project object */ = {
+		C9143B9019390E1D0039AAEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Pedro Enrique";
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Appcelerator;
+				TargetAttributes = {
+					C9143BA719390E1E0039AAEA = {
+						TestTargetID = C9D0605E19491129007E488A;
+					};
+				};
 			};
-			buildConfigurationList = B635ED4218FDB3310038B130 /* Build configuration list for PBXProject "APSHTTPClient" */;
+			buildConfigurationList = C9143B9319390E1D0039AAEA /* Build configuration list for PBXProject "APSHTTPClient" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = B635ED3E18FDB3310038B130;
-			productRefGroup = B635ED4818FDB3320038B130 /* Products */;
+			mainGroup = C9143B8F19390E1D0039AAEA;
+			productRefGroup = C9143B9919390E1D0039AAEA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B6C4B87E190AE0FB00482D2E /* APSHTTPClient */,
-				B635EDA518FDB90A0038B130 /* APSHTTPClient.framework */,
+				C9143B9719390E1D0039AAEA /* APSHTTPClient */,
+				C9143BA719390E1E0039AAEA /* APSHTTPClientTests */,
+				C9D0608A19491B4B007E488A /* Create Release Folder */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		C9143BA619390E1E0039AAEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9143BB619390E1E0039AAEA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
-		B635EDA918FDB9330038B130 /* ShellScript */ = {
+		C9D0608E19491D3B007E488A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -204,30 +276,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild clean -target 'APSHTTPClient' -sdk iphoneos\nxcodebuild clean -target 'APSHTTPClient' -sdk iphonesimulator\n\nxcodebuild -configuration ${CONFIGURATION} -target APSHTTPClient -sdk iphoneos -SYMROOT=${SYMROOT} -OBJROOT=${OBJROOT}\n\nxcodebuild -configuration ${CONFIGURATION} -target APSHTTPClient -sdk iphonesimulator -SYMROOT=${SYMROOT} -OBJROOT=${OBJROOT}\n\nINSTALL_DIR=${SRCROOT}/${TARGET_NAME}\nBUILD_DIR=${SRCROOT}/build\n\n\nDEVICE_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos\nSIMULATOR_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\n\n# Create and renews the final product folder.\n\nrm -rf \"${INSTALL_DIR}\"\necho \"${INSTALL_DIR}\"\n\nmkdir -p \"${INSTALL_DIR}\"\n\nmkdir -p \"${INSTALL_DIR}/Versions/A/Headers\"\n\nxcrun -sdk iphoneos lipo -create ${SIMULATOR_DIR}/libAPSHTTPClient.a ${DEVICE_DIR}/libAPSHTTPClient.a -o ${INSTALL_DIR}/Versions/A/APSHTTPClient\n\n# Copy the header files to the final product folder.\ncp -r \"${SIMULATOR_DIR}/usr/local/include/\" \"${INSTALL_DIR}/Versions/A/Headers/\"\n\n#create relative symbolic link.\ncd ${INSTALL_DIR}\n\n#link\nln -s A Versions/Current\nln -s Versions/A/APSHTTPClient APSHTTPClient\nln -s Versions/A/Headers Headers\n\ncd ${SRCROOT}\n\nmkdir -p \"builds/framework/${CONFIGURATION}\"\nmkdir -p \"builds/static_lib/${CONFIGURATION}/include\"\n\nrm -rf \"builds/framework/${CONFIGURATION}\"\nmv \"${INSTALL_DIR}\" \"builds/framework/${CONFIGURATION}\"\nxcrun -sdk iphoneos lipo -create ${SIMULATOR_DIR}/libAPSHTTPClient.a ${DEVICE_DIR}/libAPSHTTPClient.a -o builds/static_lib/${CONFIGURATION}/libAPSHTTPClient.a\ncp -r \"${SIMULATOR_DIR}/usr/local/include/\" \"builds/static_lib/${CONFIGURATION}/include\"\n";
+			shellScript = "#! /usr/bin/env bash\n\n# Authors: Sabil and Matt\n# Date: 2014.06.11\n#\n# IMPORTANT: This script should be retired after the SDK Engineering\n# team migrates to Cocoa Pods for dependency management and\n# distribution.\n#\n# This script creates a versioned directory of the APSHTTPClient\n# library in a subdirectory named \"build\" under the project's root.\n#\n# The version of the library is the build timestamp formatted as the\n# number of seconds since the Unix epoch. For example:\n#\n# build/APSHTTPClient-1402532543/\n\n# This is a convenient command to determine a human readable date and\n# time from the version number (replace the last number with the\n# version number):\n#\n# date -j -f \"%s\" 1402532543\n# Wed Jun 11 17:22:23 PDT 2014\n#\n#  The contents of this directory contain a \"universal\" library for\n#  the architectures i386, armv7 and armv7s.\n\n# Sabil and Matt are knowingly overriding the TARGET_NAME environment\n# variable from Xcode since they named the Xcode target that executes\n# this script \"Create Release Folder\".\nTARGET_NAME=\"APSHTTPClient\"\n\n# Sabil and Matt are knowingly overriding the CONFIGURATION\n# environment variable from Xcode since they only want distribute\n# Release builds. Engineers wanting a Debug build should simply\n# include this Xcode project directly into their project.\nCONFIGURATION=\"Release\"\n\nAPSHTTPCLIENT_VERSION=$(date +%s)\n\nBUILD_DIR=\"${PWD}/build\"\necho \"Assuming BUILD_DIR=${BUILD_DIR}\"\n\nDEVICE_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos\"\nSIMULATOR_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\"\nLIB_NAME=\"lib${TARGET_NAME}.a\"\nDIST_DIR=\"${BUILD_DIR}/${TARGET_NAME}-${APSHTTPCLIENT_VERSION}\"\n\nfunction echo_and_eval {\n    local -r cmd=\"${1:?}\"\n    echo \"${cmd}\" && eval \"${cmd}\"\n}\n\nfor sdk in iphoneos iphonesimulator; do\necho_and_eval \"xcodebuild clean -target \\\"${TARGET_NAME}\\\" -sdk ${sdk}\"\necho_and_eval \"xcodebuild -configuration \\\"${CONFIGURATION}\\\" -target \\\"${TARGET_NAME}\\\" -sdk ${sdk}\"\ndone\n\necho_and_eval \"mkdir -p \\\"${DIST_DIR}\\\"\"\necho_and_eval \"xcrun -sdk iphoneos lipo -create \\\"${DEVICE_DIR}/${LIB_NAME}\\\" \\\"${SIMULATOR_DIR}/${LIB_NAME}\\\" -o \\\"${DIST_DIR}/${LIB_NAME}\\\"\"\necho_and_eval \"cp -r \\\"${DEVICE_DIR}/include\\\" \\\"${DIST_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${DEVICE_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${SIMULATOR_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${BUILD_DIR}/${TARGET_NAME}.build\\\"\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B6C4B87B190AE0FB00482D2E /* Sources */ = {
+		C9143B9419390E1D0039AAEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6C4B8A4190AE13E00482D2E /* APSHTTPHelper.m in Sources */,
-				B6C4B8A5190AE13E00482D2E /* APSHTTPOperation.m in Sources */,
-				B6C4B8A6190AE13E00482D2E /* APSHTTPPostForm.m in Sources */,
-				B6C4B8A7190AE13E00482D2E /* APSHTTPRequest.m in Sources */,
-				B6C4B8A8190AE13E00482D2E /* APSHTTPResponse.m in Sources */,
+				C9143BD019390EAD0039AAEA /* APSHTTPResponse.m in Sources */,
+				C9143BCF19390EAD0039AAEA /* APSHTTPRequest.m in Sources */,
+				C9143BCC19390EAD0039AAEA /* APSHTTPHelper.m in Sources */,
+				C9143BCE19390EAD0039AAEA /* APSHTTPPostForm.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9143BA419390E1E0039AAEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9143BB819390E1E0039AAEA /* APSHTTPClientTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C9143BAF19390E1E0039AAEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C9143B9719390E1D0039AAEA /* APSHTTPClient */;
+			targetProxy = C9143BAE19390E1E0039AAEA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		B635ED4F18FDB3320038B130 /* InfoPlist.strings */ = {
+		C9143BB419390E1E0039AAEA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B635ED5018FDB3320038B130 /* en */,
+				C9143BB519390E1E0039AAEA /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -235,14 +322,19 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B635ED5318FDB3320038B130 /* Debug */ = {
+		C9143BB919390E1E0039AAEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					armv7s,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -252,10 +344,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -265,31 +355,27 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				LINK_WITH_STANDARD_LIBRARIES = NO;
-				MACH_O_TYPE = mh_object;
-				MACOSX_DEPLOYMENT_TARGET = "";
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = APSHTTPClient;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
-				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
 		};
-		B635ED5418FDB3320038B130 /* Release */ = {
+		C9143BBA19390E1E0039AAEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					armv7s,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -299,122 +385,138 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				LINK_WITH_STANDARD_LIBRARIES = NO;
-				MACH_O_TYPE = mh_object;
-				MACOSX_DEPLOYMENT_TARGET = "";
-				PRODUCT_NAME = APSHTTPClient;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
-				WRAPPER_EXTENSION = framework;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		B635EDA718FDB90A0038B130 /* Debug */ = {
+		C9143BBC19390E1E0039AAEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				ONLY_ACTIVE_ARCH = NO;
+				DSTROOT = /tmp/APSHTTPClient.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		B635EDA818FDB90A0038B130 /* Release */ = {
+		C9143BBD19390E1E0039AAEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				DSTROOT = /tmp/APSHTTPClient.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		B6C4B89E190AE0FC00482D2E /* Debug */ = {
+		C9143BBF19390E1E0039AAEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
-				DSTROOT = /tmp/APSHTTPClient_library.dst;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				MACH_O_TYPE = staticlib;
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = APSHTTPClient;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = "";
+				INFOPLIST_FILE = "APSHTTPClientTests/APSHTTPClientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
-		B6C4B89F190AE0FC00482D2E /* Release */ = {
+		C9143BC019390E1E0039AAEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
-				DSTROOT = /tmp/APSHTTPClient_library.dst;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = APSHTTPClient;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = "";
+				INFOPLIST_FILE = "APSHTTPClientTests/APSHTTPClientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		C9D0608C19491B4B007E488A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C9D0608D19491B4B007E488A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B635ED4218FDB3310038B130 /* Build configuration list for PBXProject "APSHTTPClient" */ = {
+		C9143B9319390E1D0039AAEA /* Build configuration list for PBXProject "APSHTTPClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B635ED5318FDB3320038B130 /* Debug */,
-				B635ED5418FDB3320038B130 /* Release */,
+				C9143BB919390E1E0039AAEA /* Debug */,
+				C9143BBA19390E1E0039AAEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B635EDA618FDB90A0038B130 /* Build configuration list for PBXAggregateTarget "APSHTTPClient.framework" */ = {
+		C9143BBB19390E1E0039AAEA /* Build configuration list for PBXNativeTarget "APSHTTPClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B635EDA718FDB90A0038B130 /* Debug */,
-				B635EDA818FDB90A0038B130 /* Release */,
+				C9143BBC19390E1E0039AAEA /* Debug */,
+				C9143BBD19390E1E0039AAEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B6C4B8A2190AE0FC00482D2E /* Build configuration list for PBXNativeTarget "APSHTTPClient" */ = {
+		C9143BBE19390E1E0039AAEA /* Build configuration list for PBXNativeTarget "APSHTTPClientTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B6C4B89E190AE0FC00482D2E /* Debug */,
-				B6C4B89F190AE0FC00482D2E /* Release */,
+				C9143BBF19390E1E0039AAEA /* Debug */,
+				C9143BC019390E1E0039AAEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9D0608B19491B4B007E488A /* Build configuration list for PBXAggregateTarget "Create Release Folder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9D0608C19491B4B007E488A /* Debug */,
+				C9D0608D19491B4B007E488A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B635ED3F18FDB3310038B130 /* Project object */;
+	rootObject = C9143B9019390E1D0039AAEA /* Project object */;
 }

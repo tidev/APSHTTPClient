@@ -7,46 +7,34 @@
 
 #import "APSHTTPClient.h"
 
-@implementation APSHTTPResponse
+@interface APSHTTPResponse ()
+@property(nonatomic,         readwrite) NSStringEncoding     encoding;
+@property(nonatomic,         readwrite) BOOL                 saveToFile;
+@property(nonatomic, strong, readonly ) NSURL                *url;
+@end
 
-@synthesize url = _url;
-@synthesize status = _status;
-@synthesize headers = _headers;
-@synthesize responseArray = _responseArray;
-@synthesize responseData = _responseData;
-@synthesize responseDictionary = _responseDictionary;
-@synthesize responseString = _responseString;
-@synthesize error = _error;
-
-- (void)dealloc
-{
-    RELEASE_TO_NIL(_data);
-    RELEASE_TO_NIL(_location);
-    RELEASE_TO_NIL(_connectionType);
-    RELEASE_TO_NIL(_headers);
-    RELEASE_TO_NIL(_error);
-    RELEASE_TO_NIL(_filePath);
-    
-    [super dealloc];
+@implementation APSHTTPResponse {
+    NSMutableData *_data;
 }
--(void)setResponse:(NSURLResponse*) response
+
+
+- (void) updateResponseParamaters:(NSURLResponse *)response
 {
     _url = [response URL];
     if([response isKindOfClass:[NSHTTPURLResponse class]]) {
         _status = [(NSHTTPURLResponse*)response statusCode];
-        _headers = [[(NSHTTPURLResponse*)response allHeaderFields] retain];
+        _headers = [(NSHTTPURLResponse*)response allHeaderFields];
         NSStringEncoding encoding = [APSHTTPHelper parseStringEncodingFromHeaders: _headers];
         encoding = encoding == 0 ? NSUTF8StringEncoding : encoding;
         [self setEncoding: encoding];
 
     }
 }
--(void)setRequest:(NSURLRequest*) request
+
+- (void) updateRequestParamaters:(NSURLRequest *)request
 {
-    RELEASE_TO_NIL(_location);
-    RELEASE_TO_NIL(_connectionType);
-    _connectionType = [[request HTTPMethod] retain];
-    _location = [[[request URL] absoluteString] retain];
+    _connectionType = [request HTTPMethod];
+    _location = [[request URL] absoluteString];
 }
 
 -(void)appendData:(NSData *)data
@@ -66,8 +54,7 @@
 
 -(void)setFilePath:(NSString *)filePath
 {
-    RELEASE_TO_NIL(_filePath);
-    _filePath = [filePath retain];
+    _filePath = [filePath copy];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     BOOL isWritable = NO;
@@ -99,7 +86,7 @@
     if(_data == nil) {
         return nil;
     }
-    return [[_data copy] autorelease];
+    return [_data copy];
 }
 -(NSInteger)responseLength
 {
@@ -134,7 +121,7 @@
     }
     if([self responseData] == nil || [self responseLength] == 0) return nil;
     NSData *data =  [self responseData];
-    NSString * result = [[[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:[self encoding]] autorelease];
+    NSString * result = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:[self encoding]];
     if (result==nil) {
         // encoding failed, probably a bad webserver or content we have to deal
         // with in a _special_ way
@@ -142,9 +129,9 @@
         BOOL didExtractEncoding =  [APSHTTPHelper extractEncodingFromData:data result:&encoding];
         if (didExtractEncoding) {
             //If I did extract encoding use that
-            result = [[[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:encoding] autorelease];
+            result = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:encoding];
         } else {
-            result = [[[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSISOLatin1StringEncoding] autorelease];
+            result = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSISOLatin1StringEncoding];
         }
             
     }

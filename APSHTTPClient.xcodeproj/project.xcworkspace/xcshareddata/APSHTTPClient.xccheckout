@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>34CDC654-2E94-4837-BA68-31853396B1EC</string>
+	<string>C6354703-44D9-447B-A3DF-764631941173</string>
 	<key>IDESourceControlProjectName</key>
 	<string>APSHTTPClient</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B9A9726A-0C90-4CCB-A489-7A07189D8E7D</key>
-		<string>ssh://github.com/srahim/APSHTTPClient.git</string>
+		<key>F4C810E4-B021-475E-B7A4-46884183A5F3</key>
+		<string>https://github.com/matt-langston/APSHTTPClient.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>APSHTTPClient.xcodeproj/project.xcworkspace</string>
+	<string>APSHTTPClient/APSHTTPClient.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B9A9726A-0C90-4CCB-A489-7A07189D8E7D</key>
-		<string>../..</string>
+		<key>F4C810E4-B021-475E-B7A4-46884183A5F3</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/srahim/APSHTTPClient.git</string>
+	<string>https://github.com/matt-langston/APSHTTPClient.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B9A9726A-0C90-4CCB-A489-7A07189D8E7D</string>
+	<string>F4C810E4-B021-475E-B7A4-46884183A5F3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B9A9726A-0C90-4CCB-A489-7A07189D8E7D</string>
+			<string>F4C810E4-B021-475E-B7A4-46884183A5F3</string>
 			<key>IDESourceControlWCCName</key>
 			<string>APSHTTPClient</string>
 		</dict>

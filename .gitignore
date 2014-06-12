@@ -1,7 +1,12 @@
-/Build/
-/Builds/
+# Build artifacts
+build/
+
+# User-specific Xcode settings.
+APSHTTPClient.xcodeproj/xcuserdata
+APSHTTPClient.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Emacs backup files
+*~
+
+# OS X
 .DS_Store
-xcuserdata
-xcsharedata
-
-
