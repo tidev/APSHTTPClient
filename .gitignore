@@ -1,3 +1,6 @@
+# Build artifacts
+build/
+
 # User-specific Xcode settings.
 APSHTTPClient.xcodeproj/xcuserdata
 APSHTTPClient.xcodeproj/project.xcworkspace/xcuserdata/

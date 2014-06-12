@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		C9D0608A19491B4B007E488A /* Create Release Folder */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C9D0608B19491B4B007E488A /* Build configuration list for PBXAggregateTarget "Create Release Folder" */;
+			buildPhases = (
+				C9D0608E19491D3B007E488A /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Create Release Folder";
+			productName = "Create Release Zip";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		C9143B9C19390E1D0039AAEA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143B9B19390E1D0039AAEA /* Foundation.framework */; };
 		C9143BAA19390E1E0039AAEA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143BA919390E1E0039AAEA /* XCTest.framework */; };
@@ -71,6 +85,12 @@
 		C9143BC919390EAD0039AAEA /* APSHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPRequest.m; sourceTree = "<group>"; };
 		C9143BCA19390EAD0039AAEA /* APSHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPResponse.h; sourceTree = "<group>"; };
 		C9143BCB19390EAD0039AAEA /* APSHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPResponse.m; sourceTree = "<group>"; };
+		C9D0606C1949180D007E488A /* foo bar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "foo bar-Prefix.pch"; sourceTree = "<group>"; };
+		C9D0606D1949180D007E488A /* foo_bar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = foo_bar.h; sourceTree = "<group>"; };
+		C9D0606F1949180D007E488A /* foo_bar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = foo_bar.m; sourceTree = "<group>"; };
+		C9D0607E1949180D007E488A /* foo barTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "foo barTests-Info.plist"; sourceTree = "<group>"; };
+		C9D060801949180D007E488A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C9D060821949180D007E488A /* foo_barTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = foo_barTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +121,8 @@
 			children = (
 				C9143B9D19390E1D0039AAEA /* APSHTTPClient */,
 				C9143BB119390E1E0039AAEA /* APSHTTPClientTests */,
+				C9D0606A1949180D007E488A /* foo bar */,
+				C9D0607C1949180D007E488A /* foo barTests */,
 				C9143B9A19390E1D0039AAEA /* Frameworks */,
 				C9143B9919390E1D0039AAEA /* Products */,
 			);
@@ -168,6 +190,42 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C9D0606A1949180D007E488A /* foo bar */ = {
+			isa = PBXGroup;
+			children = (
+				C9D0606D1949180D007E488A /* foo_bar.h */,
+				C9D0606F1949180D007E488A /* foo_bar.m */,
+				C9D0606B1949180D007E488A /* Supporting Files */,
+			);
+			path = "foo bar";
+			sourceTree = "<group>";
+		};
+		C9D0606B1949180D007E488A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C9D0606C1949180D007E488A /* foo bar-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C9D0607C1949180D007E488A /* foo barTests */ = {
+			isa = PBXGroup;
+			children = (
+				C9D060821949180D007E488A /* foo_barTests.m */,
+				C9D0607D1949180D007E488A /* Supporting Files */,
+			);
+			path = "foo barTests";
+			sourceTree = "<group>";
+		};
+		C9D0607D1949180D007E488A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C9D0607E1949180D007E488A /* foo barTests-Info.plist */,
+				C9D0607F1949180D007E488A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,6 +272,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Appcelerator;
+				TargetAttributes = {
+					C9143BA719390E1E0039AAEA = {
+						TestTargetID = C9D0605E19491129007E488A;
+					};
+				};
 			};
 			buildConfigurationList = C9143B9319390E1D0039AAEA /* Build configuration list for PBXProject "APSHTTPClient" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -229,6 +292,7 @@
 			targets = (
 				C9143B9719390E1D0039AAEA /* APSHTTPClient */,
 				C9143BA719390E1E0039AAEA /* APSHTTPClientTests */,
+				C9D0608A19491B4B007E488A /* Create Release Folder */,
 			);
 		};
 /* End PBXProject section */
@@ -243,6 +307,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C9D0608E19491D3B007E488A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#! /usr/bin/env bash\n\n# Authors: Sabil and Matt\n# Date: 2014.06.11\n#\n# IMPORTANT: This script should be retired after the SDK Engineering\n# team migrates to Cocoa Pods for dependency management and\n# distribution.\n#\n# This script creates a versioned directory of the APSHTTPClient\n# library in a subdirectory named \"build\" under the project's root.\n#\n# The version of the library is the build timestamp formatted as the\n# number of seconds since the Unix epoch. For example:\n#\n# build/APSHTTPClient-1402532543/\n\n# This is a convenient command to determine a human readable date and\n# time from the version number (replace the last number with the\n# version number):\n#\n# date -j -f \"%s\" 1402532543\n# Wed Jun 11 17:22:23 PDT 2014\n#\n#  The contents of this directory contain a \"universal\" library for\n#  the architectures i386, armv7 and armv7s.\n\n# Sabil and Matt are knowingly overriding the TARGET_NAME environment\n# variable from Xcode since they named the Xcode target that executes\n# this script \"Create Release Folder\".\nTARGET_NAME=\"APSHTTPClient\"\n\n# Sabil and Matt are knowingly overriding the CONFIGURATION\n# environment variable from Xcode since they only want distribute\n# Release builds. Engineers wanting a Debug build should simply\n# include this Xcode project directly into their project.\nCONFIGURATION=\"Release\"\n\nAPSHTTPCLIENT_VERSION=$(date +%s)\n\nBUILD_DIR=\"${PWD}/build\"\necho\"Assuming BUILD_DIR=${BUILD_DIR}\"\n\nDEVICE_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos\"\nSIMULATOR_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\"\nLIB_NAME=\"lib${TARGET_NAME}.a\"\nDIST_DIR=\"${BUILD_DIR}/${TARGET_NAME}-${APSHTTPCLIENT_VERSION}\"\n\nfunction echo_and_eval {\n    local -r cmd=\"${1:?}\"\n    echo \"${cmd}\" && eval \"${cmd}\"\n}\n\nfor sdk in iphoneos iphonesimulator; do\necho_and_eval \"xcodebuild clean -target \\\"${TARGET_NAME}\\\" -sdk ${sdk}\"\necho_and_eval \"xcodebuild -configuration \\\"${CONFIGURATION}\\\" -target \\\"${TARGET_NAME}\\\" -sdk ${sdk}\"\ndone\n\necho_and_eval \"mkdir -p \"${DIST_DIR}\"\"\necho_and_eval \"xcrun -sdk iphoneos lipo -create \\\"${DEVICE_DIR}/${LIB_NAME}\\\" \\\"${SIMULATOR_DIR}/${LIB_NAME}\\\" -o \\\"${DIST_DIR}/${LIB_NAME}\\\"\"\necho_and_eval \"cp -r \\\"${DEVICE_DIR}/include\\\" \\\"${DIST_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${DEVICE_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${SIMULATOR_DIR}\\\"\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C9143B9419390E1D0039AAEA /* Sources */ = {
@@ -283,6 +363,14 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		C9D0607F1949180D007E488A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9D060801949180D007E488A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -290,8 +378,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
-				"ARCHS[sdk=iphoneos*]" = armv7;
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					armv7s,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -321,7 +411,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -330,8 +419,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
-				"ARCHS[sdk=iphoneos*]" = armv7;
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					armv7s,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -355,7 +446,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -388,6 +478,7 @@
 		C9143BBF19390E1E0039AAEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -401,6 +492,7 @@
 				);
 				INFOPLIST_FILE = "APSHTTPClientTests/APSHTTPClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -408,6 +500,7 @@
 		C9143BC019390E1E0039AAEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -417,7 +510,22 @@
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				INFOPLIST_FILE = "APSHTTPClientTests/APSHTTPClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		C9D0608C19491B4B007E488A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C9D0608D19491B4B007E488A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -447,6 +555,15 @@
 			buildConfigurations = (
 				C9143BBF19390E1E0039AAEA /* Debug */,
 				C9143BC019390E1E0039AAEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9D0608B19491B4B007E488A /* Build configuration list for PBXAggregateTarget "Create Release Folder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9D0608C19491B4B007E488A /* Debug */,
+				C9D0608D19491B4B007E488A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
