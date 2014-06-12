@@ -85,12 +85,6 @@
 		C9143BC919390EAD0039AAEA /* APSHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPRequest.m; sourceTree = "<group>"; };
 		C9143BCA19390EAD0039AAEA /* APSHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSHTTPResponse.h; sourceTree = "<group>"; };
 		C9143BCB19390EAD0039AAEA /* APSHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSHTTPResponse.m; sourceTree = "<group>"; };
-		C9D0606C1949180D007E488A /* foo bar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "foo bar-Prefix.pch"; sourceTree = "<group>"; };
-		C9D0606D1949180D007E488A /* foo_bar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = foo_bar.h; sourceTree = "<group>"; };
-		C9D0606F1949180D007E488A /* foo_bar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = foo_bar.m; sourceTree = "<group>"; };
-		C9D0607E1949180D007E488A /* foo barTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "foo barTests-Info.plist"; sourceTree = "<group>"; };
-		C9D060801949180D007E488A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C9D060821949180D007E488A /* foo_barTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = foo_barTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +115,6 @@
 			children = (
 				C9143B9D19390E1D0039AAEA /* APSHTTPClient */,
 				C9143BB119390E1E0039AAEA /* APSHTTPClientTests */,
-				C9D0606A1949180D007E488A /* foo bar */,
-				C9D0607C1949180D007E488A /* foo barTests */,
 				C9143B9A19390E1D0039AAEA /* Frameworks */,
 				C9143B9919390E1D0039AAEA /* Products */,
 			);
@@ -186,42 +178,6 @@
 			children = (
 				C9143BB319390E1E0039AAEA /* APSHTTPClientTests-Info.plist */,
 				C9143BB419390E1E0039AAEA /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C9D0606A1949180D007E488A /* foo bar */ = {
-			isa = PBXGroup;
-			children = (
-				C9D0606D1949180D007E488A /* foo_bar.h */,
-				C9D0606F1949180D007E488A /* foo_bar.m */,
-				C9D0606B1949180D007E488A /* Supporting Files */,
-			);
-			path = "foo bar";
-			sourceTree = "<group>";
-		};
-		C9D0606B1949180D007E488A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C9D0606C1949180D007E488A /* foo bar-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C9D0607C1949180D007E488A /* foo barTests */ = {
-			isa = PBXGroup;
-			children = (
-				C9D060821949180D007E488A /* foo_barTests.m */,
-				C9D0607D1949180D007E488A /* Supporting Files */,
-			);
-			path = "foo barTests";
-			sourceTree = "<group>";
-		};
-		C9D0607D1949180D007E488A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C9D0607E1949180D007E488A /* foo barTests-Info.plist */,
-				C9D0607F1949180D007E488A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -359,14 +315,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				C9143BB519390E1E0039AAEA /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		C9D0607F1949180D007E488A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C9D060801949180D007E488A /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
