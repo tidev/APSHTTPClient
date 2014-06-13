@@ -34,10 +34,10 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 {
     self = [super init];
     if (self) {
-        [self setSendDefaultCookies:YES];
-        [self setRedirects:YES];
-        [self setValidatesSecureCertificate: YES];
-        
+        _sendDefaultCookies = YES;
+        _redirects = YES;
+        _validatesSecureCertificate = YES;
+        _runModes = [NSArray arrayWithObject:NSDefaultRunLoopMode];
         _request = [[NSMutableURLRequest alloc] init];
         [_request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
         _response = [[APSHTTPResponse alloc] init];
