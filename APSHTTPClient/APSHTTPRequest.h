@@ -46,11 +46,12 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 @property(nonatomic, assign, readwrite) NSTimeInterval                   timeout;
 @property(nonatomic, assign, readwrite) BOOL                             sendDefaultCookies;
 @property(nonatomic, assign, readwrite) BOOL                             redirects;
-@property(nonatomic, assign, readwrite) BOOL                             synchronous;
 @property(nonatomic, assign, readwrite) BOOL                             validatesSecureCertificate;
 @property(nonatomic, assign, readwrite) BOOL                             cancelled;
-@property(nonatomic, strong, readwrite) NSOperationQueue                 *theQueue;
 @property(nonatomic, assign, readwrite) NSURLRequestCachePolicy          cachePolicy;
+@property(nonatomic, assign, readwrite) BOOL                             synchronous;                   //Determines if request is synchronous
+@property(nonatomic, strong, readwrite) NSOperationQueue                 *theQueue;                     //For asynchronous requests, provides delegateQueue queue
+@property(nonatomic, strong, readwrite) NSArray                          *runModes;                     //For asynchronous requests, provides run modes for currentRunLoop to schedule the connection. Not used if delegateQueue is specified
 
 // Only used in Titanium ImageLoader
 @property(nonatomic, strong, readwrite) NSDictionary                     *userInfo;

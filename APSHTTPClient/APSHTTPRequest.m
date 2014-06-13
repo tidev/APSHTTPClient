@@ -7,8 +7,20 @@
 
 #import "APSHTTPClient.h"
 
+
+typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
+    APSHTTPCallbackStateReadyState = 0,
+    APSHTTPCallbackStateLoad       = 1,
+    APSHTTPCallbackStateSendStream = 2,
+    APSHTTPCallbackStateDataStream = 3,
+    APSHTTPCallbackStateError      = 4,
+    APSHTTPCallbackStateRedirect   = 5
+};
+
 @interface APSHTTPRequest () <NSURLConnectionDataDelegate>
 @property(nonatomic, strong, readonly) NSMutableURLRequest *request;
+
+-(void)invokeCallbackWithState:(APSHTTPCallbackState)state;
 @end
 
 
@@ -47,13 +59,24 @@
     }
 }
 
--(NSURLConnection*)connection
-{
-    return _connection;
-}
 
 -(void)send
 {
+    if (![self url]) {
+        DebugLog(@"[ERROR] Missing required parameter URL. Ignoring call");
+        return;
+    }
+    
+    if (![self method]) {
+        DebugLog(@"[ERROR] Missing required parameter method. Ignoring call");
+        return;
+    }
+    
+    if (self.response.readyState != APSHTTPResponseStateUnsent) {
+        DebugLog(@"[ERROR] APSHTTPRequest does not support reuse of connection. Ignoring call.");
+        return;
+    }
+
     if([self filePath]) {
         [self.response setFilePath:[self filePath]];
     }
@@ -115,9 +138,7 @@
     } else {
         [self.response updateRequestParamaters:self.request];
         [self.response setReadyState:APSHTTPResponseStateOpened];
-        if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
-            [_delegate request:self onReadyStateChage:self.response];
-        }
+        [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
         
         _connection = [[NSURLConnection alloc] initWithRequest: self.request
                                                       delegate: self
@@ -127,20 +148,18 @@
         if([self theQueue]) {
             [_connection setDelegateQueue:[self theQueue]];
         } else {
-            if (![NSThread isMainThread]) {
-                NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-                NSMutableSet *runLoopModes = [NSMutableSet setWithObjects:NSDefaultRunLoopMode, NSRunLoopCommonModes, nil];
-                if ([runLoop currentMode]) {
-                    if (![runLoopModes containsObject:[runLoop currentMode]]) {
-                        [runLoopModes addObject:[runLoop currentMode]];
-                    }
-                } else {
-                    DebugLog(@"%s [Line %@] [WARN] [[NSRunLoop currentRunLoop] currentMode] is nil", __PRETTY_FUNCTION__, @(__LINE__));
-                }
-                for (NSString *runLoopMode in runLoopModes) {
-                    NSLog(@"MDL: runLoopMode = %@", runLoopMode);
-                    [_connection scheduleInRunLoop:runLoop forMode:runLoopMode];
-                }
+            
+            /*
+             If caller specifies runModes with which to specify the connection use those,
+             otherwise just configure to run in NSDefaultRunLoopMode (Default).
+             It is the callers responsibility to keep calling thread and runloop alive.
+            */
+            if ([self.runModes count] == 0) {
+                self.runModes = [NSArray arrayWithObject:NSDefaultRunLoopMode];
+            }
+            NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+            for (NSString *runLoopMode in self.runModes) {
+                [_connection scheduleInRunLoop:runLoop forMode:runLoopMode];
             }
         }
         [_connection start];
@@ -222,11 +241,7 @@
     [self.response setConnected:YES];
     [self.response updateResponseParamaters:response];
     [self.response updateRequestParamaters:self.request];
-
-    if([[self delegate] respondsToSelector:@selector(request:onRedirect:)])
-    {
-        [[self delegate] request:self onRedirect:self.response];
-    }
+    [self invokeCallbackWithState:APSHTTPCallbackStateRedirect];
     if(![self redirects] && [self.response status] != 0)
     {
         return nil;
@@ -259,9 +274,7 @@
     }
     _expectedDownloadResponseLength = [response expectedContentLength];
     
-    if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
-        [_delegate request:self onReadyStateChage:self.response];
-    }
+    [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
 
 }
 
@@ -272,15 +285,12 @@
 #endif
     if([self.response readyState] != APSHTTPResponseStateLoading) {
         [self.response setReadyState:APSHTTPResponseStateLoading];
-        if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
-            [_delegate request:self onReadyStateChage:self.response];
-        }
+        [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
     }
     [self.response appendData:data];
     [self.response setDownloadProgress: (float)[self.response responseLength] / (float)_expectedDownloadResponseLength];
-    if([_delegate respondsToSelector:@selector(request:onDataStream:)]) {
-        [_delegate request:self onDataStream:self.response];
-    }
+    [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
+
     
 }
 
@@ -288,14 +298,12 @@
 {
     if([self.response readyState] != APSHTTPResponseStateLoading) {
         [self.response setReadyState:APSHTTPResponseStateLoading];
-        if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
-            [_delegate request:self onReadyStateChage:self.response];
-        }
+        [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
+
     }
     [self.response setUploadProgress: (float)totalBytesWritten / (float)totalBytesExpectedToWrite];
-    if([_delegate respondsToSelector:@selector(request:onSendStream:)]) {
-        [_delegate request:self onSendStream:self.response];
-    }
+    [self invokeCallbackWithState:APSHTTPCallbackStateSendStream];
+
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -308,18 +316,14 @@
     [self.response setReadyState:APSHTTPResponseStateDone];
     [self.response setConnected:NO];
      
-    if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
-        [_delegate request:self onReadyStateChage:self.response];
-    }
-    if([_delegate respondsToSelector:@selector(request:onSendStream:)]) {
-        [_delegate request:self onSendStream:self.response];
-    }
-    if([_delegate respondsToSelector:@selector(request:onDataStream:)]) {
-        [_delegate request:self onDataStream:self.response];
-    }
-    if([_delegate respondsToSelector:@selector(request:onLoad:)]) {
-        [_delegate request:self onLoad:self.response];
-    }
+    [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
+
+    [self invokeCallbackWithState:APSHTTPCallbackStateSendStream];
+
+    [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
+
+    [self invokeCallbackWithState:APSHTTPCallbackStateLoad];
+
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -331,13 +335,49 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 #endif
     [self.response setReadyState:APSHTTPResponseStateDone];
-    if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
-        [_delegate request:self onReadyStateChage:self.response];
-    }
+    [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
+
     [self.response setConnected:NO];
     [self.response setError:error];
-    if([_delegate respondsToSelector:@selector(request:onError:)]) {
-        [_delegate request:self onError:self.response];
+    [self invokeCallbackWithState:APSHTTPCallbackStateError];
+
+}
+
+-(void)invokeCallbackWithState:(APSHTTPCallbackState)state
+{
+    switch (state) {
+        case APSHTTPCallbackStateReadyState:
+            if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
+                [_delegate request:self onReadyStateChage:self.response];
+            }
+            break;
+        case APSHTTPCallbackStateLoad:
+            if([_delegate respondsToSelector:@selector(request:onLoad:)]) {
+                [_delegate request:self onLoad:self.response];
+            }
+            break;
+        case APSHTTPCallbackStateSendStream:
+            if([_delegate respondsToSelector:@selector(request:onSendStream:)]) {
+                [_delegate request:self onSendStream:self.response];
+            }
+            break;
+        case APSHTTPCallbackStateDataStream:
+            if([_delegate respondsToSelector:@selector(request:onDataStream:)]) {
+                [_delegate request:self onDataStream:self.response];
+            }
+            break;
+        case APSHTTPCallbackStateError:
+            if([_delegate respondsToSelector:@selector(request:onError:)]) {
+                [_delegate request:self onError:self.response];
+            }
+            break;
+        case APSHTTPCallbackStateRedirect:
+            if([_delegate respondsToSelector:@selector(request:onRedirect:)]) {
+                [_delegate request:self onRedirect:self.response];
+            }
+            break;
+        default:
+            break;
     }
 }
 
