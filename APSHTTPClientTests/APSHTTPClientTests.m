@@ -91,7 +91,7 @@
 -(void)request:(APSHTTPRequest*)request onLoad:(APSHTTPResponse*)response
 {
     if (self.asyncThread) {
-        XCTAssertEqual([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
+        XCTAssertEqualObjects([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
         [self.dummyTimer invalidate];
     }
 }
@@ -99,35 +99,35 @@
 -(void)request:(APSHTTPRequest*)request onError:(APSHTTPResponse*)response
 {
     if (self.asyncThread) {
-        XCTAssertEqual([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
+        XCTAssertEqualObjects([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
     }
 }
 
 -(void)request:(APSHTTPRequest*)request onDataStream:(APSHTTPResponse*)response
 {
     if (self.asyncThread) {
-        XCTAssertEqual([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
+        XCTAssertEqualObjects([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
     }
 }
 
 -(void)request:(APSHTTPRequest*)request onSendStream:(APSHTTPResponse*)response
 {
     if (self.asyncThread) {
-        XCTAssertEqual([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
+        XCTAssertEqualObjects([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
     }
 }
 
 -(void)request:(APSHTTPRequest*)request onReadyStateChage:(APSHTTPResponse*)response
 {
     if (self.asyncThread) {
-        XCTAssertEqual([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
+        XCTAssertEqualObjects([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
     }
 }
 
 -(void)request:(APSHTTPRequest*)request onRedirect:(APSHTTPResponse*)response
 {
     if (self.asyncThread) {
-        XCTAssertEqual([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
+        XCTAssertEqualObjects([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);
     }
 }
 
