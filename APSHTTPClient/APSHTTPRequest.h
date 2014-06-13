@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 -(void)request:(APSHTTPRequest*)request onError:(APSHTTPResponse*)response;
 -(void)request:(APSHTTPRequest*)request onDataStream:(APSHTTPResponse*)response;
 -(void)request:(APSHTTPRequest*)request onSendStream:(APSHTTPResponse*)response;
--(void)request:(APSHTTPRequest*)request onReadyStateChage:(APSHTTPResponse*)response;
+-(void)request:(APSHTTPRequest*)request onReadyStateChange:(APSHTTPResponse*)response;
 -(void)request:(APSHTTPRequest*)request onRedirect:(APSHTTPResponse*)response;
 
 @end

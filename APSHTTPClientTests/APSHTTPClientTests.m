@@ -117,7 +117,7 @@
     }
 }
 
--(void)request:(APSHTTPRequest*)request onReadyStateChage:(APSHTTPResponse*)response
+-(void)request:(APSHTTPRequest*)request onReadyStateChange:(APSHTTPResponse*)response
 {
     if (self.asyncThread) {
         XCTAssertEqualObjects([NSThread currentThread], self.asyncThread, @"Asynchronous callback not on same thread as calling thread %@ %@",[NSThread currentThread], self.asyncThread);

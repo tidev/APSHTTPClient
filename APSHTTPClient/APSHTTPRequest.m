@@ -347,8 +347,8 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 {
     switch (state) {
         case APSHTTPCallbackStateReadyState:
-            if([_delegate respondsToSelector:@selector(request:onReadyStateChage:)]) {
-                [_delegate request:self onReadyStateChage:self.response];
+            if([_delegate respondsToSelector:@selector(request:onReadyStateChange:)]) {
+                [_delegate request:self onReadyStateChange:self.response];
             }
             break;
         case APSHTTPCallbackStateLoad:
