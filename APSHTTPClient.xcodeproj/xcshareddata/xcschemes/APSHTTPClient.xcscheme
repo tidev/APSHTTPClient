@@ -28,6 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C9143BA719390E1E0039AAEA"
+               BuildableName = "APSHTTPClientTests.xctest"
+               BlueprintName = "APSHTTPClientTests"
+               ReferencedContainer = "container:APSHTTPClient.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

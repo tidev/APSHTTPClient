@@ -189,6 +189,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C9143BBB19390E1E0039AAEA /* Build configuration list for PBXNativeTarget "APSHTTPClient" */;
 			buildPhases = (
+				C92DC90F194B7AB8001F33C0 /* ShellScript */,
 				C9143B9419390E1D0039AAEA /* Sources */,
 				C9143B9519390E1D0039AAEA /* Frameworks */,
 				C9143B9619390E1D0039AAEA /* CopyFiles */,
@@ -206,6 +207,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C9143BBE19390E1E0039AAEA /* Build configuration list for PBXNativeTarget "APSHTTPClientTests" */;
 			buildPhases = (
+				C92DC910194B7B0A001F33C0 /* ShellScript */,
 				C9143BA419390E1E0039AAEA /* Sources */,
 				C9143BA519390E1E0039AAEA /* Frameworks */,
 				C9143BA619390E1E0039AAEA /* Resources */,
@@ -265,6 +267,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		C92DC90F194B7AB8001F33C0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"MDL\"";
+		};
+		C92DC910194B7B0A001F33C0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"MDL\"";
+		};
 		C9D0608E19491D3B007E488A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,11 +354,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos*]" = (
-					armv7,
-					armv7s,
-				);
-				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -367,11 +390,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos*]" = (
-					armv7,
-					armv7s,
-				);
-				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -426,7 +444,6 @@
 		C9143BBF19390E1E0039AAEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -440,7 +457,6 @@
 				);
 				INFOPLIST_FILE = "APSHTTPClientTests/APSHTTPClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -448,7 +464,6 @@
 		C9143BC019390E1E0039AAEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -458,7 +473,6 @@
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				INFOPLIST_FILE = "APSHTTPClientTests/APSHTTPClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
