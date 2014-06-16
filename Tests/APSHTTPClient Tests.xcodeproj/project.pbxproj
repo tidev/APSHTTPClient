@@ -19,7 +19,7 @@
 		C951FE2A194EA89F00A7FD78 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C951FE3F194EA89F00A7FD78 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C99B7220194EAA3100656CE1 /* iOS Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS Tests-Prefix.pch"; sourceTree = "<group>"; };
-		C99B7229194EAA3100656CE1 /* iOS TestsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS TestsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C99B7229194EAA3100656CE1 /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99B723E194EAB2D00656CE1 /* iOS Tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iOS Tests-Info.plist"; sourceTree = "<group>"; };
 		C99B723F194EAB9D00656CE1 /* APSHTTPClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APSHTTPClientTests.m; path = Tests/APSHTTPClientTests.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -51,7 +51,7 @@
 		C951FE24194EA89F00A7FD78 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C99B7229194EAA3100656CE1 /* iOS TestsTests.xctest */,
+				C99B7229194EAA3100656CE1 /* iOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,7 +110,7 @@
 			);
 			name = "iOS Tests";
 			productName = "iOS TestsTests";
-			productReference = C99B7229194EAA3100656CE1 /* iOS TestsTests.xctest */;
+			productReference = C99B7229194EAA3100656CE1 /* iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -288,6 +288,7 @@
 				C99B723B194EAA3100656CE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
