@@ -1,0 +1,11 @@
+platform :ios, '6.1'
+
+target "Demo" do
+  pod "APSHTTPClient", :path => "../"
+end
+
+# Uncomment the following lines to add testing dependencies
+# target "DemoTests" do
+#   pod 'Expecta'
+# end
+

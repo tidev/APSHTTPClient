@@ -1,7 +1,13 @@
 # **EXPERIMENTAL: DO NOT USE IN PRODUCTION YET.**
+# APSHTTPClient
 
-### Requirements
-**MobileCoreServices.framework**
+[![Version](https://img.shields.io/cocoapods/v/APSHTTPClient.svg?style=flat)](http://cocoadocs.org/docsets/APSHTTPClient)
+[![License](https://img.shields.io/cocoapods/l/APSHTTPClient.svg?style=flat)](http://cocoadocs.org/docsets/APSHTTPClient)
+[![Platform](https://img.shields.io/cocoapods/p/APSHTTPClient.svg?style=flat)](http://cocoadocs.org/docsets/APSHTTPClient)
+
+## Usage
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ### Components
 **APSHTTPRequest** - Responsible for the http request  
@@ -65,4 +71,23 @@
     {
         NSString* errorMessage = [[response error] localizedDescription];
     }
-    
+
+## Requirements
+
+## Installation
+
+APSHTTPClient is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+    pod "APSHTTPClient"
+
+## Author
+
+Pedro Enrique, penrique@appcelerator.com
+Sabil Rahim, srahim@appcelerator.com
+Vishal Duggal, vduggal@appcelerator.com
+
+## License
+
+APSHTTPClient is available under the Apache License, Version 2.0
+license. See the LICENSE file for more info.
