@@ -11,9 +11,12 @@
 		C99B722B194EAA3100656CE1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C951FE26194EA89F00A7FD78 /* Foundation.framework */; };
 		C99B722C194EAA3100656CE1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C951FE2A194EA89F00A7FD78 /* UIKit.framework */; };
 		C99B7240194EAB9D00656CE1 /* APSHTTPClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C99B723F194EAB9D00656CE1 /* APSHTTPClientTests.m */; };
+		DA0A2AA49C4045B89B5E5FE0 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF0AE533C984AF8AF1B3BEA /* libPods-ios.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10F6ED2A0DA448AD9E4AF490 /* Pods-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.xcconfig"; path = "Pods/Pods-ios.xcconfig"; sourceTree = "<group>"; };
+		BFF0AE533C984AF8AF1B3BEA /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C951FE26194EA89F00A7FD78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C951FE28194EA89F00A7FD78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C951FE2A194EA89F00A7FD78 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -32,6 +35,7 @@
 				C99B722A194EAA3100656CE1 /* XCTest.framework in Frameworks */,
 				C99B722C194EAA3100656CE1 /* UIKit.framework in Frameworks */,
 				C99B722B194EAA3100656CE1 /* Foundation.framework in Frameworks */,
+				DA0A2AA49C4045B89B5E5FE0 /* libPods-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +49,7 @@
 				C99B721E194EAA3100656CE1 /* iOS Tests */,
 				C951FE25194EA89F00A7FD78 /* Frameworks */,
 				C951FE24194EA89F00A7FD78 /* Products */,
+				10F6ED2A0DA448AD9E4AF490 /* Pods-ios.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +68,7 @@
 				C951FE28194EA89F00A7FD78 /* CoreGraphics.framework */,
 				C951FE2A194EA89F00A7FD78 /* UIKit.framework */,
 				C951FE3F194EA89F00A7FD78 /* XCTest.framework */,
+				BFF0AE533C984AF8AF1B3BEA /* libPods-ios.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -100,9 +106,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C99B723D194EAA3100656CE1 /* Build configuration list for PBXNativeTarget "iOS Tests" */;
 			buildPhases = (
+				ECD5E0245FF245578EC8C82F /* Check Pods Manifest.lock */,
 				C99B7225194EAA3100656CE1 /* Sources */,
 				C99B7226194EAA3100656CE1 /* Frameworks */,
 				C99B7227194EAA3100656CE1 /* Resources */,
+				4F4F6F94B5D248378A169CDD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,6 +156,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4F4F6F94B5D248378A169CDD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ECD5E0245FF245578EC8C82F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C99B7225194EAA3100656CE1 /* Sources */ = {
@@ -235,6 +276,7 @@
 		};
 		C99B723A194EAA3100656CE1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10F6ED2A0DA448AD9E4AF490 /* Pods-ios.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -247,7 +289,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "iOS TestsTests/iOS TestsTests-Info.plist";
+				INFOPLIST_FILE = "iOS Tests/iOS Tests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -255,6 +297,7 @@
 		};
 		C99B723B194EAA3100656CE1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10F6ED2A0DA448AD9E4AF490 /* Pods-ios.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -263,7 +306,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS Tests/iOS Tests-Prefix.pch";
-				INFOPLIST_FILE = "iOS TestsTests/iOS TestsTests-Info.plist";
+				INFOPLIST_FILE = "iOS Tests/iOS Tests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};

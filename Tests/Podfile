@@ -10,7 +10,7 @@ end
 
 target :ios do
   platform :ios, '7.0'
-  # link_with 'iOS Tests'
+  link_with 'iOS Tests'
   import_pods
 end
 
