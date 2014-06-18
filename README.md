@@ -1,4 +1,4 @@
-# **EXPERIMENTAL: DO NOT USE IN PRODUCTION YET.**
+> **EXPERIMENTAL: DO NOT USE IN PRODUCTION YET.**
 # APSHTTPClient
 
 [![Version](https://img.shields.io/cocoapods/v/APSHTTPClient.svg?style=flat)](http://cocoadocs.org/docsets/APSHTTPClient)
@@ -7,7 +7,20 @@
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+Run the library's unit tests from the command line with these commands:
+
+```shell
+pushd Test
+pod install
+popd
+rake test
+```
+
+Package the library for distribution with this command:
+
+```shell
+create_release_folder.sh
+```
 
 ### Components
 **APSHTTPRequest** - Responsible for the http request  
