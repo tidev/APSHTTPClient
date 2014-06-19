@@ -1,9 +1,7 @@
 > **EXPERIMENTAL: DO NOT USE IN PRODUCTION YET.**
 # APSHTTPClient
 
-[![Version](https://img.shields.io/cocoapods/v/APSHTTPClient.svg?style=flat)](http://cocoadocs.org/docsets/APSHTTPClient)
-[![License](https://img.shields.io/cocoapods/l/APSHTTPClient.svg?style=flat)](http://cocoadocs.org/docsets/APSHTTPClient)
-[![Platform](https://img.shields.io/cocoapods/p/APSHTTPClient.svg?style=flat)](http://cocoadocs.org/docsets/APSHTTPClient)
+- [![Build Status](https://travis-ci.org/matt-langston/APSHTTPClient.svg)](https://travis-ci.org/matt-langston/APSHTTPClient)
 
 ## Usage
 
