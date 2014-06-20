@@ -229,18 +229,19 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 {
     DebugLog(@"Code %li Redirecting from: %@ to: %@",(long)[(NSHTTPURLResponse*)response statusCode], [self.request URL] ,[request URL]);
     self.response.connected = YES;
-    [self.response updateResponseParamaters:response];
-    [self.response updateRequestParamaters:self.request];
-    [self invokeCallbackWithState:APSHTTPCallbackStateRedirect];
     if(!self.redirects && self.response.status != 0)
     {
         return nil;
     }
+    [self.response updateResponseParamaters:response];
+    [self.response updateRequestParamaters:request];
+    [self invokeCallbackWithState:APSHTTPCallbackStateRedirect];
     
     //http://tewha.net/2012/05/handling-302303-redirects/
     if (response) {
-        self.request.URL = request.URL;
-        return self.request;
+        NSMutableURLRequest *r = [self.request mutableCopy];
+        r.URL = request.URL;
+        return r;
     } else {
         return request;
     }
