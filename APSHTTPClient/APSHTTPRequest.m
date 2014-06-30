@@ -166,9 +166,11 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 -(void)addRequestHeader:(NSString *)key value:(NSString *)value
 {
     if (key == nil) {
+        DebugLog(@"Ignore request to %s. key is nil.", __PRETTY_FUNCTION__);
         return;
     }
     if (value == nil) {
+        DebugLog(@"Remove header for key %@.", key);
         [self.headers removeObjectForKey:key];
     } else {
         self.headers[key] = value;

@@ -250,13 +250,15 @@
 -(void)addHeaderKey:(NSString*)key andHeaderValue:(NSString*)value
 {
     if (key == nil) {
+        DebugLog(@"Ignore request to %s. key is nil.", __PRETTY_FUNCTION__);
         return;
     }
     
     if (value == nil) {
-        [[self headers] removeObjectForKey:key];
+        DebugLog(@"Remove header for key %@.", key);
+        [self.headers removeObjectForKey:key];
     } else {
-        [[self headers] setValue:value forKey:key];
+        self.headers[key] = value;
     }
 }
 
