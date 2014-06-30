@@ -165,7 +165,14 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 
 -(void)addRequestHeader:(NSString *)key value:(NSString *)value
 {
-    self.headers[key] = value;
+    if (key == nil) {
+        return;
+    }
+    if (value == nil) {
+        [self.headers removeObjectForKey:key];
+    } else {
+        self.headers[key] = value;
+    }
 }
 
 -(BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection

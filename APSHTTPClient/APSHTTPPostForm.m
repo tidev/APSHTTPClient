@@ -249,7 +249,15 @@
 
 -(void)addHeaderKey:(NSString*)key andHeaderValue:(NSString*)value
 {
-	[[self headers] setValue:value forKey:key];
+    if (key == nil) {
+        return;
+    }
+    
+    if (value == nil) {
+        [[self headers] removeObjectForKey:key];
+    } else {
+        [[self headers] setValue:value forKey:key];
+    }
 }
 
 @end
