@@ -249,7 +249,17 @@
 
 -(void)addHeaderKey:(NSString*)key andHeaderValue:(NSString*)value
 {
-	[[self headers] setValue:value forKey:key];
+    if (key == nil) {
+        DebugLog(@"Ignore request to %s. key is nil.", __PRETTY_FUNCTION__);
+        return;
+    }
+    
+    if (value == nil) {
+        DebugLog(@"Remove header for key %@.", key);
+        [self.headers removeObjectForKey:key];
+    } else {
+        self.headers[key] = value;
+    }
 }
 
 @end
