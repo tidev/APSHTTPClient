@@ -242,7 +242,6 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     if (!self.redirects && self.response.status != 0) {
         return nil;
     }
-    [self.response updateResponseParamaters:response];
     [self.response updateRequestParamaters:request];
     [self invokeCallbackWithState:APSHTTPCallbackStateRedirect];
     
