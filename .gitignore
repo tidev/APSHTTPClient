@@ -4,6 +4,7 @@ build/
 # User-specific Xcode settings.
 APSHTTPClient.xcodeproj/xcuserdata
 APSHTTPClient.xcodeproj/project.xcworkspace/xcuserdata/
+APSHTTPClient.xcodeproj/project.xcworkspace/xcshareddata/
 
 # Emacs backup files
 *~

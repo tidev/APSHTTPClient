@@ -238,11 +238,10 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 {
     DebugLog(@"Code %li Redirecting from: %@ to: %@",(long)[(NSHTTPURLResponse*)response statusCode], [self.request URL] ,[request URL]);
     self.response.connected = YES;
-    if(!self.redirects && self.response.status != 0)
-    {
+    [self.response updateResponseParamaters:response];
+    if (!self.redirects && self.response.status != 0) {
         return nil;
     }
-    [self.response updateResponseParamaters:response];
     [self.response updateRequestParamaters:request];
     [self invokeCallbackWithState:APSHTTPCallbackStateRedirect];
     
