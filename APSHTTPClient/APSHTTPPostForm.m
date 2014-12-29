@@ -62,7 +62,7 @@
 	NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
 
     NSString* boundry = [NSString stringWithFormat:@"0xTibOuNdArY_%i", (int)[[NSDate date] timeIntervalSince1970]];
-    [self addHeaderKey:@"Content-Type" andHeaderValue:[NSString stringWithFormat:@"multipart/form-data; charset=%@; boundary=%@", charset, boundry]];
+    [self addHeaderKey:@"Content-Type" andHeaderValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundry]];
     
     [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundry]];
     
@@ -77,6 +77,7 @@
         }
 
         NSString *key = [allKeys objectAtIndex:i];
+        [self appendStringData: [NSString stringWithFormat:@"Content-Type: charset=\"%@\"\r\n", charset]];
         [self appendStringData: [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key]];
         [self appendStringData:@"\r\n"];
         [self appendStringData:[NSString stringWithFormat:@"%@\r\n", [[self requestFormDictionay] valueForKey:key]]];
