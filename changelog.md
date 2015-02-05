@@ -13,3 +13,7 @@
 ### Version 1.2 ###
 
 * [TIMOB-18341] - Fix malformed Content-Type error with modsecurity
+
+### Version 1.3 ###
+
+* [TIMOB-18129] - Handle thrown exceptions from connection delegate
