@@ -9,3 +9,7 @@
 ### Version 1.1 ###
 
 * Minor bug fix. Add support for NSURLAuthenticationMethodHTTPDigest
+
+### Version 1.2 ###
+
+* [TIMOB-18341] - Fix malformed Content-Type error with modsecurity
