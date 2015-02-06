@@ -196,7 +196,35 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     }
     
     if(useSubDelegate) {
-        [self.connectionDelegate connection:connection willSendRequestForAuthenticationChallenge:challenge];
+        @try {
+            [self.connectionDelegate connection:connection willSendRequestForAuthenticationChallenge:challenge];
+        }
+        @catch (NSException *exception) {
+            if (self.connection != nil) {
+                [self.connection cancel];
+                
+                NSMutableDictionary *dictionary = nil;
+                if (exception.userInfo) {
+                    dictionary = [NSMutableDictionary dictionaryWithDictionary:exception.userInfo];
+                } else {
+                    dictionary = [NSMutableDictionary dictionary];
+                }
+                if (exception.reason != nil) {
+                    [dictionary setObject:exception.reason forKey:NSLocalizedDescriptionKey];
+                }
+                
+                NSError* error = [NSError errorWithDomain:@"APSHTTPErrorDomain"
+                                                     code:APSRequestErrorConnectionDelegateFailed
+                                                 userInfo:dictionary];
+                
+
+                
+                [self connection:self.connection didFailWithError:error];
+            }
+        }
+        @finally {
+            //Do nothing
+        }
         return;
     }
 
