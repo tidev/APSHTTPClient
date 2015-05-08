@@ -1,6 +1,6 @@
 /**
  * Appcelerator APSHTTPClient Library
- * Copyright (c) 2014 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2014-2015 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -173,6 +173,14 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
         DebugLog(@"Remove header for key %@.", key);
         [self.headers removeObjectForKey:key];
     } else {
+        if ([[key lowercaseString] isEqualToString:@"cookie"]) {
+            NSString *oldValue = [self.headers objectForKey:key];
+            if (oldValue != nil) {
+                self.headers[key] = [NSString stringWithFormat:@"%@;%@",oldValue,value];
+                DebugLog(@"Multiple cookies set. cookie values %@.", self.headers[key]);
+                return;
+            }
+        }
         self.headers[key] = value;
     }
 }
