@@ -17,3 +17,7 @@
 ### Version 1.3 ###
 
 * [TIMOB-18129] - Handle thrown exceptions from connection delegate
+
+### Version 1.4 ###
+
+* [TIMOB-17573] - Add support to set multiple cookies in request header
