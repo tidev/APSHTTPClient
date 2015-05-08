@@ -77,8 +77,8 @@
         }
 
         NSString *key = [allKeys objectAtIndex:i];
-        [self appendStringData: [NSString stringWithFormat:@"Content-Type: charset=\"%@\"\r\n", charset]];
         [self appendStringData: [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key]];
+        [self appendStringData: [NSString stringWithFormat:@"Content-Type:text/plain;charset=\"%@\"\r\n", charset]];
         [self appendStringData:@"\r\n"];
         [self appendStringData:[NSString stringWithFormat:@"%@\r\n", [[self requestFormDictionay] valueForKey:key]]];
         [self appendStringData:[NSString stringWithFormat:@"--%@\r\n", last ? [@"--" stringByAppendingString:boundry] : boundry]];

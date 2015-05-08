@@ -17,3 +17,7 @@
 ### Version 1.3 ###
 
 * [TIMOB-18129] - Handle thrown exceptions from connection delegate
+
+### Version 1.4 ###
+
+* [TIMOB-18838] - Fix Content-Type definition of multipart/form-data
