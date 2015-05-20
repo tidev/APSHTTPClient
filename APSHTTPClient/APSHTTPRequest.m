@@ -183,7 +183,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             else {
                 self.headers[key] = [NSString stringWithFormat:@"%@, %@",oldValue,value];
             }
-            DebugLog(@"Multiple cookies set. cookie values %@.", self.headers[key]);
+            DebugLog(@"Multiple headers set. header values %@.", self.headers[key]);
             return;
 
         }
