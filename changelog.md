@@ -21,3 +21,7 @@
 ### Version 1.4 ###
 
 * [TIMOB-18838] - Fix Content-Type definition of multipart/form-data
+
+### Version 1.5 ###
+
+* [TIMOB-17573] - Support multiple cookies in Request Header
