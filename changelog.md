@@ -25,3 +25,7 @@
 ### Version 1.5 ###
 
 * [TIMOB-17573] - Support multiple cookies in Request Header
+
+### Version 1.6 ###
+
+* [TIMOB-18902] - Support JSON in multipart post
