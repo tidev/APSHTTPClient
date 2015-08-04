@@ -15,7 +15,6 @@
     NSMutableData *_postFormData;
     NSData *_jsonData;
     NSData *_stringData;
-    NSString* boundry;
 }
 
 
@@ -59,25 +58,23 @@
 
 }
 
--(void)buildJSONPostData
+-(void)buildFilePostData
 {
     NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
-    [self addHeaderKey:@"Content-Type" andHeaderValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundry]];
-    [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundry]];
-    [self appendStringData: @"Content-Disposition: form-data; name=\"json\"\n"];
-    [self appendStringData: [NSString stringWithFormat:@"Content-Type:application/json;charset=\"%@\"\r\n", charset]];
-    [self appendStringData:@"\r\n"];
-    [self appendData:_jsonData];
-    [self appendStringData:@"\r\n"];
+    NSString *boundary = [NSString stringWithFormat:@"0xTibOuNdArY_%i", (int)[[NSDate date] timeIntervalSince1970]];
+    [self addHeaderKey:@"Content-Type" andHeaderValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary]];
+    if (_jsonData != nil) {
+        [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundary]];
+        [self appendStringData: @"Content-Disposition: form-data; name=\"json\"\n"];
+        [self appendStringData: [NSString stringWithFormat:@"Content-Type:application/json;charset=\"%@\"\r\n", charset]];
+        [self appendStringData:@"\r\n"];
+        [self appendData:_jsonData];
+        [self appendStringData:@"\r\n"];
         // Content-Disposition: form-data; name="json"
         // Content-Type: application/json; charset=utf-8
         //
         // --0xTibOuNdArY
-}
--(void)buildFilePostData
-{
-	NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
-    [self addHeaderKey:@"Content-Type" andHeaderValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundry]];
+    }
     NSArray *allKeys = [[self requestFormDictionay] allKeys];
     NSInteger fileCount = [[self requestFilesArray] count];
     BOOL last = NO;
@@ -88,12 +85,14 @@
             last = YES;
         }
         NSString *key = [allKeys objectAtIndex:i];
-        [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundry]];
+        [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundary]];
         [self appendStringData: [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key]];
         [self appendStringData: [NSString stringWithFormat:@"Content-Type:text/plain;charset=\"%@\"\r\n", charset]];
         [self appendStringData:@"\r\n"];
         [self appendStringData:[NSString stringWithFormat:@"%@\r\n", [[self requestFormDictionay] valueForKey:key]]];
-         
+        if (last == YES) {
+            [self appendStringData:[NSString stringWithFormat:@"--%@--\r\n", boundary]];
+        }
          // Content-Disposition: form-data; name="username"
          //
          // pec1985
@@ -106,10 +105,13 @@
             last = YES;
         }
         NSDictionary *dict = [[self requestFilesArray] objectAtIndex:i];
-        [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundry]];
+        [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundary]];
         [self appendStringData: [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", [dict valueForKey:@"fileField"], [dict valueForKey:@"fileName"]]];
 		[self appendStringData: [NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", [dict objectForKey:@"contentType"]]];
         [self appendData:[dict valueForKey:@"fileData"]];
+        if (last == YES) {
+            [self appendStringData:[NSString stringWithFormat:@"--%@--\r\n", boundary]];
+        }
         // Content-Disposition: form-data; name="file[0]"; filename="image.jpg"
         // Content-Type: imgae/jpeg
         //
@@ -120,27 +122,25 @@
 
 -(NSData*)requestData
 {
-    BOOL needBoundary = NO;
-    boundry = [NSString stringWithFormat:@"0xTibOuNdArY_%i", (int)[[NSDate date] timeIntervalSince1970]];    
+    NSInteger fileCount = [[self requestFilesArray] count];
+    if(fileCount != 0) {
+        //for multipart
+        [self buildFilePostData];
+        [self addHeaderKey:@"Content-Length" andHeaderValue:[NSString stringWithFormat:@"%lu", (unsigned long)[_postFormData length]]];
+        return [self postFormData];
+    }
     if(_postFormData != nil && _contentType != nil) {
         [self addHeaderKey:@"Content-Type" andHeaderValue: _contentType];
     }
-    if(_stringData != nil) {
+    else if(_stringData != nil) {
         [self appendData:_stringData];
     }
-    if(_jsonData != nil) {
-        [self buildJSONPostData];
-        needBoundary = YES;
+    else if(_jsonData != nil) {
+        [self appendData:_jsonData];
+        [self addHeaderKey:@"Content-Type" andHeaderValue:@"application/json;charset=utf-8"];
     }
-    NSInteger fileCount = [[self requestFilesArray] count];
-    if(fileCount == 0) {
+    else {
         [self buildStringPostData];
-    } else {
-        [self buildFilePostData];
-        needBoundary = YES;
-    }
-    if (needBoundary == YES) {
-        [self appendStringData:[NSString stringWithFormat:@"\r\n--%@--\r\n", boundry]];
     }
     [self addHeaderKey:@"Content-Length" andHeaderValue:[NSString stringWithFormat:@"%lu", (unsigned long)[_postFormData length]]];
     return [self postFormData];
