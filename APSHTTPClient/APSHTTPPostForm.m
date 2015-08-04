@@ -109,6 +109,7 @@
         [self appendStringData: [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", [dict valueForKey:@"fileField"], [dict valueForKey:@"fileName"]]];
 		[self appendStringData: [NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", [dict objectForKey:@"contentType"]]];
         [self appendData:[dict valueForKey:@"fileData"]];
+        [self appendStringData:@"\r\n"];        
         if (last == YES) {
             [self appendStringData:[NSString stringWithFormat:@"--%@--\r\n", boundary]];
         }
