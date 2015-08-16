@@ -28,4 +28,8 @@
 
 ### Version 1.6 ###
 
+* [TIMOB-18902] - Support JSON in multipart post
+
+### Version 1.7 ###
+
 * [TIMOB-19154] - Deprecate NSURLConnection and use NSURLSession instead
