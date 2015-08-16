@@ -93,6 +93,10 @@
         if (last == YES) {
             [self appendStringData:[NSString stringWithFormat:@"--%@--\r\n", boundary]];
         }
+<<<<<<< HEAD
+=======
+         
+>>>>>>> b8e6afd2d94a5eb96ebf5094ce7c13340f0ddac7
          // Content-Disposition: form-data; name="username"
          //
          // pec1985
@@ -109,10 +113,11 @@
         [self appendStringData: [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", [dict valueForKey:@"fileField"], [dict valueForKey:@"fileName"]]];
 		[self appendStringData: [NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", [dict objectForKey:@"contentType"]]];
         [self appendData:[dict valueForKey:@"fileData"]];
-        [self appendStringData:@"\r\n"];        
+        [self appendStringData:@"\r\n"];
         if (last == YES) {
             [self appendStringData:[NSString stringWithFormat:@"--%@--\r\n", boundary]];
         }
+
         // Content-Disposition: form-data; name="file[0]"; filename="image.jpg"
         // Content-Type: imgae/jpeg
         //
