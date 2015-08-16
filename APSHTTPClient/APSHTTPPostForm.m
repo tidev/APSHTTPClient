@@ -93,10 +93,7 @@
         if (last == YES) {
             [self appendStringData:[NSString stringWithFormat:@"--%@--\r\n", boundary]];
         }
-<<<<<<< HEAD
-=======
-         
->>>>>>> b8e6afd2d94a5eb96ebf5094ce7c13340f0ddac7
+
          // Content-Disposition: form-data; name="username"
          //
          // pec1985
