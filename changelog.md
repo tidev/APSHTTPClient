@@ -33,3 +33,7 @@
 ### Version 1.7 ###
 
 * [TIMOB-19154] - Deprecate NSURLConnection and use NSURLSession instead
+
+### Version 1.8 ###
+
+* [TIMOB-19390] - Rebuild SDK Dependent libs to support bitcode
