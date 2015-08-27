@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 -(void)abort
 {
     self.cancelled = YES;
-    if ([self isIOS7OrGreater]) {
+/*    if ([self isIOS7OrGreater]) {
         if (self.session != nil) {
             [self.session invalidateAndCancel];
             [self URLSession:self.session didBecomeInvalidWithError:
@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
              ];
         }
         return;
-    }
+    }*/
     if(self.connection != nil) {
         [self.connection cancel];
         [self connection:self.connection didFailWithError:
@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
         NSURLResponse *response;
         NSError *error = nil;
         NSData *responseData = nil;
-        if ([self isIOS7OrGreater]) {
+/*        if ([self isIOS7OrGreater]) {
             dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
             self.session = [NSURLSession sharedSession];
             NSURLSessionDataTask *task = [self.session dataTaskWithRequest:self.request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error) {
@@ -151,7 +151,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             [task resume];
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
-        else {
+        else {*/
             responseData = [NSURLConnection sendSynchronousRequest:self.request returningResponse:&response error:&error];
             [self.response appendData:responseData];
             [self.response updateResponseParamaters:response];
@@ -159,17 +159,18 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             [self.response updateRequestParamaters:self.request];
             [self.response setReadyState:APSHTTPResponseStateDone];
             [self.response setConnected:NO];
-        }
+//        }
     } else {
         [self.response updateRequestParamaters:self.request];
         [self.response setReadyState:APSHTTPResponseStateOpened];
         [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
         
-        if ([self isIOS7OrGreater]) {
+/*        if ([self isIOS7OrGreater]) {
             self.session = [NSURLSession sharedSession];
             NSURLSessionDataTask *task = [self.session dataTaskWithRequest:self.request];
             [task resume];
-        }
+            return;
+        }*/
         self.connection = [[NSURLConnection alloc] initWithRequest: self.request
                                                       delegate: self
                                               startImmediately: NO
