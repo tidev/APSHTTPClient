@@ -306,7 +306,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#! /usr/bin/env bash\n\n# Authors: Sabil and Matt\n# Date: 2014.06.11\n#\n# IMPORTANT: This script should be retired after the SDK Engineering\n# team migrates to Cocoa Pods for dependency management and\n# distribution.\n#\n# This script creates a versioned directory of the APSHTTPClient\n# library in a subdirectory named \"build\" under the project's root.\n#\n# The version of the library is the build timestamp formatted as the\n# number of seconds since the Unix epoch. For example:\n#\n# build/APSHTTPClient-1402532543/\n\n# This is a convenient command to determine a human readable date and\n# time from the version number (replace the last number with the\n# version number):\n#\n# date -j -f \"%s\" 1402532543\n# Wed Jun 11 17:22:23 PDT 2014\n#\n#  The contents of this directory contain a \"universal\" library for\n#  the architectures i386, armv7 and armv7s.\n\n# Sabil and Matt are knowingly overriding the TARGET_NAME environment\n# variable from Xcode since they named the Xcode target that executes\n# this script \"Create Release Folder\".\nTARGET_NAME=\"APSHTTPClient\"\n\n# Sabil and Matt are knowingly overriding the CONFIGURATION\n# environment variable from Xcode since they only want distribute\n# Release builds. Engineers wanting a Debug build should simply\n# include this Xcode project directly into their project.\nCONFIGURATION=\"Release\"\n\nAPSHTTPCLIENT_VERSION=$(date +%s)\n\nBUILD_DIR=\"${PWD}/build\"\necho \"Assuming BUILD_DIR=${BUILD_DIR}\"\n\nDEVICE_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos\"\nSIMULATOR_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\"\nLIB_NAME=\"lib${TARGET_NAME}.a\"\nDIST_DIR=\"${BUILD_DIR}/${TARGET_NAME}-${APSHTTPCLIENT_VERSION}\"\n\nfunction echo_and_eval {\n    local -r cmd=\"${1:?}\"\n    echo \"${cmd}\" && eval \"${cmd}\"\n}\n\nfor sdk in iphoneos iphonesimulator; do\necho_and_eval \"xcodebuild clean -target \\\"${TARGET_NAME}\\\" -sdk ${sdk}\"\necho_and_eval \"xcodebuild -configuration \\\"${CONFIGURATION}\\\" -target \\\"${TARGET_NAME}\\\" -sdk ${sdk}\"\ndone\n\necho_and_eval \"mkdir -p \\\"${DIST_DIR}\\\"\"\necho_and_eval \"xcrun -sdk iphoneos lipo -create \\\"${DEVICE_DIR}/${LIB_NAME}\\\" \\\"${SIMULATOR_DIR}/${LIB_NAME}\\\" -o \\\"${DIST_DIR}/${LIB_NAME}\\\"\"\necho_and_eval \"cp -r \\\"${DEVICE_DIR}/include\\\" \\\"${DIST_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${DEVICE_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${SIMULATOR_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${BUILD_DIR}/${TARGET_NAME}.build\\\"\"\n";
+			shellScript = "#! /usr/bin/env bash\n\n# Authors: Sabil and Matt\n# Date: 2014.06.11\n#\n# IMPORTANT: This script should be retired after the SDK Engineering\n# team migrates to Cocoa Pods for dependency management and\n# distribution.\n#\n# This script creates a versioned directory of the APSHTTPClient\n# library in a subdirectory named \"build\" under the project's root.\n#\n# The version of the library is the build timestamp formatted as the\n# number of seconds since the Unix epoch. For example:\n#\n# build/APSHTTPClient-1402532543/\n\n# This is a convenient command to determine a human readable date and\n# time from the version number (replace the last number with the\n# version number):\n#\n# date -j -f \"%s\" 1402532543\n# Wed Jun 11 17:22:23 PDT 2014\n#\n#  The contents of this directory contain a \"universal\" library for\n#  the architectures i386, armv7 and armv7s.\n\n# Sabil and Matt are knowingly overriding the TARGET_NAME environment\n# variable from Xcode since they named the Xcode target that executes\n# this script \"Create Release Folder\".\nTARGET_NAME=\"APSHTTPClient\"\n\n# Sabil and Matt are knowingly overriding the CONFIGURATION\n# environment variable from Xcode since they only want distribute\n# Release builds. Engineers wanting a Debug build should simply\n# include this Xcode project directly into their project.\nCONFIGURATION=\"Release\"\n\nAPSHTTPCLIENT_VERSION=$(date +%s)\n\nBUILD_DIR=\"${PWD}/build\"\necho \"Assuming BUILD_DIR=${BUILD_DIR}\"\n\nDEVICE_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos\"\nSIMULATOR_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\"\nLIB_NAME=\"lib${TARGET_NAME}.a\"\nDIST_DIR=\"${BUILD_DIR}/${TARGET_NAME}-${APSHTTPCLIENT_VERSION}\"\n\nfunction echo_and_eval {\n    local -r cmd=\"${1:?}\"\n    echo \"${cmd}\" && eval \"${cmd}\"\n}\n\nfor sdk in iphoneos iphonesimulator; do\necho_and_eval \"xcodebuild clean -target \\\"${TARGET_NAME}\\\" -sdk ${sdk}\"\necho_and_eval \"xcodebuild -configuration \\\"${CONFIGURATION}\\\" -target \\\"${TARGET_NAME}\\\" -sdk ${sdk} OTHER_CFLAGS=\\\"-fembed-bitcode\\\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\\\"DWARF with dSYM\\\"\"\ndone\n\necho_and_eval \"mkdir -p \\\"${DIST_DIR}\\\"\"\necho_and_eval \"xcrun -sdk iphoneos lipo -create \\\"${DEVICE_DIR}/${LIB_NAME}\\\" \\\"${SIMULATOR_DIR}/${LIB_NAME}\\\" -o \\\"${DIST_DIR}/${LIB_NAME}\\\"\"\necho_and_eval \"cp -r \\\"${DEVICE_DIR}/include\\\" \\\"${DIST_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${DEVICE_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${SIMULATOR_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${BUILD_DIR}/${TARGET_NAME}.build\\\"\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -359,6 +359,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULE_DEBUGGING = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -395,6 +396,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULE_DEBUGGING = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -423,7 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/APSHTTPClient.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -435,7 +437,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/APSHTTPClient.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

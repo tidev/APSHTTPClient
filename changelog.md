@@ -37,3 +37,7 @@
 ### Version 1.8 ###
 
 * [TIMOB-19390] - Rebuild SDK Dependent libs to support bitcode
+
+### Version 1.9 ###
+
+* [TIMOB-19609] - Remove "pcm missing" warnings
