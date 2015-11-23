@@ -41,3 +41,7 @@
 ### Version 1.9 ###
 
 * [TIMOB-19609] - Remove "pcm missing" warnings
+
+### Version 1.10 ###
+
+* [TIMOB-20048] - Revert to nsurlconnection
