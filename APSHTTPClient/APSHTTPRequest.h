@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 @protocol APSConnectionDelegate <NSURLConnectionDelegate, NSURLSessionDelegate, NSURLSessionDataDelegate>
 @optional
 -(BOOL)willHandleChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection;
+-(void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *))completionHandler;
 @end
 
 @protocol APSHTTPRequestDelegate <NSObject>

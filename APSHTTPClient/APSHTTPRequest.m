@@ -234,86 +234,17 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 	return YES;
 }
 
--(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-    DebugLog(@"%s", __PRETTY_FUNCTION__);
-
-    BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
-    
-    if(useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forConnection:)]) {
-        useSubDelegate = [self.connectionDelegate willHandleChallenge:challenge forConnection:connection];
-    }
-    
-    if(useSubDelegate) {
-        @try {
-            [self.connectionDelegate connection:connection willSendRequestForAuthenticationChallenge:challenge];
-        }
-        @catch (NSException *exception) {
-            if (self.connection != nil) {
-                [self.connection cancel];
-                
-                NSMutableDictionary *dictionary = nil;
-                if (exception.userInfo) {
-                    dictionary = [NSMutableDictionary dictionaryWithDictionary:exception.userInfo];
-                } else {
-                    dictionary = [NSMutableDictionary dictionary];
-                }
-                if (exception.reason != nil) {
-                    [dictionary setObject:exception.reason forKey:NSLocalizedDescriptionKey];
-                }
-                
-                NSError* error = [NSError errorWithDomain:@"APSHTTPErrorDomain"
-                                                     code:APSRequestErrorConnectionDelegateFailed
-                                                 userInfo:dictionary];
-                
-
-                
-                [self connection:self.connection didFailWithError:error];
-            }
-        }
-        @finally {
-            //Do nothing
-        }
-        return;
-    }
-
-    if (challenge.previousFailureCount) {
-        [challenge.sender cancelAuthenticationChallenge:challenge];
-    }
-    
-    NSString* authMethod = challenge.protectionSpace.authenticationMethod;
-    BOOL handled = NO;
-    if ([authMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        if ( ([challenge.protectionSpace.host isEqualToString:self.url.host]) && (!self.validatesSecureCertificate) ){
-            handled = YES;
-            [challenge.sender useCredential:
-             [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]
-                   forAuthenticationChallenge:challenge];
-        }
-    } else if ( [authMethod isEqualToString:NSURLAuthenticationMethodDefault] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic]
-               || [authMethod isEqualToString:NSURLAuthenticationMethodNTLM] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest]) {
-        if(self.requestPassword != nil && self.requestUsername != nil) {
-            handled = YES;
-            [challenge.sender useCredential:
-             [NSURLCredential credentialWithUser:self.requestUsername
-                                        password:self.requestPassword
-                                     persistence:NSURLCredentialPersistenceForSession]
-                   forAuthenticationChallenge:challenge];
-        }
-    }
-    
-    if (!handled) {
-        if ([challenge.sender respondsToSelector:@selector(performDefaultHandlingForAuthenticationChallenge:)]) {
-            [challenge.sender performDefaultHandlingForAuthenticationChallenge:challenge];
-        } else {
-            [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-        }
-    }
-}
-
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
 {
     DebugLog(@"%s", __PRETTY_FUNCTION__);
+    DebugLog(@"WITH TASK");
+    
+    BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
+    
+    if(useSubDelegate) {
+        [self.connectionDelegate URLSession:session didReceiveChallenge:challenge completionHandler:completionHandler];
+        return;
+    }
     
     if (challenge.previousFailureCount) {
         [challenge.sender cancelAuthenticationChallenge:challenge];
@@ -361,6 +292,14 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 -(void)URLSession:(nonnull NSURLSession *)session didReceiveChallenge:(nonnull NSURLAuthenticationChallenge *)challenge completionHandler:(nonnull void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * __nullable))completionHandler
 {
     DebugLog(@"%s", __PRETTY_FUNCTION__);
+    DebugLog(@"WITHOUT TASK");
+
+    BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
+    
+    if(useSubDelegate) {
+        [self.connectionDelegate URLSession:session didReceiveChallenge:challenge completionHandler:completionHandler];
+        return;
+    }
     
     if (challenge.previousFailureCount) {
         [challenge.sender cancelAuthenticationChallenge:challenge];
