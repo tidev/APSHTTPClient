@@ -6,7 +6,7 @@
  */
 
 #import "APSHTTPClient.h"
-
+#define USE_NSURLSESSION NO
 
 typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     APSHTTPCallbackStateReadyState = 0,
@@ -645,6 +645,6 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 }
 -(BOOL)isIOS7OrGreater
 {
-    return [NSURLSession instancesRespondToSelector:@selector(invalidateAndCancel)];
+    return [NSURLSession instancesRespondToSelector:@selector(invalidateAndCancel)] && USE_NSURLSESSION;
 }
 @end
