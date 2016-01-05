@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/appcelerator/APSHTTPClient.svg?branch=master)](https://travis-ci.org/appcelerator/APSHTTPClient)
 ### Requirements
 **MobileCoreServices.framework**
 
