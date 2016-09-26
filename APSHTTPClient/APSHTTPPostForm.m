@@ -63,10 +63,12 @@
     NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
     NSString *boundary = [NSString stringWithFormat:@"0xTibOuNdArY_%i", (int)[[NSDate date] timeIntervalSince1970]];
     [self addHeaderKey:@"Content-Type" andHeaderValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary]];
+    
+    // Handle JSON
     if (_jsonData != nil) {
         [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundary]];
         [self appendStringData: @"Content-Disposition: form-data; name=\"json\"\n"];
-        [self appendStringData: [NSString stringWithFormat:@"Content-Type:application/json;charset=\"%@\"\r\n", charset]];
+        [self appendStringData: [NSString stringWithFormat:@"Content-Type:application/json;charset=%@\r\n", charset]];
         [self appendStringData:@"\r\n"];
         [self appendData:_jsonData];
         [self appendStringData:@"\r\n"];
@@ -79,6 +81,7 @@
     NSInteger fileCount = [[self requestFilesArray] count];
     BOOL last = NO;
 
+    // Handle text
     for(NSInteger i = 0, len = [allKeys count]; i < len; i++)
     {
         if(i == len - 1 && fileCount == 0) {
@@ -87,7 +90,7 @@
         NSString *key = [allKeys objectAtIndex:i];
         [self appendStringData:[NSString stringWithFormat:@"--%@\r\n",boundary]];
         [self appendStringData: [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key]];
-        [self appendStringData: [NSString stringWithFormat:@"Content-Type:text/plain;charset=\"%@\"\r\n", charset]];
+        [self appendStringData: [NSString stringWithFormat:@"Content-Type:text/plain;charset=%@\r\n", charset]];
         [self appendStringData:@"\r\n"];
         [self appendStringData:[NSString stringWithFormat:@"%@\r\n", [[self requestFormDictionay] valueForKey:key]]];
         if (last == YES) {
@@ -95,11 +98,13 @@
         }
 
          // Content-Disposition: form-data; name="username"
+         // Content-Type:text/plain;charset=utf-8
          //
          // pec1985
          // --0xTibOuNdArY
     }
 
+    // Handle files
     for(NSInteger i = 0; i < fileCount; i++)
     {
         if(i == fileCount - 1) {
@@ -116,7 +121,7 @@
         }
 
         // Content-Disposition: form-data; name="file[0]"; filename="image.jpg"
-        // Content-Type: imgae/jpeg
+        // Content-Type: image/jpeg
         //
         // [binary data]
         // --0xTibOuNdArY
