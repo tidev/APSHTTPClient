@@ -584,13 +584,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     self.response.readyState = APSHTTPResponseStateDone;
     self.response.connected = NO;
     
-    [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
-    
-    [self invokeCallbackWithState:APSHTTPCallbackStateSendStream];
-    
-    [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
-    
-    [self invokeCallbackWithState:APSHTTPCallbackStateLoad];
+    [self responseFinished];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
