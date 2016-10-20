@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
         DebugLog(@"[ERROR] APSHTTPRequest does not support reuse of connection. Ignoring call.");
         return;
     }
-
+    
     if (self.filePath != nil) {
         self.response.filePath = self.filePath;
     }
@@ -109,10 +109,10 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             DebugLog(@"Header: %@: %@", key, [headers valueForKey:key]);
         }
     }
-
+    
     for (NSString* key in self.headers) {
-            [self.request setValue:self.headers[key] forHTTPHeaderField:key];
-            DebugLog(@"Header: %@: %@", key, self.headers[key]);
+        [self.request setValue:self.headers[key] forHTTPHeaderField:key];
+        DebugLog(@"Header: %@: %@", key, self.headers[key]);
     }
     
     DebugLog(@"URL: %@", self.url);
@@ -170,11 +170,11 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             NSURLSessionDataTask *task = [self.session dataTaskWithRequest:self.request];
             [task resume];
             return;
-         }
+        }
         self.connection = [[NSURLConnection alloc] initWithRequest: self.request
-                                                      delegate: self
-                                              startImmediately: NO
-                               ];
+                                                          delegate: self
+                                                  startImmediately: NO
+                           ];
         
         if(self.theQueue) {
             [self.connection setDelegateQueue:[self theQueue]];
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
              If caller specifies runModes with which to specify the connection use those,
              otherwise just configure to run in NSDefaultRunLoopMode (Default).
              It is the callers responsibility to keep calling thread and runloop alive.
-            */
+             */
             if (self.runModes.count == 0) {
                 self.runModes = @[NSDefaultRunLoopMode];
             }
@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             }
             DebugLog(@"Multiple headers set. header values %@.", self.headers[key]);
             return;
-
+            
         }
         self.headers[key] = value;
     }
@@ -228,16 +228,18 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 
 -(BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection
 {
-	if(self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(connectionShouldUseCredentialStorage:)]) {
-		return [self.connectionDelegate connectionShouldUseCredentialStorage:connection];
-	}
-	return YES;
+    if(self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(connectionShouldUseCredentialStorage:)]) {
+        return [self.connectionDelegate connectionShouldUseCredentialStorage:connection];
+    }
+    return YES;
 }
 
 -(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     DebugLog(@"%s", __PRETTY_FUNCTION__);
-
+    
+    DebugLog(@"-- NSURLConnection delegate --");
+    
     BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
     
     if(useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forConnection:)]) {
@@ -266,7 +268,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
                                                      code:APSRequestErrorConnectionDelegateFailed
                                                  userInfo:dictionary];
                 
-
+                
                 
                 [self connection:self.connection didFailWithError:error];
             }
@@ -276,7 +278,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
         }
         return;
     }
-
+    
     if (challenge.previousFailureCount) {
         [challenge.sender cancelAuthenticationChallenge:challenge];
     }
@@ -288,7 +290,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             handled = YES;
             [challenge.sender useCredential:
              [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]
-                   forAuthenticationChallenge:challenge];
+                 forAuthenticationChallenge:challenge];
         }
     } else if ( [authMethod isEqualToString:NSURLAuthenticationMethodDefault] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic]
                || [authMethod isEqualToString:NSURLAuthenticationMethodNTLM] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest]) {
@@ -298,7 +300,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
              [NSURLCredential credentialWithUser:self.requestUsername
                                         password:self.requestPassword
                                      persistence:NSURLCredentialPersistenceForSession]
-                   forAuthenticationChallenge:challenge];
+                 forAuthenticationChallenge:challenge];
         }
     }
     
@@ -361,6 +363,46 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 -(void)URLSession:(nonnull NSURLSession *)session didReceiveChallenge:(nonnull NSURLAuthenticationChallenge *)challenge completionHandler:(nonnull void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * __nullable))completionHandler
 {
     DebugLog(@"%s", __PRETTY_FUNCTION__);
+    
+    BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
+    
+    // Removed, since we use the NSURLSession instead of the NSURLConnection
+    //if(useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forConnection:)]) {
+    //    useSubDelegate = [self.connectionDelegate willHandleChallenge:challenge forConnection:connection];
+    //}
+    
+    if(useSubDelegate) {
+        @try {
+            [self.connectionDelegate URLSession:session didReceiveChallenge:challenge completionHandler:completionHandler];
+        }
+        @catch (NSException *exception) {
+            if (self.connection != nil) {
+                [self.connection cancel];
+                
+                NSMutableDictionary *dictionary = nil;
+                if (exception.userInfo) {
+                    dictionary = [NSMutableDictionary dictionaryWithDictionary:exception.userInfo];
+                } else {
+                    dictionary = [NSMutableDictionary dictionary];
+                }
+                if (exception.reason != nil) {
+                    [dictionary setObject:exception.reason forKey:NSLocalizedDescriptionKey];
+                }
+                
+                NSError* error = [NSError errorWithDomain:@"APSHTTPErrorDomain"
+                                                     code:APSRequestErrorConnectionDelegateFailed
+                                                 userInfo:dictionary];
+                
+                
+                
+                [self connection:self.connection didFailWithError:error];
+            }
+        }
+        @finally {
+            //Do nothing
+        }
+        return;
+    }
     
     if (challenge.previousFailureCount) {
         [challenge.sender cancelAuthenticationChallenge:challenge];
@@ -462,7 +504,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     self.expectedDownloadResponseLength = response.expectedContentLength;
     
     [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
-
+    
 }
 
 - (void) URLSession:(nonnull NSURLSession *)session dataTask:(nonnull NSURLSessionDataTask *)dataTask didReceiveResponse:(nonnull NSURLResponse *)response completionHandler:(nonnull void (^)(NSURLSessionResponseDisposition))completionHandler
@@ -495,7 +537,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     [self.response appendData:data];
     self.response.downloadProgress = (float)self.response.responseLength / (float)self.expectedDownloadResponseLength;
     [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
-
+    
     
 }
 
@@ -516,11 +558,11 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     if(self.response.readyState != APSHTTPResponseStateLoading) {
         self.response.readyState = APSHTTPResponseStateLoading;
         [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
-
+        
     }
     self.response.uploadProgress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
     [self invokeCallbackWithState:APSHTTPCallbackStateSendStream];
-
+    
 }
 
 -(void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
@@ -541,15 +583,15 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     self.response.uploadProgress = 1.f;
     self.response.readyState = APSHTTPResponseStateDone;
     self.response.connected = NO;
-     
+    
     [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
-
+    
     [self invokeCallbackWithState:APSHTTPCallbackStateSendStream];
-
+    
     [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
-
+    
     [self invokeCallbackWithState:APSHTTPCallbackStateLoad];
-
+    
 }
 
 -(void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
@@ -581,17 +623,17 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-	if(self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(connection:didFailWithError:)]) {
-		[self.connectionDelegate connection:connection didFailWithError:error];
-	}
+    if(self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(connection:didFailWithError:)]) {
+        [self.connectionDelegate connection:connection didFailWithError:error];
+    }
     DebugLog(@"%s", __PRETTY_FUNCTION__);
     self.response.readyState = APSHTTPResponseStateDone;
     [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
-
+    
     self.response.connected = NO;
     self.response.error = error;
     [self invokeCallbackWithState:APSHTTPCallbackStateError];
-
+    
 }
 
 - (void)URLSession:(nonnull NSURLSession *)session didBecomeInvalidWithError:(nullable NSError *)error
