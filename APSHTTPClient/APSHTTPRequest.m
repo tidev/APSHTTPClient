@@ -561,9 +561,6 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
     
     [self invokeCallbackWithState:APSHTTPCallbackStateLoad];
-    
-    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:0 diskCapacity:0 diskPath:nil];
-    [NSURLCache setSharedURLCache:sharedCache];
 }
 
 -(void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
