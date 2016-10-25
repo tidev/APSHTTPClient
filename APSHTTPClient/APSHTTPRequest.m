@@ -74,10 +74,13 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 
 -(void)send
 {
+#if TARGET_OS_SIMULATOR
     assert(self.url != nil);
     assert(self.method != nil);
     assert(self.response != nil);
     assert(self.response.readyState == APSHTTPResponseStateUnsent);
+#endif
+
     if (!(self.url != nil)) {
         DebugLog(@"[ERROR] Missing required parameter URL. Ignoring call");
         return;
@@ -146,6 +149,8 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
                 [self.response updateRequestParamaters:self.request];
                 [self.response setReadyState:APSHTTPResponseStateDone];
                 [self.response setConnected:NO];
+                
+                [self responseFinished];
                 dispatch_semaphore_signal(semaphore);
             }];
             [task resume];
@@ -159,6 +164,8 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             [self.response updateRequestParamaters:self.request];
             [self.response setReadyState:APSHTTPResponseStateDone];
             [self.response setConnected:NO];
+
+            [self responseFinished];
         }
     } else {
         [self.response updateRequestParamaters:self.request];
@@ -542,14 +549,18 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     self.response.readyState = APSHTTPResponseStateDone;
     self.response.connected = NO;
      
+    [self responseFinished];
+}
+
+-(void)responseFinished
+{
     [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
-
+    
     [self invokeCallbackWithState:APSHTTPCallbackStateSendStream];
-
+    
     [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
-
+    
     [self invokeCallbackWithState:APSHTTPCallbackStateLoad];
-
 }
 
 -(void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
@@ -570,13 +581,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     self.response.readyState = APSHTTPResponseStateDone;
     self.response.connected = NO;
     
-    [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
-    
-    [self invokeCallbackWithState:APSHTTPCallbackStateSendStream];
-    
-    [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
-    
-    [self invokeCallbackWithState:APSHTTPCallbackStateLoad];
+    [self responseFinished];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
