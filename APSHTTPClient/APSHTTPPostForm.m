@@ -128,6 +128,11 @@
     }
 }
 
+- (void)dealloc
+{
+    _postFormData = nil;
+}
+
 -(NSData*)requestData
 {
     NSInteger fileCount = [[self requestFilesArray] count];
