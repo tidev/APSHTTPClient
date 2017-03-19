@@ -104,7 +104,6 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
         if(data.length > 0) {
             [self.request setHTTPBody:data];
         }
-        DebugLog(@"Data: %@", [NSString stringWithUTF8String: [data bytes]]);
         NSDictionary *headers = self.postForm.requestHeaders;
         for (NSString* key in headers)
         {
