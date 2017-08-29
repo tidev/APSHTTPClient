@@ -6,7 +6,7 @@
  */
 
 #import "APSHTTPClient.h"
-#define USE_NSURLSESSION NO
+#define USE_NSURLSESSION YES
 
 typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     APSHTTPCallbackStateReadyState = 0,
@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 @property(nonatomic, strong, readwrite) NSURLConnection     *connection;
 @property(nonatomic, strong, readwrite) NSURLSession        *session;
 @property(nonatomic, strong, readonly ) NSMutableDictionary *headers;
+@property(nonatomic, strong, readwrite) NSURLSessionDataTask *task;
 
 @end
 
@@ -142,7 +143,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
         if ([self isIOS7OrGreater]) {
             dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
             self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:self.theQueue];
-            NSURLSessionDataTask *task = [self.session dataTaskWithRequest:self.request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error) {
+            self.task = [self.session dataTaskWithRequest:self.request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error) {
                 [self.response appendData:data];
                 [self.response updateResponseParamaters:response];
                 [self.response setError:error];
@@ -153,7 +154,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
                 [self responseFinished];
                 dispatch_semaphore_signal(semaphore);
             }];
-            [task resume];
+            [self.task resume];
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
         else {
@@ -174,8 +175,8 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
         
         if ([self isIOS7OrGreater]) {
             self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
-            NSURLSessionDataTask *task = [self.session dataTaskWithRequest:self.request];
-            [task resume];
+            self.task = [self.session dataTaskWithRequest:self.request];
+            [self.task resume];
             return;
          }
         self.connection = [[NSURLConnection alloc] initWithRequest: self.request
@@ -321,9 +322,50 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
 {
     DebugLog(@"%s", __PRETTY_FUNCTION__);
+    BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]);
+    
+    if(useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forSession:)]) {
+        useSubDelegate = [self.connectionDelegate willHandleChallenge:challenge forSession:session];
+    }
+    
+    if(useSubDelegate) {
+        @try {
+            [self.connectionDelegate URLSession:session task:task didReceiveChallenge:challenge completionHandler:completionHandler];
+        }
+        @catch (NSException *exception) {
+            if (self.task != nil) {
+                [self.task cancel];
+                
+                NSMutableDictionary *dictionary = nil;
+                if (exception.userInfo) {
+                    dictionary = [NSMutableDictionary dictionaryWithDictionary:exception.userInfo];
+                } else {
+                    dictionary = [NSMutableDictionary dictionary];
+                }
+                if (exception.reason != nil) {
+                    [dictionary setObject:exception.reason forKey:NSLocalizedDescriptionKey];
+                }
+                
+                NSError* error = [NSError errorWithDomain:@"APSHTTPErrorDomain"
+                                                     code:APSRequestErrorConnectionDelegateFailed
+                                                 userInfo:dictionary];
+                
+                
+                
+                [self connection:self.connection didFailWithError:error];
+                [self URLSession:self.session didBecomeInvalidWithError:error];
+                completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
+            }
+        }
+        @finally {
+            //Do nothing
+        }
+        return;
+    }
     
     if (challenge.previousFailureCount) {
         [challenge.sender cancelAuthenticationChallenge:challenge];
+        completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
     }
     
     NSString* authMethod = challenge.protectionSpace.authenticationMethod;
@@ -369,8 +411,49 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 {
     DebugLog(@"%s", __PRETTY_FUNCTION__);
     
+    BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]);
+    
+    if(useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forSession:)]) {
+        useSubDelegate = [self.connectionDelegate willHandleChallenge:challenge forSession:session];
+    }
+    
+    if(useSubDelegate) {
+        @try {
+            [self.connectionDelegate URLSession:session task:self.task didReceiveChallenge:challenge completionHandler:completionHandler];
+        }
+        @catch (NSException *exception) {
+            if (self.task != nil) {
+                [self.task cancel];
+                
+                NSMutableDictionary *dictionary = nil;
+                if (exception.userInfo) {
+                    dictionary = [NSMutableDictionary dictionaryWithDictionary:exception.userInfo];
+                } else {
+                    dictionary = [NSMutableDictionary dictionary];
+                }
+                if (exception.reason != nil) {
+                    [dictionary setObject:exception.reason forKey:NSLocalizedDescriptionKey];
+                }
+                
+                NSError* error = [NSError errorWithDomain:@"APSHTTPErrorDomain"
+                                                     code:APSRequestErrorConnectionDelegateFailed
+                                                 userInfo:dictionary];
+                
+                
+                
+                [self URLSession:self.session didBecomeInvalidWithError:error];
+                completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
+            }
+        }
+        @finally {
+            //Do nothing
+        }
+        return;
+    }
+    
     if (challenge.previousFailureCount) {
         [challenge.sender cancelAuthenticationChallenge:challenge];
+        completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
     }
     
     NSString* authMethod = challenge.protectionSpace.authenticationMethod;
