@@ -324,11 +324,11 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     DebugLog(@"%s", __PRETTY_FUNCTION__);
     BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]);
     
-    if(useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forSession:)]) {
+    if (useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forSession:)]) {
         useSubDelegate = [self.connectionDelegate willHandleChallenge:challenge forSession:session];
     }
     
-    if(useSubDelegate) {
+    if (useSubDelegate) {
         @try {
             [self.connectionDelegate URLSession:session task:task didReceiveChallenge:challenge completionHandler:completionHandler];
         }
@@ -350,8 +350,6 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
                                                      code:APSRequestErrorConnectionDelegateFailed
                                                  userInfo:dictionary];
                 
-                
-                
                 [self connection:self.connection didFailWithError:error];
                 [self URLSession:self.session didBecomeInvalidWithError:error];
                 completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
@@ -371,7 +369,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     NSString* authMethod = challenge.protectionSpace.authenticationMethod;
     BOOL handled = NO;
     if ([authMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        if ( ([challenge.protectionSpace.host isEqualToString:self.url.host]) && (!self.validatesSecureCertificate) ){
+        if (([challenge.protectionSpace.host isEqualToString:self.url.host]) && (!self.validatesSecureCertificate)){
             handled = YES;
             NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
             [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
@@ -384,8 +382,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
         if(self.requestPassword != nil && self.requestUsername != nil) {
             handled = YES;
             NSURLCredential *credential = [NSURLCredential credentialWithUser:self.requestUsername
-                                                                     password:self.requestPassword
-                                                                  persistence:NSURLCredentialPersistenceForSession];
+                                                                     password:self.requestPassword                                                                  persistence:NSURLCredentialPersistenceForSession];
             
             [challenge.sender useCredential: credential forAuthenticationChallenge:challenge];
             NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengeUseCredential;
@@ -413,11 +410,11 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     
     BOOL useSubDelegate = (self.connectionDelegate != nil && [self.connectionDelegate respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]);
     
-    if(useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forSession:)]) {
+    if (useSubDelegate && [self.connectionDelegate respondsToSelector:@selector(willHandleChallenge:forSession:)]) {
         useSubDelegate = [self.connectionDelegate willHandleChallenge:challenge forSession:session];
     }
     
-    if(useSubDelegate) {
+    if (useSubDelegate) {
         @try {
             [self.connectionDelegate URLSession:session task:self.task didReceiveChallenge:challenge completionHandler:completionHandler];
         }
@@ -439,8 +436,6 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
                                                      code:APSRequestErrorConnectionDelegateFailed
                                                  userInfo:dictionary];
                 
-                
-                
                 [self URLSession:self.session didBecomeInvalidWithError:error];
                 completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
             }
@@ -459,7 +454,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     NSString* authMethod = challenge.protectionSpace.authenticationMethod;
     BOOL handled = NO;
     if ([authMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        if ( ([challenge.protectionSpace.host isEqualToString:self.url.host]) && (!self.validatesSecureCertificate) ){
+        if (([challenge.protectionSpace.host isEqualToString:self.url.host]) && (!self.validatesSecureCertificate)){
             handled = YES;
             NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
             [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
@@ -467,9 +462,9 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengeUseCredential;
             completionHandler(disposition, credential);
         }
-    } else if ( [authMethod isEqualToString:NSURLAuthenticationMethodDefault] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic]
+    } else if ([authMethod isEqualToString:NSURLAuthenticationMethodDefault] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic]
                || [authMethod isEqualToString:NSURLAuthenticationMethodNTLM] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest]) {
-        if(self.requestPassword != nil && self.requestUsername != nil) {
+        if (self.requestPassword != nil && self.requestUsername != nil) {
             handled = YES;
             NSURLCredential *credential = [NSURLCredential credentialWithUser:self.requestUsername
                                                                      password:self.requestPassword
