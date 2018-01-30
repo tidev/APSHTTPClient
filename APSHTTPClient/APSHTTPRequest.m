@@ -316,7 +316,6 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
             handled = YES;
             NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
             [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-            //NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;
             NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengeUseCredential;
             completionHandler(disposition, credential);
         }
@@ -324,7 +323,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
                || [authMethod isEqualToString:NSURLAuthenticationMethodNTLM] || [authMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest]) {
         if (self.requestPassword != nil && self.requestUsername != nil) {
             handled = YES;
-          NSURLCredential *credential = [NSURLCredential credentialWithUser:self.requestUsername password:self.requestPassword persistence:NSURLCredentialPersistenceForSession];
+            NSURLCredential *credential = [NSURLCredential credentialWithUser:self.requestUsername password:self.requestPassword persistence:NSURLCredentialPersistenceForSession];
             
             [challenge.sender useCredential: credential forAuthenticationChallenge:challenge];
             NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengeUseCredential;
