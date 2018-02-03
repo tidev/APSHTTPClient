@@ -30,5 +30,6 @@
 - (void)addFormData:(NSData *)data fileName:(NSString *)fileName fieldName:(NSString *)fieldName contentType:(NSString *)contentType;
 
 - (void)addHeaderKey:(NSString *)key andHeaderValue:(NSString *)value;
+- (void)destroyTemporaryData;
 
 @end

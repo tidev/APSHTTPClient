@@ -17,6 +17,21 @@
   NSData *_stringData;
 }
 
+- (void)dealloc
+{
+  [self destroyTemporaryData];
+}
+
+- (void)destroyTemporaryData
+{
+  _requestFormDictionay = nil;
+  _requestFilesArray = nil;
+  _headers = nil;
+  _jsonData = nil;
+  _stringData = nil;
+  _postFormData = nil;
+}
+
 - (void)appendStringData:(NSString *)str
 {
   [[self postFormData] appendData:[str dataUsingEncoding:NSUTF8StringEncoding]];
