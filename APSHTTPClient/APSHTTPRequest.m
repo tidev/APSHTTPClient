@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     assert(self.url != nil);
     assert(self.method != nil);
     assert(self.response != nil);
-    assert(self.response.readyState == APSHTTPResponseStateUnsent);
+    assert(self.response.readyState == APSHTTPResponseStateUnsent || self.response.readyState == APSHTTPResponseStateDone);
 #endif
 
     if (!(self.url != nil)) {
