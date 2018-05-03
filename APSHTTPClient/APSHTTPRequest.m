@@ -427,6 +427,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     self.response.connected = NO;
     self.response.error = error;
     [self invokeCallbackWithState:APSHTTPCallbackStateError];
+    [[self postForm] destroyTemporaryData];
     return;
   }
   DebugLog(@"%s", __PRETTY_FUNCTION__);
