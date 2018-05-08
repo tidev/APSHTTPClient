@@ -59,27 +59,32 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
   return;
 }
 
+- (BOOL)isReady
+{
+  return [@[@(APSHTTPResponseStateUnsent), @(APSHTTPResponseStateDone)] containsObject:@([[self response] readyState])];
+}
+
 - (void)send
 {
 #if TARGET_OS_SIMULATOR
   assert(self.url != nil);
   assert(self.method != nil);
   assert(self.response != nil);
-  assert(self.response.readyState == APSHTTPResponseStateUnsent);
+  assert([self isReady]);
 #endif
 
   if (!(self.url != nil)) {
-    DebugLog(@"[ERROR] Missing required parameter URL. Ignoring call");
+    DebugLog(@"[ERROR] Missing required parameter URL. Ignoring call.");
     return;
   }
 
   if (!(self.method != nil)) {
-    DebugLog(@"[ERROR] Missing required parameter method. Ignoring call");
+    DebugLog(@"[ERROR] Missing required parameter method. Ignoring call.");
     return;
   }
 
-  if (!(self.response.readyState == APSHTTPResponseStateUnsent)) {
-    DebugLog(@"[ERROR] APSHTTPRequest does not support reuse of connection. Ignoring call.");
+  if (![self isReady]) {
+    DebugLog(@"[ERROR] Tried to re-submit request while previous request is still running. Ignoring call.");
     return;
   }
 
