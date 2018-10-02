@@ -17,7 +17,7 @@ node('osx && xcode') {
 	}
 
 	stage('Package') {
-		sh 'mkdir -p out/'
+		sh 'mkdir -p out/APSHTTPClient'
 		sh 'xcrun -sdk iphoneos lipo -create ./build/Release-iphoneos/libAPSHTTPClient.a ./build/Release-iphonesimulator/libAPSHTTPClient.a -o out/APSHTTPClient/libAPSHTTPClient.a'
 		sh 'cp -r ./build/Release-iphoneos/include/. out/.'
 		sh 'rm -rf build'
