@@ -421,7 +421,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
   
   [[self postForm] destroyTemporaryData];
   
-  [self.session invalidateAndCancel];
+  [self.session finishTasksAndInvalidate];
 }
 
 - (void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
