@@ -230,7 +230,7 @@
 		C9143B9019390E1D0039AAEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Appcelerator;
 				TargetAttributes = {
 					C9143BA719390E1E0039AAEA = {
@@ -306,7 +306,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#! /usr/bin/env bash\n\n# Authors: Sabil and Matt\n# Date: 2014.06.11\n#\n# IMPORTANT: This script should be retired after the SDK Engineering\n# team migrates to Cocoa Pods for dependency management and\n# distribution.\n#\n# This script creates a versioned directory of the APSHTTPClient\n# library in a subdirectory named \"build\" under the project's root.\n#\n# The version of the library is the build timestamp formatted as the\n# number of seconds since the Unix epoch. For example:\n#\n# build/APSHTTPClient-1402532543/\n\n# This is a convenient command to determine a human readable date and\n# time from the version number (replace the last number with the\n# version number):\n#\n# date -j -f \"%s\" 1402532543\n# Wed Jun 11 17:22:23 PDT 2014\n#\n#  The contents of this directory contain a \"universal\" library for\n#  the architectures i386, armv7 and armv7s.\n\n# Sabil and Matt are knowingly overriding the TARGET_NAME environment\n# variable from Xcode since they named the Xcode target that executes\n# this script \"Create Release Folder\".\nTARGET_NAME=\"APSHTTPClient\"\n\n# Sabil and Matt are knowingly overriding the CONFIGURATION\n# environment variable from Xcode since they only want distribute\n# Release builds. Engineers wanting a Debug build should simply\n# include this Xcode project directly into their project.\nCONFIGURATION=\"Release\"\n\nAPSHTTPCLIENT_VERSION=$(date +%s)\n\nBUILD_DIR=\"${PWD}/build\"\necho \"Assuming BUILD_DIR=${BUILD_DIR}\"\n\nDEVICE_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos\"\nSIMULATOR_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\"\nLIB_NAME=\"lib${TARGET_NAME}.a\"\nDIST_DIR=\"${BUILD_DIR}/${TARGET_NAME}-${APSHTTPCLIENT_VERSION}\"\n\nfunction echo_and_eval {\n    local -r cmd=\"${1:?}\"\n    echo \"${cmd}\" && eval \"${cmd}\"\n}\n\nfor sdk in iphoneos iphonesimulator; do\necho_and_eval \"xcodebuild clean -target \\\"${TARGET_NAME}\\\" -sdk ${sdk}\"\necho_and_eval \"xcodebuild -configuration \\\"${CONFIGURATION}\\\" -target \\\"${TARGET_NAME}\\\" -sdk ${sdk} OTHER_CFLAGS=\\\"-fembed-bitcode\\\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\\\"DWARF with dSYM\\\"\"\ndone\n\necho_and_eval \"mkdir -p \\\"${DIST_DIR}\\\"\"\necho_and_eval \"xcrun -sdk iphoneos lipo -create \\\"${DEVICE_DIR}/${LIB_NAME}\\\" \\\"${SIMULATOR_DIR}/${LIB_NAME}\\\" -o \\\"${DIST_DIR}/${LIB_NAME}\\\"\"\necho_and_eval \"cp -r \\\"${DEVICE_DIR}/include\\\" \\\"${DIST_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${DEVICE_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${SIMULATOR_DIR}\\\"\"\necho_and_eval \"rm -rf \\\"${BUILD_DIR}/${TARGET_NAME}.build\\\"\"\n";
+			shellScript = "UNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nfor sdk in iphoneos iphonesimulator; do\nxcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk ${sdk} BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\ndone\n\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R ${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/APSHTTPClient/* \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\nopen \"${UNIVERSAL_OUTPUTFOLDER}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -361,17 +361,31 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_MODULE_DEBUGGING = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -385,6 +399,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -398,17 +413,30 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_MODULE_DEBUGGING = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -457,6 +485,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				INFOPLIST_FILE = "APSHTTPClientTests/APSHTTPClientTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcelerator.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -473,6 +502,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				INFOPLIST_FILE = "APSHTTPClientTests/APSHTTPClientTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcelerator.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
