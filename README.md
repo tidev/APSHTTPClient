@@ -11,57 +11,60 @@
 
 ### GET Request:
 
-	// in header
-	#import <APSHTTPClient/APSHTTPClient.h>
+```objc
+// in header
+#import <APSHTTPClient/APSHTTPClient.h>
 
-    -(void)sendRequest
-    {
-        APSHTTPRequest *request = [[[APSHTTPRequest alloc] init] autorelease];
-        [request setDelegate:self];
-        [request setMethod: @"GET"];
-        [request setUrl:[NSURL URLWithString: @"http://google.com/"]];
-        [request send];
-    }
+-(void)sendRequest
+{
+  APSHTTPRequest *request = [[[APSHTTPRequest alloc] init] autorelease];
+  [request setDelegate:self];
+  [request setMethod: @"GET"];
+  [request setUrl:[NSURL URLWithString: @"http://google.com/"]];
+  [request send];
+}
 
-    -(void)tiRequest:(APSHTTPRequest *)request onLoad:(APSHTTPResponse *)response
-    {
-        NSString* response = [response responseString];
-    }
-    
-    -(void)tiRequest:(APSHTTPRequest *)request onError:(APSHTTPResponse *)response
-    {
-        NSString* errorMessage = [[response error] localizedDescription];
-    }
+- (void)request:(APSHTTPRequest *)request onLoad:(APSHTTPResponse *)response
+{
+  NSString* responseString = [response responseString];
+}
+
+- (void)request:(APSHTTPRequest *)request onError:(APSHTTPResponse *)response
+{
+  NSString* errorMessage = [[response error] localizedDescription];
+}
+```
 
 ### POST Request:
 
-	// in header
-	#import <APSHTTPClient/APSHTTPClient.h>
+```objc
+// in header
+#import <APSHTTPClient/APSHTTPClient.h>
 
-    -(void)sendRequest
-    {
-        APSHTTPPostForm *form = [[[APSHTTPPostForm alloc] init] autorelease];
-        [form addFormKey:@"first_name" andValue: @"John"];
-        [form addFormKey:@"last_name" andValue: @"Smith"];
-        [form addFormData: UIImageJPEGRepresentation([[self myImageView] image], 0.7)
-                 fileName:@"image.jpeg"
-                fieldName:@"photo"];
-    
-        APSHTTPRequest *request = [[[APSHTTPRequest alloc] init] autorelease];
-        [request setDelegate:self];
-        [request setMethod: @"POST"];
-        [request setPostForm:form];
-        [request setUrl:[NSURL URLWithString: @"http://some_server.com/api/post"]];
-        [request send];
-    }
+-(void)sendRequest
+{
+  APSHTTPPostForm *form = [[[APSHTTPPostForm alloc] init] autorelease];
+  [form addFormKey:@"first_name" andValue: @"John"];
+  [form addFormKey:@"last_name" andValue: @"Smith"];
+  [form addFormData: UIImageJPEGRepresentation([[self myImageView] image], 0.7)
+           fileName:@"image.jpeg"
+	  fieldName:@"photo"];
 
-    -(void)tiRequest:(APSHTTPRequest *)request onLoad:(APSHTTPResponse *)response
-    {
-        NSString* response = [response responseString];
-    }
-    
-    -(void)tiRequest:(APSHTTPRequest *)request onError:(APSHTTPResponse *)response
-    {
-        NSString* errorMessage = [[response error] localizedDescription];
-    }
-    
+  APSHTTPRequest *request = [[[APSHTTPRequest alloc] init] autorelease];
+  [request setDelegate:self];
+  [request setMethod: @"POST"];
+  [request setPostForm:form];
+  [request setUrl:[NSURL URLWithString: @"http://some_server.com/api/post"]];
+  [request send];
+}
+
+- (void)request:(APSHTTPRequest *)request onLoad:(APSHTTPResponse *)response
+{
+  NSString* response = [response responseString];
+}
+
+- (void)request:(APSHTTPRequest *)request onError:(APSHTTPResponse *)response
+{
+  NSString* errorMessage = [[response error] localizedDescription];
+}
+```
