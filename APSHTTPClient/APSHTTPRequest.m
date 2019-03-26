@@ -418,8 +418,10 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
   [self invokeCallbackWithState:APSHTTPCallbackStateDataStream];
 
   [self invokeCallbackWithState:APSHTTPCallbackStateLoad];
-  
+
   [[self postForm] destroyTemporaryData];
+
+  [self.session finishTasksAndInvalidate];
 }
 
 - (void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
@@ -433,6 +435,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     self.response.error = error;
     [self invokeCallbackWithState:APSHTTPCallbackStateError];
     [[self postForm] destroyTemporaryData];
+    [self.session finishTasksAndInvalidate];
     return;
   }
   DebugLog(@"%s", __PRETTY_FUNCTION__);
@@ -447,6 +450,12 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 - (void)URLSession:(nonnull NSURLSession *)session didBecomeInvalidWithError:(nullable NSError *)error
 {
   DebugLog(@"%s", __PRETTY_FUNCTION__);
+
+  if (error == nil) {
+    // Ignore explicit session invalidations
+    return;
+  }
+
   self.response.readyState = APSHTTPResponseStateDone;
   [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
 
