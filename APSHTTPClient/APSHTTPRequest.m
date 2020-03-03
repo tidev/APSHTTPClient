@@ -67,16 +67,10 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
 - (void)send
 {
 #if TARGET_OS_SIMULATOR
-  assert(self.url != nil);
   assert(self.method != nil);
   assert(self.response != nil);
   assert([self isReady]);
 #endif
-
-  if (!(self.url != nil)) {
-    DebugLog(@"[ERROR] Missing required parameter URL. Ignoring call.");
-    return;
-  }
 
   if (!(self.method != nil)) {
     DebugLog(@"[ERROR] Missing required parameter method. Ignoring call.");
