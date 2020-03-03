@@ -243,6 +243,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = C9143B8F19390E1D0039AAEA;
@@ -280,7 +281,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"MDL\"";
+			shellScript = "echo \"MDL\"\n";
 		};
 		C92DC910194B7B0A001F33C0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -306,7 +307,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "UNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\nXCODE_VERSION=$(/usr/libexec/PlistBuddy -c \"Print :DTXcode\" \"$(xcode-select -p)/../Info.plist\")\n# Step 1. Build for Simulator\n\n# Exclude arm64 architecture from simulator build in XCode 12+- TIMOB-28075\n\n if [[ $XCODE_VERSION -ge 1200 ]];  then\n xcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk iphonesimulator EXCLUDED_ARCHS=arm64 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\n else\n xcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\n fi\n\n# Step 2. Build for Device\nxcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\n\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 3. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R ${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/APSHTTPClient/* \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\nopen \"${UNIVERSAL_OUTPUTFOLDER}\"\n";
+			shellScript = "UNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${PROJECT_NAME}-universal\n\n# Step 1. Build Device and Simulator versions\nfor sdk in iphoneos; do\nxcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk ${sdk} BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\ndone\n \nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\n#lipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\n#cp -R ${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/APSHTTPClient/* \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n\n#----- Make macCatalyst archive\nxcodebuild archive \\\n-scheme APSHTTPClient \\\n-archivePath $BUILD_DIR/macCatalyst.xcarchive \\\n-sdk macosx \\\nSKIP_INSTALL=NO \\\nBUILD_LIBRARIES_FOR_DISTRIBUTION=YES \\ SUPPORTS_MACCATALYST=YES \\\n\n#----- Make iOS Simulator archive\nxcodebuild archive \\\n-scheme APSHTTPClient \\\n-archivePath $BUILD_DIR/simulator.xcarchive \\\n-sdk iphonesimulator \\\nSKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES\n\n#----- Make iOS device archive\nxcodebuild archive \\\n-scheme APSHTTPClient \\\n-archivePath $BUILD_DIR/iosdevice.xcarchive \\\n-sdk iphoneos \\\nSKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES\n\n#----- Make XCFramework\nxcodebuild -create-xcframework \\\n-library $BUILD_DIR/simulator.xcarchive/Products/usr/local/lib/lib${PROJECT_NAME}.a \\\n-headers ${BUILD_DIR}/Release-iphoneos/include/${PROJECT_NAME}/ \\\n-library $BUILD_DIR/iosdevice.xcarchive/Products/usr/local/lib/lib${PROJECT_NAME}.a \\\n-headers ${BUILD_DIR}/Release-iphoneos/include/${PROJECT_NAME}/ \\\n-library $BUILD_DIR/macCatalyst.xcarchive/Products/usr/local/lib/lib${PROJECT_NAME}.a \\\n-headers ${BUILD_DIR}/Release-iphoneos/include/${PROJECT_NAME}/ \\\n-output ${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.xcframework\n\nopen \"${UNIVERSAL_OUTPUTFOLDER}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
