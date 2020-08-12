@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     _sendDefaultCookies = YES;
     _redirects = YES;
     _validatesSecureCertificate = YES;
+    _waitsForConnectivity = NO;
     _headers = [[NSMutableDictionary alloc] init];
     _runModes = @[ NSDefaultRunLoopMode ];
     _request = [[NSMutableURLRequest alloc] init];
@@ -116,13 +117,23 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
   [self.request setHTTPShouldHandleCookies:self.sendDefaultCookies];
   [self.request setCachePolicy:self.cachePolicy];
 
+  NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  
+  if (self.timeoutForResource > 0) {
+    sessionConfiguration.timeoutIntervalForResource = self.timeoutForResource;
+  }
+
+  if (@available(iOS 11.0, *)) {
+    sessionConfiguration.waitsForConnectivity = self.waitsForConnectivity;
+  }
+
   if (self.synchronous) {
     if (self.requestUsername != nil && self.requestPassword != nil && [self.request valueForHTTPHeaderField:@"Authorization"] == nil) {
       NSString *authString = [APSHTTPHelper base64encode:[[NSString stringWithFormat:@"%@:%@", self.requestUsername, self.requestPassword] dataUsingEncoding:NSUTF8StringEncoding]];
       [self.request setValue:[NSString stringWithFormat:@"Basic %@", authString] forHTTPHeaderField:@"Authorization"];
     }
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:self.theQueue];
+    self.session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:self.theQueue];
     self.task = [self.session dataTaskWithRequest:self.request
                                 completionHandler:^(NSData *__nullable data, NSURLResponse *__nullable response, NSError *__nullable error) {
                                   [self.response appendData:data];
@@ -142,7 +153,7 @@ typedef NS_ENUM(NSInteger, APSHTTPCallbackState) {
     [self.response setReadyState:APSHTTPResponseStateOpened];
     [self invokeCallbackWithState:APSHTTPCallbackStateReadyState];
 
-    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
+    self.session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
     self.task = [self.session dataTaskWithRequest:self.request];
     [self.task resume];
   }
