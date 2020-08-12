@@ -50,7 +50,8 @@ typedef NS_ENUM(NSInteger, APSRequestError) {
 @property (nonatomic, assign, readwrite) BOOL cancelled;
 @property (nonatomic, assign, readwrite) NSURLRequestCachePolicy cachePolicy;
 @property (nonatomic, assign, readonly, getter=isReady) BOOL ready;
-
+@property (nonatomic, assign, readwrite) BOOL waitsForConnectivity;
+@property (nonatomic, assign, readwrite) NSTimeInterval timeoutForResource;
 /*!
  @discussion Set to YES to block the caller's thread for the duration
  of the network call. In this case the queue property is ignored. The
