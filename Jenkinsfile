@@ -1,4 +1,4 @@
-node('osx && xcode') {
+node('osx && xcode-12') {
 	stage('Checkout') {
 		checkout scm
 	}
@@ -6,25 +6,17 @@ node('osx && xcode') {
 	stage('Clean') {
 		sh 'xcodebuild clean -target "APSHTTPClient" -sdk iphoneos'
 		sh 'xcodebuild clean -target "APSHTTPClient" -sdk iphonesimulator'
+		sh 'xcodebuild clean -target "APSHTTPClient" -sdk macosx'
 	}
 
 	stage('Build') {
-		sh 'xcodebuild -configuration "Release" -target "APSHTTPClient" -sdk iphoneos OTHER_CFLAGS="-fembed-bitcode" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT="DWARF with dSYM"'
-		// generates build/Release-iphoneos/libAPSHTTPClient.a (also an include folder there)
-
-		sh 'xcodebuild -configuration "Release" -target "APSHTTPClient" -sdk iphonesimulator OTHER_CFLAGS="-fembed-bitcode" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT="DWARF with dSYM"'
-		// generates build/Release-iphonesimulator/libAPSHTTPClient.a (also an include folder there)
+		sh './build.sh'
 	}
 
 	stage('Package') {
-		sh 'mkdir -p out/APSHTTPClient'
-		sh 'xcrun -sdk iphoneos lipo -create ./build/Release-iphoneos/libAPSHTTPClient.a ./build/Release-iphonesimulator/libAPSHTTPClient.a -o out/APSHTTPClient/libAPSHTTPClient.a'
-		sh 'cp -r ./build/Release-iphoneos/include/. out/.'
-		sh 'rm -rf build'
-
-		dir('out') {
-			archiveArtifacts '**'
+		dir('build/APSHTTPClient-universal') {
+			archiveArtifacts 'APSHTTPClient.xcframework/'
 		}
-		sh 'rm -rf out'
+		sh 'rm -rf build'
 	}
 }
