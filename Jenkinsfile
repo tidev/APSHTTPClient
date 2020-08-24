@@ -4,6 +4,7 @@ node('osx && xcode-12') {
 	}
 
 	stage('Clean') {
+		sh 'rm -rf build'
 		sh 'xcodebuild clean -target "APSHTTPClient" -sdk iphoneos'
 		sh 'xcodebuild clean -target "APSHTTPClient" -sdk iphonesimulator'
 		sh 'xcodebuild clean -target "APSHTTPClient" -sdk macosx'
