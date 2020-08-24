@@ -22,16 +22,14 @@ Base HTTP Client used by Titanium SDK. Used by Analytics, and the SDK for any ht
                        DESC
 
   s.homepage         = 'https://github.com/appcelerator/APSHTTPClient'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'Apache2', :file => 'LICENSE' }
   s.author           = { 'sgtcoolguy' => 'chris.a.williams@gmail.com' }
-  s.source           = { :git => 'https://github.com/appcelerator/APSHTTPClient.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/sgtcoolguy/APSHTTPClient.git', :branch => 'cocoapods' }
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'APSHTTPClient/Classes/**/*'
 
   s.frameworks = 'CoreServices'
-  s.vendored_frameworks = 'APSHTTPClient.xcframework'
+  # s.vendored_frameworks = 'APSHTTPClient.xcframework'
 end
