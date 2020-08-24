@@ -20,5 +20,5 @@
   },
   "source_files": "APSHTTPClient/Classes/**/*",
   "frameworks": "CoreServices",
-  "static_framework": true
+  "vendored_frameworks": "APSHTTPClient.xcframework"
 }
