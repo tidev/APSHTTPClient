@@ -22,7 +22,6 @@
 
 /* Begin PBXBuildFile section */
 		B700CCF724C1F95F0089BDB0 /* APSHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BC119390EAD0039AAEA /* APSHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B700CCF824C1F9620089BDB0 /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = B700CCF424C1F8210089BDB0 /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		B700CCF924C1F9670089BDB0 /* APSHTTPHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BC219390EAD0039AAEA /* APSHTTPHelper.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B700CCFA24C1F96A0089BDB0 /* APSHTTPPostForm.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BC619390EAD0039AAEA /* APSHTTPPostForm.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B700CCFB24C1F96C0089BDB0 /* APSHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BC819390EAD0039AAEA /* APSHTTPRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -51,7 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B700CCF424C1F8210089BDB0 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		C9143B9819390E1D0039AAEA /* libAPSHTTPClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAPSHTTPClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9143B9B19390E1D0039AAEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9143B9F19390E1D0039AAEA /* APSHTTPClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "APSHTTPClient-Prefix.pch"; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 		C9143B9D19390E1D0039AAEA /* APSHTTPClient */ = {
 			isa = PBXGroup;
 			children = (
-				B700CCF424C1F8210089BDB0 /* module.modulemap */,
 				C9143BC119390EAD0039AAEA /* APSHTTPClient.h */,
 				C9143BC219390EAD0039AAEA /* APSHTTPHelper.h */,
 				C9143BC319390EAD0039AAEA /* APSHTTPHelper.m */,
@@ -178,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B700CCF724C1F95F0089BDB0 /* APSHTTPClient.h in Headers */,
-				B700CCF824C1F9620089BDB0 /* module.modulemap in Headers */,
 				B700CCF924C1F9670089BDB0 /* APSHTTPHelper.h in Headers */,
 				B700CCFC24C1F96E0089BDB0 /* APSHTTPResponse.h in Headers */,
 				B700CCFB24C1F96C0089BDB0 /* APSHTTPRequest.h in Headers */,
