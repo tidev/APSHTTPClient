@@ -1,0 +1,6 @@
+framework module Pods_APSHTTPClient_Tests {
+  umbrella header "Pods-APSHTTPClient_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

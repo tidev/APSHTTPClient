@@ -1,4 +1,20 @@
 [![Build Status](https://travis-ci.org/appcelerator/APSHTTPClient.svg?branch=master)](https://travis-ci.org/appcelerator/APSHTTPClient)
+
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+## Requirements
+
+## Installation
+
+APSHTTPClient is available through [CocoaPods](https://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'APSHTTPClient'
+```
+
 ### Requirements
 **MobileCoreServices.framework**
 

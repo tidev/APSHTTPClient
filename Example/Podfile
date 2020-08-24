@@ -1,0 +1,7 @@
+use_frameworks!
+target 'APSHTTPClient_Tests' do
+  pod 'APSHTTPClient', :path => '../'
+  
+  pod 'Specta'
+    pod 'Expecta'
+end

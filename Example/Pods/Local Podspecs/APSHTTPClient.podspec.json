@@ -1,0 +1,24 @@
+{
+  "name": "APSHTTPClient",
+  "version": "0.1.0",
+  "summary": "Base HTTP Client used by Titanium SDK.",
+  "description": "Base HTTP Client used by Titanium SDK. Used by Analytics, and the SDK for any http connections.",
+  "homepage": "https://github.com/appcelerator/APSHTTPClient",
+  "license": {
+    "type": "Apache2",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "sgtcoolguy": "chris.a.williams@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/appcelerator/APSHTTPClient.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "APSHTTPClient/Classes/**/*",
+  "frameworks": "CoreServices",
+  "static_framework": true
+}
