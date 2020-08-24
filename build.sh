@@ -29,9 +29,11 @@ xcodebuild archive \
   -sdk iphoneos \
   SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
 
+sleep 1
+
 #----- Make XCFramework
 xcodebuild -create-xcframework \
   -framework $BUILD_DIR/iosdevice.xcarchive/Products/Library/Frameworks/$PROJECT_NAME.framework \
   -framework $BUILD_DIR/simulator.xcarchive/Products/Library/Frameworks/$PROJECT_NAME.framework \
   -framework $BUILD_DIR/macCatalyst.xcarchive/Products/Library/Frameworks/$PROJECT_NAME.framework \
-  -output $PROJECT_NAME.xcframework
+  -output $UNIVERSAL_OUTPUTFOLDER/$PROJECT_NAME.xcframework
