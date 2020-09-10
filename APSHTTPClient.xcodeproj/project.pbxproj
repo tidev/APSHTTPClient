@@ -21,6 +21,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B700CCF724C1F95F0089BDB0 /* APSHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BC119390EAD0039AAEA /* APSHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B700CCF924C1F9670089BDB0 /* APSHTTPHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BC219390EAD0039AAEA /* APSHTTPHelper.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B700CCFA24C1F96A0089BDB0 /* APSHTTPPostForm.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BC619390EAD0039AAEA /* APSHTTPPostForm.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B700CCFB24C1F96C0089BDB0 /* APSHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BC819390EAD0039AAEA /* APSHTTPRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B700CCFC24C1F96E0089BDB0 /* APSHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = C9143BCA19390EAD0039AAEA /* APSHTTPResponse.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C9143B9C19390E1D0039AAEA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143B9B19390E1D0039AAEA /* Foundation.framework */; };
 		C9143BAA19390E1E0039AAEA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143BA919390E1E0039AAEA /* XCTest.framework */; };
 		C9143BAB19390E1E0039AAEA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9143B9B19390E1D0039AAEA /* Foundation.framework */; };
@@ -31,11 +36,6 @@
 		C9143BCE19390EAD0039AAEA /* APSHTTPPostForm.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BC719390EAD0039AAEA /* APSHTTPPostForm.m */; };
 		C9143BCF19390EAD0039AAEA /* APSHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BC919390EAD0039AAEA /* APSHTTPRequest.m */; };
 		C9143BD019390EAD0039AAEA /* APSHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C9143BCB19390EAD0039AAEA /* APSHTTPResponse.m */; };
-		C9143BE3193916E90039AAEA /* APSHTTPClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC119390EAD0039AAEA /* APSHTTPClient.h */; };
-		C9143BE4193916E90039AAEA /* APSHTTPHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC219390EAD0039AAEA /* APSHTTPHelper.h */; };
-		C9143BE6193916E90039AAEA /* APSHTTPPostForm.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC619390EAD0039AAEA /* APSHTTPPostForm.h */; };
-		C9143BE7193916E90039AAEA /* APSHTTPRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BC819390EAD0039AAEA /* APSHTTPRequest.h */; };
-		C9143BE8193916E90039AAEA /* APSHTTPResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9143BCA19390EAD0039AAEA /* APSHTTPResponse.h */; };
 		C92DC91A194BCE23001F33C0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92DC919194BCE23001F33C0 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,23 +48,6 @@
 			remoteInfo = APSHTTPClient;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		C9143B9619390E1D0039AAEA /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				C9143BE3193916E90039AAEA /* APSHTTPClient.h in CopyFiles */,
-				C9143BE4193916E90039AAEA /* APSHTTPHelper.h in CopyFiles */,
-				C9143BE6193916E90039AAEA /* APSHTTPPostForm.h in CopyFiles */,
-				C9143BE7193916E90039AAEA /* APSHTTPRequest.h in CopyFiles */,
-				C9143BE8193916E90039AAEA /* APSHTTPResponse.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C9143B9819390E1D0039AAEA /* libAPSHTTPClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAPSHTTPClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,15 +169,30 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		B700CCF624C1F9520089BDB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B700CCF724C1F95F0089BDB0 /* APSHTTPClient.h in Headers */,
+				B700CCF924C1F9670089BDB0 /* APSHTTPHelper.h in Headers */,
+				B700CCFC24C1F96E0089BDB0 /* APSHTTPResponse.h in Headers */,
+				B700CCFB24C1F96C0089BDB0 /* APSHTTPRequest.h in Headers */,
+				B700CCFA24C1F96A0089BDB0 /* APSHTTPPostForm.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		C9143B9719390E1D0039AAEA /* APSHTTPClient */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C9143BBB19390E1E0039AAEA /* Build configuration list for PBXNativeTarget "APSHTTPClient" */;
 			buildPhases = (
 				C92DC90F194B7AB8001F33C0 /* ShellScript */,
+				B700CCF624C1F9520089BDB0 /* Headers */,
 				C9143B9419390E1D0039AAEA /* Sources */,
 				C9143B9519390E1D0039AAEA /* Frameworks */,
-				C9143B9619390E1D0039AAEA /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -243,6 +241,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = C9143B8F19390E1D0039AAEA;
@@ -280,7 +279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"MDL\"";
+			shellScript = "echo \"MDL\"\n";
 		};
 		C92DC910194B7B0A001F33C0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -306,7 +305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "UNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\nXCODE_VERSION=$(/usr/libexec/PlistBuddy -c \"Print :DTXcode\" \"$(xcode-select -p)/../Info.plist\")\n# Step 1. Build for Simulator\n\n# Exclude arm64 architecture from simulator build in XCode 12+- TIMOB-28075\n\n if [[ $XCODE_VERSION -ge 1200 ]];  then\n xcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk iphonesimulator EXCLUDED_ARCHS=arm64 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\n else\n xcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\n fi\n\n# Step 2. Build for Device\nxcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\n\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 3. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R ${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/APSHTTPClient/* \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\nopen \"${UNIVERSAL_OUTPUTFOLDER}\"\n";
+			shellScript = "UNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${PROJECT_NAME}-universal\n\n# Step 1. Build Device and Simulator versions\nfor sdk in iphoneos; do\nxcodebuild -target APSHTTPClient -configuration ${CONFIGURATION} -sdk ${sdk} BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" OTHER_CFLAGS=\"-fembed-bitcode\" CLANG_ENABLE_MODULE_DEBUGGING=NO GCC_PRECOMPILE_PREFIX_HEADER=NO DEBUG_INFORMATION_FORMAT=\"DWARF with dSYM\"\ndone\n \nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\n#lipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\n#cp -R ${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/APSHTTPClient/* \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n\n#----- Make macCatalyst archive\nxcodebuild archive \\\n-scheme APSHTTPClient \\\n-archivePath $BUILD_DIR/macCatalyst.xcarchive \\\n-sdk macosx \\\nSKIP_INSTALL=NO \\\nBUILD_LIBRARIES_FOR_DISTRIBUTION=YES \\ SUPPORTS_MACCATALYST=YES \\\n\n#----- Make iOS Simulator archive\nxcodebuild archive \\\n-scheme APSHTTPClient \\\n-archivePath $BUILD_DIR/simulator.xcarchive \\\n-sdk iphonesimulator \\\nSKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES\n\n#----- Make iOS device archive\nxcodebuild archive \\\n-scheme APSHTTPClient \\\n-archivePath $BUILD_DIR/iosdevice.xcarchive \\\n-sdk iphoneos \\\nSKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES\n\n#----- Make XCFramework\nxcodebuild -create-xcframework \\\n-library $BUILD_DIR/simulator.xcarchive/Products/usr/local/lib/lib${PROJECT_NAME}.a \\\n-headers ${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/usr/local/include/${PROJECT_NAME}/ \\\n-library $BUILD_DIR/iosdevice.xcarchive/Products/usr/local/lib/lib${PROJECT_NAME}.a \\\n-headers ${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include/${PROJECT_NAME}/ \\\n-library $BUILD_DIR/macCatalyst.xcarchive/Products/usr/local/lib/lib${PROJECT_NAME}.a \\\n-headers ${BUILD_DIR}/${CONFIGURATION}-macosx/usr/local/include/${PROJECT_NAME}/ \\\n-output ${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.xcframework\n\nopen \"${UNIVERSAL_OUTPUTFOLDER}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -452,9 +451,12 @@
 		C9143BBC19390E1E0039AAEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				DEFINES_MODULE = YES;
 				DSTROOT = /tmp/APSHTTPClient.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
+				MODULEMAP_FILE = APSHTTPClient/module.modulemap;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -464,10 +466,13 @@
 		C9143BBD19390E1E0039AAEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				DEFINES_MODULE = YES;
 				DSTROOT = /tmp/APSHTTPClient.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "APSHTTPClient/APSHTTPClient-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				MODULEMAP_FILE = APSHTTPClient/module.modulemap;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
